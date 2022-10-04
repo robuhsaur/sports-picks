@@ -1,5 +1,5 @@
 ## October 4, 2022
-We worked on created the database and pgAdmin.
+We worked on creating the database and pgAdmin.
 
 ## October 3, 2022
 
