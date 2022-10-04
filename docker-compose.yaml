@@ -1,5 +1,18 @@
-# volumes:
+volumes:
+  postgres-data:
+    external: true
 services:
+  postgres:
+    build:
+      context: ./relational-data
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_MULTIPLE_DATABASES=guru_data
+      - POSTGRES_PASSWORD=test-databases
+    ports:
+      - 15432:5432
   fastapi:
     build:
       context: sample_service
@@ -8,7 +21,7 @@ services:
       - 8000:8000
     volumes:
       - ./sample_service:/app
-  
+
   ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
@@ -22,5 +35,3 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       REACT_APP_API_HOST: http://localhost:8000
-
-            
