@@ -1,5 +1,5 @@
 ## October 5, 2022
-We all decided to read up on and watch the FastAPI videos so we can start builindg soon.
+We all decided to read up on and watch the FastAPI videos so we can start building soon.
 
 ## October 4, 2022
 We worked on creating the database and pgAdmin.
