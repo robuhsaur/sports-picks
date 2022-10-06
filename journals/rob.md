@@ -2,6 +2,9 @@
 ## October 6, 2022
 ## October 5, 2022
 ## October 4, 2022
+
+Today
+
 ## October 3, 2022
 
 Today:
