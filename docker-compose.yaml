@@ -13,7 +13,7 @@ services:
     environment:
       - POSTGRES_MULTIPLE_DATABASES=guru_data
       - POSTGRES_PASSWORD=test-databases
-      - POSTGRES_USER
+      - POSTGRES_USER=postgres
     ports:
       - 15432:5432
   fastapi:
