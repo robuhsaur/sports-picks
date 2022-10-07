@@ -1,3 +1,6 @@
+## October 6, 2022
+We split up the work and everyone chose on what they are going to work on.
+
 ## October 5, 2022
 We all decided to read up on and watch the FastAPI videos so we can start building soon.
 
