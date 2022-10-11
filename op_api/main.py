@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
+from routers import guru
+
+
+
 
 app = FastAPI()
+app.include_router(guru.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,15 +19,3 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/api/launch-details")
-def launch_details():
-    return {
-        "launch_details": {
-            "year": 2022,
-            "month": 10,
-            "day": "28",
-            "hour": 19,
-            "min": 0,
-            "tz:": "PST"
-        }
-    }
