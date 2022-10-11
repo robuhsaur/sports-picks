@@ -9,8 +9,8 @@ This idea came up from personal experience
  
 ### project idea - revised ### 
 
-we are switching to a subcription model. where we will not be providing gurus instead we are providing a platform for gurus to signup up and sell picks to their following. new name OnlyPicks !! 
-we have desinged our wireframe.
+we are switching to a subscription model. where we will not be providing gurus instead we are providing a platform for gurus to signup up and sell picks to their following. new name OnlyPicks !! 
+we have designed our wireframe.
 
 ### week 1 ### 
 I forked the repo and created a group in gitlab for our team. then created a issue board with the help of the team. finished last touches to the wireframe.
@@ -28,4 +28,4 @@ started working on 3rd party api. signed up to get api key. started reading docs
 
 ### Week 2 ### 
 10/10
-working on getting the 3d api to work with react. researched a way to hide API Key. getting title to display but getting error on the get request. 
+working on getting the 3rd party api to work with react. researched a way to hide API Key. getting title to display but getting error on the get request. Was finally able to get 3rd party api working. First time using react/front end to make a request to a 3rd party api. Data is coming in and I am able to display it. next I will work on making the titles a clickable link that routes to the league/sport selected. ran into some issues while trying to request the data. it was displaying undefined but my api dashboard was indicating a call was made. I checked the network tab and saw a 200 response which led me to review my code and what I was doing once the data was being sent back. I fixed the issue by changing the state I had it set to. 
