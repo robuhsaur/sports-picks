@@ -14,7 +14,7 @@ class SportsList extends React.Component {
             method: 'GET',
             sport_key:"americanfootball_nfl",
             headers: {
-                'X-RapidAPI-Key': '745e367328msh9c743ff71db8609p123dbejsn0adf84fc1eac',
+                'X-RapidAPI-Key': process.env.REACT_APP_ODDS_API_KEY,
                 'X-RapidAPI-Host': 'odds.p.rapidapi.com'
             }
         };
