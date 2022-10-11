@@ -7,9 +7,7 @@ function Nav() {
                 <div className="container-fluid">
                     <NavLink className="text-decoration-underline navbar-brand" to="/">OnlyPics</NavLink>
                     <ul className="dropdown">
-                        <button className="btn btn-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                            Guru
-                        </button>
+                        <NavLink className="btn btn-dark" to="/guru/create" type="button" aria-current="page"> Guru </NavLink>
                         <button className="btn btn-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             Sports
                         </button>
