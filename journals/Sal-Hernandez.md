@@ -18,3 +18,14 @@ I forked the repo and created a group in gitlab for our team. then created a iss
 10/4 
 team created DBs. I worked with  Armen to implement the pgAdmin. got that resolved and added.
 started working on FastAPI and did more research on the 3rd party API to pull odds. spoke with SEIR Matt came to conclusion that React might be easier to pull 3rd party API. started looking into pulling with react
+
+10/5
+worked on DBs making sure we are able to connect. did encounter issues with docker took a bit to figure out. had to delete project and re-clone. 
+
+10/6
+started working on 3rd party api. signed up to get api key. started reading docs on how to use api. also reading how to use react to make 3rd party api call. have to choose wether to use function or class based.
+
+
+### Week 2 ### 
+10/10
+working on getting the 3d api to work with react. researched a way to hide API Key. getting title to display but getting error on the get request. 
