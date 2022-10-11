@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
+// import { useEffect, useState } from 'react';
+// import Construct from './Construct.js'
+// import ErrorNotification from './ErrorNotification';
 import './App.css';
-import Nav from './Nav';
-import HomePage from './HomePage';
-import GuruForm from './GuruForm';
+import Nav from './pages/Nav';
+import HomePage from './pages/HomePage';
+import GuruForm from './pages/GuruForm';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignUp from './pages/SignUp';
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -39,6 +40,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/guru/create" element={<GuruForm />} />
+            <Route path="/guru/signup" element={<SignUp />} />
           </Routes>
         </div>
       </BrowserRouter>
