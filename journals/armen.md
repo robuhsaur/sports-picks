@@ -1,3 +1,6 @@
+## October 10, 2022
+I finished up the UI for the Sign up page, Robbie/Will are working on backend and Sal is working on getting API's.
+
 ## October 6, 2022
 We split up the work and everyone chose on what they are going to work on.
 
