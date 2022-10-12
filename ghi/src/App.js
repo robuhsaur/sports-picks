@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignUp from './pages/GuruSignUp';
 // import Nav from './Nav';
 import MyGurus from './MyGuru.js';
