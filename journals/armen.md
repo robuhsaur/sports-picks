@@ -1,3 +1,6 @@
+## October 11, 2022
+Will and Robbie finished up the backend for the Guru side, Sal set up the API's. I worked on the User Signup page, home page and Guru login. Pushed up my work to my branch. 
+
 ## October 10, 2022
 I finished up the UI for the Sign up page, Robbie/Will are working on backend and Sal is working on getting API's.
 
