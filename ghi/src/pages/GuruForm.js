@@ -1,44 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from 'react';
+
+function BootStrapInput(props) {
+    const { id, placeholder, labelText, value, onChange, type } = props
+
+
+    return (
+        <div className="mb-4">
+            <label htmlFor={id}>{labelText}</label>
+            <input value={value} onChange={onChange} type={type} className="form-control" id={id} placeholder={placeholder} />
+        </div>
+    )
+}
 
 function GuruForm(props) {
+
+    const [pick, setPick] = useState('')
+    const [pickDetail, setPickDetail] = useState('')
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log({ pick, pickDetail });
+    }
+
+
+
     return (
-        <div className="form-outline mb-4">
-            <form>
-                <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Sport/Team</label>
-                    <input type="text" className="form-control" id="exampleSportTeam" placeholder="Enter picks here" />
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Guru's Choice</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-            </form>
-        </div>
+        <form>
+            <BootStrapInput
+                id="pick"
+                placeholder="Guru Pick"
+                labelText="Put ya pick here"
+                value={pick}
+                onChange={e => setPick(e.target.value)}
+                type="text" />
+            <BootStrapInput
+                id="pickDetail"
+                placeholder="Pick Detail"
+                labelText="Put ya Odds here"
+                value={pickDetail}
+                onChange={e => setPickDetail(e.target.value)}
+                type="text" />
+
+            <button onClick={handleSubmit}> Submit </button>
+        </form>
     )
 }
 
 export default GuruForm
 
 
-
-// class GuruForm extends React.Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             pick: "",
-//             pick_detail: "",
-//         }
-//         this.handleChange = this.handleChange.bind(this);
-//     }
-
-//     async handleSubmit(event) {
-//         event.preventDefault();
-//         const data = { ...this.state };
-//         delete data.models;
-
-//         // let automobileUrl = `http://localhost:8100/api/automobiles/`;
-
-//     }
-// }
-
-// export default GuruForm
+// http://localhost:8000/guru/form

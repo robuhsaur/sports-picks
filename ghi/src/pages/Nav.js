@@ -8,15 +8,9 @@ function Nav() {
                     <NavLink className="text-decoration-underline navbar-brand" to="/">OnlyPics</NavLink>
                     <ul className="dropdown">
                         <NavLink className="btn btn-dark" to="/guru/create" type="button" aria-current="page"> Guru </NavLink>
-                        <button className="btn btn-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sports
-                        </button>
-                        <button className="btn btn-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                            Odds
-                        </button>
-                        <button className="btn btn-dark" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Gurus
-                        </button>
+                        <NavLink className="btn btn-dark" to="/" type="button" aria-current="page"> Sports </NavLink>
+                        <NavLink className="btn btn-dark" to="/" type="button" aria-current="page"> Odds </NavLink>
+                        <NavLink className="btn btn-dark" to="/" type="button" aria-current="page"> My Gurus </NavLink>
                     </ul>
                 </div>
             </nav>
