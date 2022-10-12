@@ -22,6 +22,7 @@ from queries.guru import (
 
 router = APIRouter()
 
+
 class AccountForm(BaseModel):
     username: str
     password: str
@@ -32,10 +33,27 @@ class AccountToken(Token):
 class HttpError(BaseModel):
     detail: str
 
-router = APIRouter()
+@router.get("/token", response_model=AccountToken | None)
+async def get_token(
+    request: Request,
+    account: GuruSignupOut = Depends(authenticator.try_get_current_account_data)
+) -> AccountToken | None:
+    if authenticator.cookie_name in request.cookies:
+        return {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "account": account,
+        }
 
+@router.get("/guruinfo/")
+async def get_things(
+    account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
+):
+    if account_data:
+        return account_data
+    return None
 
-@router.post("/api/gurus", response_model=AccountToken | HttpError)
+@router.post("/gurus", response_model=AccountToken | HttpError)
 async def create_account(
     guru: GuruSignupIn,
     request: Request,
@@ -55,24 +73,13 @@ async def create_account(
     return AccountToken(account=account, **token.dict())
 
 
+@router.get("/gurus", response_model=list[GuruSignupOut])
+def get_gurus(
+    repo: GuruSignupRepository = Depends()
+):
+    return repo.get_gurus()
 
 
-
-
-
-
-# @router.post("/gurus", response_model=GuruSignupOut)
-# def create_guru(
-#     guru: GuruSignupIn,   
-#     repo: GuruSignupRepository = Depends(),
-# ):
-#     return repo.create(guru)
-
-# @router.get("/gurus", response_model=list[GuruSignupOut])
-# def get_gurus(
-#     repo: GuruSignupRepository = Depends()
-# ):
-#     return repo.get_gurus()
 
 # @router.get("/guru/{guru_id}", response_model=Optional[GuruSignupOut])
 # def get_a_guru(
@@ -85,14 +92,28 @@ async def create_account(
 #         response.status_code = 404
 #     return guru
 
-#----------------------------------------------
+
+# @router.post("/gurus", response_model=GuruSignupOut)
+# def create_guru(
+#     guru: GuruSignupIn,   
+#     repo: GuruSignupRepository = Depends(),
+# ):
+#     return repo.create(guru)
+
+
+
+
+
+#--------------------------GURU-FORMS--------------------
 
 @router.post("/gurus/form", response_model=GuruFormOut)
 def create_guru_form(
-    guruform: GuruFormIn,   
+    guruform: GuruFormIn,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: GuruFormRepository = Depends(),
 ):
-    return repo.create(guruform)
+    guru_id = account_data.get('id')
+    return repo.create(guruform, guru_id)
 
 @router.get("/gurus/form", response_model=list[GuruFormOut])
 def get_all_forms(
@@ -104,11 +125,19 @@ def get_all_forms(
 def get_a_guru_forms(
     guru_id: int,
     response: Response,
+    account_data: dict = Depends(authenticator.get_current_account_data),
     repo: GuruFormRepository = Depends(),
 ):
     forms = repo.get_a_guru_forms(guru_id)
     if forms is None:
         response.status_code = 404
     return forms
-    
 
+@router.put("/guru/{guru_id}/form/{form_id}", response_model=GuruFormOut)
+def update_guru_form(
+        guru_id:int,
+        form_id:int,
+        guruform: GuruFormIn,
+        repo: GuruFormRepository = Depends()
+    ) -> GuruFormOut:
+    return repo.update_guru_form(guruform, guru_id, form_id)
