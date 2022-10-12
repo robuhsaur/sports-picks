@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Nav from './pages/Nav';
-import HomePage from './pages/Home';
 import GuruForm from './pages/GuruForm';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignUp from './pages/GuruSignUp';
@@ -36,7 +35,6 @@ function App() {
         <Nav />
         <div className="container">
           <Routes>
-            <Route path="/" element={<HomePage />} />
             <Route path="/guru/create" element={<GuruForm />} />
             <Route path="/guru/signup" element={<SignUp />} />
           </Routes>
