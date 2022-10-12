@@ -4,6 +4,9 @@ from queries.pool import pool
 from typing import Optional
 
 
+class DuplicateAccountError(ValueError):
+    pass
+
 class GuruSignupIn(BaseModel):
     user_name: str
     password: str
@@ -12,9 +15,10 @@ class GuruSignupIn(BaseModel):
 class GuruSignupOut(BaseModel):
     id: int
     user_name: str
-    password: str
     description: str
 
+class GuruSignupOutWithPassword(GuruSignupOut):
+    hashed_password: str
 
 class GuruFormIn(BaseModel):
     pick: str
@@ -28,7 +32,7 @@ class GuruFormOut(BaseModel):
     guru_id: int
     
 class GuruSignupRepository:
-    def get_a_guru(self, guru_id: int) -> Optional[GuruSignupOut]:
+    def get_a_guru(self, user_name: str) -> Optional[GuruSignupOutWithPassword]:
         try:
             with pool.connection() as conn:
                 # get a cursor (something to run SQL with)
@@ -41,24 +45,53 @@ class GuruSignupRepository:
                              , password
                              , description
                         FROM guru_signup
-                        WHERE id = %s
+                        WHERE user_name = %s
                         """,
-                        [guru_id]
+                        [user_name]
                     )
                     record = result.fetchone()
                     if record is None:
                         return None
                     else:
-                        return GuruSignupOut(
+                        return GuruSignupOutWithPassword(
                             id= record[0],
                             user_name= record[1],
-                            password= record[2],
+                            hashed_password= record[2],
                             description= record[3]
                         )
         except Exception as e:
             print(e)
             return {"message": "Could not get that guru"}
 
+    def create(self, guru: GuruSignupIn, hashed_password: str) -> GuruSignupOutWithPassword:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    insert into guru_signup
+                        (user_name, password, description)
+                    values
+                        (%s, %s, %s)
+                    returning id, user_name, password, description;
+                    """,
+                    [
+                    guru.user_name, 
+                    hashed_password, 
+                    guru.description
+                    ]
+                )
+                user = result.fetchone()
+                print("-------------", user)
+                return GuruSignupOutWithPassword(
+                        id = user[0],
+                        user_name= user[1],
+                        hashed_password= user[2],
+                        description= user[3]
+                    )
+                # id = result.fetchone()[0]
+                # old_data = guru.dict()
+                # print(old_data)
+                # return GuruSignupOut(id=id, **old_data)
 
     def get_gurus(self) -> list[GuruSignupOut]:
         try:
@@ -83,26 +116,7 @@ class GuruSignupRepository:
             return {"message: could not get all gurus"}
 
 
-    def create(self, guru: GuruSignupIn) -> GuruSignupOut:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                result = db.execute(
-                    """
-                    insert into guru_signup
-                        (user_name, password, description)
-                    values
-                        (%s, %s, %s)
-                    returning id;
-                    """,
-                    [
-                    guru.user_name, 
-                    guru.password, 
-                    guru.description
-                    ]
-                )
-                id = result.fetchone()[0]
-                old_data = guru.dict()
-                return GuruSignupOut(id=id, **old_data)
+
 
 #---------------------------------------
 class GuruFormRepository:

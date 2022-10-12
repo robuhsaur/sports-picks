@@ -3,7 +3,7 @@ steps = [
         """
         create table guru_signup (
             id serial primary key not null,
-            user_name varchar(1000) not null,
+            user_name varchar(1000) not null UNIQUE,
             password varchar(100) not null,
             description text not null
         );
