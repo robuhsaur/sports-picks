@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
 import './App.css';
+import Nav from './pages/Nav';
+import GuruForm from './pages/GuruForm';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignUp from './pages/GuruSignUp';
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);  
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -29,8 +31,15 @@ function App() {
 
   return (
     <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="/guru/create" element={<GuruForm />} />
+            <Route path="/guru/signup" element={<SignUp />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,7 +1,19 @@
 volumes:
   postgres-data:
     external: true
+  pg-admin:
+    external: true
 services:
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DISABLE_POSTFIX: 1
   postgres:
     build:
       context: ./relational-data
@@ -9,6 +21,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
+      - POSTGRES_USER=postgres
       - POSTGRES_MULTIPLE_DATABASES=guru_data
       - POSTGRES_PASSWORD=test-databases
     ports:
