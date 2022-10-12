@@ -3,6 +3,15 @@ import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import './App.css';
 import SignUp from './pages/SignUp.js';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import SignUpUser from './pages/SignUpUser.js';
+import Home from './pages/Home.js';
+import LoginGuru from './pages/LoginGuru.js';
 
 function App() {
   const [launch_info, setLaunchInfo] = useState([]);
@@ -29,11 +38,14 @@ function App() {
 
 
   return (
-    <div>
-      {/* <ErrorNotification error={error} />
-      <Construct info={launch_info} /> */}
-      <SignUp/>
-    </div>
+    <Router>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/signup-guru" element={<SignUp/>}/>
+          <Route path="/signup-user" element={<SignUpUser />} />
+          <Route path="/login-guru" element={<LoginGuru />} />
+        </Routes>
+    </Router>
   );
 }
 

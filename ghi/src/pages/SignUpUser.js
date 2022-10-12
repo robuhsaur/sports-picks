@@ -35,26 +35,26 @@ const useSyles = makeStyles(()=> ({
         color: "#3A8DFF !important",
         backgroundColor: "#FFFFFF !important",
         marginTop: "20px",
-        marginBottom: "20px !important",
+        marginBottom: "20px",
     }
 }))
 
-const SignUp = () => {
+const SignUpUser = () => {
     const [username,setUserName] = useState("");
     const [password,setpassword] = useState("");
-    const [description,setDescription] = useState("");
     const classes = useSyles();
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log({username,password,description});
+        console.log({username,password});
     }
 
     return(
         <Grid container className={classes.mainContainer}>
+            
             <Grid container direction='column' alignItems='center' justifyContent='center' className={classes.fieldContainer}>
-                <Typography variant='h5'>Create a Guru Account</Typography>
+                <Typography variant='h5'>Create a User Account</Typography>
                 <TextField 
                 label="Username"
                 name="username"
@@ -71,28 +71,22 @@ const SignUp = () => {
                 className={classes.Input}
                 onChange={(event)=> setpassword(event.target.value)}
                 />
-                <TextField 
-                label="Description"
-                name="description"
-                aria-label='description'
-                className={classes.Input}
-                onChange={(event)=> setDescription(event.target.value)}
-                />
                 <Box textAlign={"center"}>
-                    <Button variant='contained' onClick={handleSubmit} className={classes.createBtn}>Create Guru</Button>
+                    <Button variant='contained' onClick={handleSubmit} className={classes.createBtn}>Create User</Button>
                 </Box>
                  <Grid item container alignItems="center" justifyContent="center">
                 <Grid item>
                     <Typography className={classes.haveAccountText}>Already have an account?</Typography>
                 </Grid>
                 <Grid item>
-                    <Button variant='contained' className={classes.loginBtn} onClick={()=> navigate("/login-guru")}>Login</Button>
-                    <Button variant='contained' className={classes.loginBtn} onClick={()=> navigate("/signup-user")}>Sign Up User</Button>
+                    <Button variant='contained' className={classes.loginBtn}>Login</Button>
+                    <Button variant='contained' className={classes.loginBtn} onClick={()=> navigate("/signup-guru")}>Guru Sign Up</Button>
                 </Grid>
             </Grid>
             </Grid>
+           
         </Grid>
     )
 }
 
-export default SignUp;
+export default SignUpUser;
