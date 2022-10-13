@@ -8,8 +8,8 @@ class MyGurus extends React.Component {
         return (
             <div class="row justify-content-center">
                 <div class="col-auto">
-                <div class="card">
-                    <Scrollbars style={{ width: 500, height: 300 }}>
+                    <div class="card">
+                        <Scrollbars style={{ width: 500, height: 300 }}>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -69,7 +69,7 @@ class MyGurus extends React.Component {
                                     </tr>
                                 </tbody>
                             </table>
-                    </Scrollbars >
+                        </Scrollbars >
                     </div>
                 </div>
             </div>

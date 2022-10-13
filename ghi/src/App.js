@@ -5,7 +5,7 @@ import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
 import SignUp from './pages/GuruSignUp';
 // import Nav from './Nav';
-import MyGurus from './MyGuru.js';
+import MyGurus from './pages/MyGuru.js';
 
 function App(props) {
   return (
@@ -16,7 +16,7 @@ function App(props) {
           <Routes>
             <Route path="/guru/create" element={<GuruForm />} />
             <Route path="/guru/signup" element={<SignUp />} />
-            <Route path="onlypick/myguru" element={<MyGurus/>} />
+            <Route path="onlypick/myguru" element={<MyGurus />} />
           </Routes>
         </div>
       </BrowserRouter>
