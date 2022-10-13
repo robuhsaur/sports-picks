@@ -3,7 +3,19 @@ volumes:
     external: true
   postgres-data:
     external: true
+  pg-admin:
+    external: true
 services:
+  pg-admin:
+    image: dpage/pgadmin4
+    volumes:
+      - pg-admin:/var/lib/pgadmin
+    ports:
+      - 8082:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_DISABLE_POSTFIX: 1
   postgres:
     build:
       context: ./relational-data
@@ -11,6 +23,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     environment:
+      - POSTGRES_USER=postgres
       - POSTGRES_MULTIPLE_DATABASES=guru_data
       - POSTGRES_PASSWORD=test-databases
       - POSTGRES_USER=postgres
@@ -18,14 +31,18 @@ services:
       - 15432:5432
   fastapi:
     build:
-      context: sample_service
+      context: op_api
       dockerfile: Dockerfile.dev
+    environment:
+      DATABASE_URL: postgresql://postgres:test-databases@postgres/guru_data
+      WAIT_HOSTS: postgres:5432
+      PORT: 8000
+      SIGNING_KEY: 87fe4a3fcfb60092dbaeb854a196bc3d9b190aed7930c734749e85245de698420c25f8e6899c421b4494e99459e01058de5daa9d49584cd62ec975da9aea33da
     ports:
       - 8000:8000
     volumes:
-      - ./sample_service:/app
-
-  ghi:
+      - ./op_api:/app
+  ghi: 
     image: node:lts-bullseye
     command: /bin/bash run.sh
     working_dir: /app

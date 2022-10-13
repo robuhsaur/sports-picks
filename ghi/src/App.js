@@ -1,26 +1,30 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import './App.css';
+import Nav from './pages/Nav';
+import GuruForm from './pages/GuruForm';
+import SignUp from './pages/GuruSignUp';
+import MyGurus from './MyGuru.js';
 import SportsList from './odds/SportsList.js';
 import NFLGameslist from './odds/NFLGamesList.js';
 
-// console.log(process.env.REACT_APP_ODDS_API_KEY);
-
-
 function App() {
   return (
-    <BrowserRouter>
     <div>
-  
-      <Routes>
-      <Route path="/sportslist" element={<SportsList />} />
-      <Route path="/nflgames" element={<NFLGameslist />} />
-        
-      </Routes>
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="/guru/create" element={<GuruForm />} />
+            <Route path="/guru/signup" element={<SignUp />} />
+            <Route path="onlypick/myguru" element={<MyGurus />} />
+            <Route path="/sportslist" element={<SportsList />} />
+            <Route path="/nflgames" element={<NFLGameslist />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
-    </BrowserRouter>
+   
   );
 }
 
