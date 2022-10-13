@@ -1,15 +1,15 @@
 import React from "react";
 
-class SportsList extends React.Component {
+class NFLGameslist extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sports: []
+            games: []
         };
     }
 
     async componentDidMount() {
-        const url = 'https://odds.p.rapidapi.com/v4/sports'
+        const url = 'https://odds.p.rapidapi.com/v4/sports/americanfootball_nfl/odds?regions=us&oddsFormat=decimal&dateFormat=iso'
         const fetchConfig = {
             method: 'GET',
             headers: {
@@ -20,7 +20,8 @@ class SportsList extends React.Component {
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
             const data = await response.json();
-            this.setState({ sports: data });
+            this.setState({ games: data });
+            // console.log(data)
             
         }
     }
@@ -29,16 +30,15 @@ class SportsList extends React.Component {
         
         return (
             <div>
-                <h1>Available Sports List</h1>
+                <h1>Upcoming NFL Games</h1>
                 <ul>
-                    {this.state.sports.map((sport) => {
-                        if (sport.title === 'NFL' || sport.title === 'NBA') {
+                    {this.state.games.map((game) => {
                             return (
-                                <ul key={sport.key}>
-                                    <li><a href="">{sport.title}</a> - {sport.description}</li>
+                                <ul key={game.id}>
+                                    <li>{game.away_team}(A) vs {game.home_team}(H)</li>
                                 </ul>
                             )
-                        }
+                        
                     })}
                 </ul>
             </div>
@@ -46,18 +46,4 @@ class SportsList extends React.Component {
     }
 }
 
-export default SportsList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default NFLGameslist;
