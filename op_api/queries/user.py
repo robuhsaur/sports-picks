@@ -1,0 +1,76 @@
+from pydantic import BaseModel
+from queries.pool import pool
+from typing import Optional
+
+class DuplicateAccountError(ValueError):
+    pass
+
+class UserSignupIn(BaseModel):
+    user_name: str
+    password: str
+
+class UserSignupOut(BaseModel):
+    id: int
+    user_name: str
+
+class UserSignupOutWithPassword(UserSignupOut):
+    hashed_password: str
+
+
+class UserSignupRepository:
+    def get_a_user(self, user_name: str) -> Optional[UserSignupOutWithPassword]:
+        try:
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # Run our SELECT statement
+                    result = db.execute(
+                        """
+                        SELECT id
+                             , user_name
+                             , password
+                        FROM user_signup
+                        WHERE user_name = %s
+                        """,
+                        [user_name]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    else:
+                        return UserSignupOutWithPassword(
+                            id= record[0],
+                            user_name= record[1],
+                            hashed_password= record[2],
+                        )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that guru"}
+
+    def create_user(self, user: UserSignupIn, hashed_password: str) -> UserSignupOutWithPassword:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    insert into user_signup
+                        (user_name, password)
+                    values
+                        (%s, %s)
+                    returning id, user_name, password;
+                    """,
+                    [
+                    user.user_name, 
+                    hashed_password, 
+                    ]
+                )
+                user = result.fetchone()
+                return UserSignupOutWithPassword(
+                        id = user[0],
+                        user_name= user[1],
+                        hashed_password= user[2]
+                    )
+           
+
+
+
+
