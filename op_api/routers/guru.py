@@ -45,8 +45,8 @@ async def get_token(
             "account": account,
         }
 
-@router.get("/guruinfo/")
-async def get_things(
+@router.get("/guruinfo")
+async def get_guru_info(
     account_data: Optional[dict] = Depends(authenticator.try_get_current_account_data),
 ):
     if account_data:
