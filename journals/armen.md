@@ -1,3 +1,15 @@
+## October 13, 2022
+We ran into issues with installing material UI, will try to solve the errors. If we can't then we will not be using material UI :( 
+
+## October 12, 2022
+Continued to work on our issues. two of us merged our branches with main.
+
+## October 11, 2022
+Will and Robbie finished up the backend for the Guru side, Sal set up the API's. I worked on the User Signup page, home page and Guru login. Pushed up my work to my branch. 
+
+## October 10, 2022
+I finished up the UI for the Sign up page, Robbie/Will are working on backend and Sal is working on getting API's.
+
 ## October 6, 2022
 We split up the work and everyone chose on what they are going to work on.
 
