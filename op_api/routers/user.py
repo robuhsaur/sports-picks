@@ -59,7 +59,7 @@ async def create_account(
     response: Response,
     repo: UserSignupRepository = Depends(),
 ):
-    hashed_password = user_authenticator.hash_password(user.password)
+    hashed_password = user_authenticator.hash_password(user.password)git 
     try:
         account = repo.create_user(user, hashed_password)
     except DuplicateAccountError:
