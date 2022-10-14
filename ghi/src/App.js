@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
-import SignUp from './pages/GuruSignUp';
+import * as GuruSignUp from './pages/GuruSignUp';
 import MyGurus from './MyGuru.js';
 import SportsList from './odds/SportsList.js';
 import NFLGameslist from './odds/NFLGamesList.js';
@@ -20,12 +20,12 @@ import LoginGuru from './pages/LoginGuru.js';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <Router>
         <Nav />
         <div className="container">
           <Routes>
             <Route path="/guru/create" element={<GuruForm />} />
-            <Route path="/guru/signup" element={<SignUp />} />
+            <Route path="/guru/signup" element={<GuruSignUp />} />
             <Route path="onlypick/myguru" element={<MyGurus />} />
             <Route path="/sportslist" element={<SportsList />} />
             <Route path="/nflgames" element={<NFLGameslist />} />
@@ -35,7 +35,7 @@ function App() {
             <Route path="/login-guru" element={<LoginGuru />} />
           </Routes>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
    
   );
