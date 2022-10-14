@@ -4,10 +4,11 @@ import './App.css';
 import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
 import SignUp from './pages/GuruSignUp';
-// import Nav from './Nav';
 import MyGurus from './MyGuru.js';
+import SportsList from './odds/SportsList.js';
+import NFLGameslist from './odds/NFLGamesList.js';
 
-function App(props) {
+function App() {
   return (
     <div>
       <BrowserRouter>
@@ -16,11 +17,14 @@ function App(props) {
           <Routes>
             <Route path="/guru/create" element={<GuruForm />} />
             <Route path="/guru/signup" element={<SignUp />} />
-            <Route path="onlypick/myguru" element={<MyGurus/>} />
+            <Route path="onlypick/myguru" element={<MyGurus />} />
+            <Route path="/sportslist" element={<SportsList />} />
+            <Route path="/nflgames" element={<NFLGameslist />} />
           </Routes>
         </div>
       </BrowserRouter>
     </div>
+   
   );
 }
 
