@@ -1,6 +1,8 @@
+from cmath import exp
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional
+from queries.guru import GuruFormOut
 
 class DuplicateAccountError(ValueError):
     pass
@@ -15,6 +17,23 @@ class UserSignupOut(BaseModel):
 
 class UserSignupOutWithPassword(UserSignupOut):
     hashed_password: str
+
+class UserSubscribeIn(BaseModel):
+    name: str
+    card_number: int
+    exp: str
+    cvv: int
+    # guru_id: int
+
+class UserSubscribeOut(BaseModel):
+    id: int
+    name: str
+    card_number: int
+    exp: str
+    cvv: int
+    user_id: int
+    guru_id: int
+
 
 
 class UserSignupRepository:
@@ -70,6 +89,52 @@ class UserSignupRepository:
                         hashed_password= user[2]
                     )
            
+    
+class UserSubscriberRepository:
+    def subscribe_to_guru(self, usersus: UserSubscribeIn, user_id, guru_id:int)-> UserSubscribeOut:
+        with pool.connection() as conn:
+            with conn.cursor() as db:
+                result = db.execute(
+                    """
+                    insert into subscriptions 
+                        (name, card_number, exp, cvv, user_id, guru_id)
+                    values
+                        (%s, %s, %s, %s, %s, %s)
+                    returning id, name, card_number, exp, cvv, user_id, guru_id;
+                    """,
+                    [
+                        usersus.name,
+                        usersus.card_number,
+                        usersus.exp,
+                        usersus.cvv,
+                        user_id,
+                        guru_id
+                    ]
+                )
+                subscription = result.fetchone()
+                return UserSubscribeOut(
+                    id= subscription[0],
+                    name= subscription[1],
+                    card_number= subscription[2],
+                    exp= subscription[3],
+                    cvv= subscription[4],
+                    user_id= subscription[5],
+                    guru_id= subscription[6]
+                )
+
+    # def get_forms_from_subscription(self, user_id:int)->list[GuruFormOut]:
+    #     try:
+    #         with pool.connection() as conn:
+    #             with conn.cursor() as db:
+    #                 result = db.execute(
+    #                     """
+    #                     select 
+    #                     """
+    #                 )
+    #     except Exception as e:
+    #         print(e)
+    #         return {"message": "User has no subscriptions"}
+
 
 
 
