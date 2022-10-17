@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, makeStyles, Typography, Button, TextField, Box } from "@material-ui/core"
+import { useNavigate } from 'react-router-dom';
 
 const useSyles = makeStyles(() => ({
     mainContainer: {
@@ -11,16 +12,16 @@ const useSyles = makeStyles(() => ({
     },
     loginBtn: {
         padding: "8px 40px",
-        color: "#3A8dFF",
-        backgroundColor: "white",
-        marginLeft: 20,
+        color: "#3A8dFF !important",
+        backgroundColor: "white !important",
+        marginLeft: "20px !important",
         height: 37,
     },
     fieldContainer: {
         height: "80%",
-        padding: "0px 56px 56px",
+        padding: "0px 56px 56px !important",
         "& >*": {
-            paddingBottom: "24px",
+            paddingBottom: "24px !important",
         }
     },
     Input: {
@@ -31,20 +32,19 @@ const useSyles = makeStyles(() => ({
     },
     createBtn: {
         padding: "8px 40px",
-        color: "#3A8DFF",
-        backgroundColor: "#FFFFFF",
-        marginTop: 20,
-        marginBottom: 20,
+        color: "#3A8DFF !important",
+        backgroundColor: "#FFFFFF !important",
+        marginTop: "20px !important",
+        marginBottom: "20px !important",
     }
 }))
 
-
-const SignUp = () => {
+const LoginGuru = () => {
     const [username, setUserName] = useState("");
     const [password, setpassword] = useState("");
     const [description, setDescription] = useState("");
     const classes = useSyles();
-
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -53,9 +53,8 @@ const SignUp = () => {
 
     return (
         <Grid container className={classes.mainContainer}>
-
             <Grid container direction='column' alignItems='center' justifyContent='center' className={classes.fieldContainer}>
-                <Typography variant='h5'>Create a Guru Account</Typography>
+                <Typography variant='h5'>Login To Your Guru Account</Typography>
                 <TextField
                     label="Username"
                     name="username"
@@ -72,31 +71,21 @@ const SignUp = () => {
                     className={classes.Input}
                     onChange={(event) => setpassword(event.target.value)}
                 />
-                <TextField
-                    label="Description"
-                    name="description"
-                    aria-label='description'
-                    className={classes.Input}
-                    onChange={(event) => setDescription(event.target.value)}
-                />
                 <Box textAlign={"center"}>
-                    <Button variant='contained' onClick={handleSubmit} className={classes.createBtn}>Create</Button>
+                    <Button variant='contained' onClick={handleSubmit} className={classes.createBtn}>Login As Guru</Button>
                 </Box>
                 <Grid item container alignItems="center" justifyContent="center">
                     <Grid item>
-                        <Typography className={classes.haveAccountText}>Already have an account?</Typography>
+                        <Typography className={classes.haveAccountText}>Don't have an account?</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' className={classes.loginBtn} onClick={event => window.location.href = '/guru/login'}>Login</Button>
+                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/guru/signup")}>Sign Up As Guru</Button>
+                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/signup-user")}>Sign Up User</Button>
                     </Grid>
                 </Grid>
             </Grid>
-
         </Grid>
     )
 }
 
-export default SignUp;
-
-
-// POST /gurus port 8000
+export default LoginGuru;
