@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class SportsList extends React.Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class SportsList extends React.Component {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
                                 <ul key={sport.key}>
-                                    <li><a href="">{sport.title}</a> - {sport.description}</li>
+                                    <li><Link to="/nflgames">{sport.title}</Link> - {sport.description}</li>
                                 </ul>
                             )
                         }

@@ -7,6 +7,7 @@ import SignUp from './pages/GuruSignUp';
 import MyGurus from './MyGuru.js';
 import SportsList from './odds/SportsList.js';
 import NFLGameslist from './odds/NFLGamesList.js';
+import NBAGameslist from './odds/NBAGamesList.js';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="onlypick/myguru" element={<MyGurus />} />
             <Route path="/sportslist" element={<SportsList />} />
             <Route path="/nflgames" element={<NFLGameslist />} />
+            <Route path="/nbagames" element={<NBAGameslist />} />
           </Routes>
         </div>
       </BrowserRouter>
