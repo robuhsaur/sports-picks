@@ -1,50 +1,96 @@
-import React, { useEffect } from "react";
-import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Grid, makeStyles, Typography, Button, TextField, Box } from "@material-ui/core"
+import { useNavigate } from 'react-router-dom';
+import { useToken } from '../Auth'
 
-
-function LoginComponent() {
-    const [token, login] = useToken();
-
-    // Other code, here
-}
-
-async function LoginUser(username, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/user/token`;
-
-    const form = new FormData();
-    form.append("username", username);
-    form.append("password", password);
-
-    const response = await fetch(url, {
-        method: "post",
-        credentials: "include",
-        body: form,
-    });
-    if (response.ok) {
-        const tokenUrl = `${process.env.REACT_APP_API_HOST}/user/token`;
-
-        try {
-            const response = await fetch(tokenUrl, {
-                credentials: "include",
-            });
-            if (response.ok) {
-                const data = await response.json();
-                const token = data.token;
-                // DO SOMETHING WITH THE TOKEN SO YOU CAN USE IT
-                // IN REQUESTS TO YOUR NON-ACCOUNTS SERVICES
-            }
-        } catch (e) { }
-        return false;
+const useSyles = makeStyles(() => ({
+    mainContainer: {
+        height: "100vh",
+        backgroundColor: "#FFFFFF"
+    }, haveAccountText: {
+        color: "#2D333A",
+        fontSize: "16px"
+    },
+    loginBtn: {
+        padding: "8px 40px",
+        color: "#3A8dFF !important",
+        backgroundColor: "#FFFFFF !important",
+        marginLeft: "20px !important",
+        height: 37,
+    },
+    fieldContainer: {
+        height: "80%",
+        padding: "0px 56px 56px !important",
+        "& >*": {
+            paddingBottom: "24px !important",
+        }
+    },
+    Input: {
+        width: "60%",
+        color: "#2D333A !important",
+        borderBottomColor: "#2D333A !important",
+        borderBottomWidth: 0.5,
+    },
+    createBtn: {
+        padding: "8px 40px",
+        color: "#3A8DFF !important",
+        backgroundColor: "#FFFFFF !important",
+        marginTop: "20px",
+        marginBottom: "20px",
     }
-    let error = await response.json();
-    // DO SOMETHING WITH THE ERROR, IF YOU WANT
+}))
 
+const SignUpUser = () => {
+    const [username, setUserName] = useState("");
+    const [password, setpassword] = useState("");
+    const [token, login] = useToken();
+    const classes = useSyles();
+    const navigate = useNavigate();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        login(username, password)
+        console.log({ username, password });
+
+    }
 
     return (
-        <p> poo poo </p>
-    )
+        <Grid container className={classes.mainContainer}>
 
+            <Grid container direction='column' alignItems='center' justifyContent='center' className={classes.fieldContainer}>
+                <Typography variant='h5'>Login User Account</Typography>
+                <TextField
+                    label="Username"
+                    name="username"
+                    aria-label='username'
+                    className={classes.Input}
+                    onChange={(event) => setUserName(event.target.value)}
+                />
+                <TextField
+                    label="Password"
+                    name="password"
+                    aria-label='password'
+                    type={"password"}
+                    inputProps={{ minLength: 6 }}
+                    className={classes.Input}
+                    onChange={(event) => setpassword(event.target.value)}
+                />
+                <Box textAlign={"center"}>
+                    <Button variant='contained' onClick={handleSubmit} className={classes.createBtn}>Log In</Button>
+                </Box>
+                <Grid item container alignItems="center" justifyContent="center">
+                    <Grid item>
+                        <Typography className={classes.haveAccountText}>Don't have an Account?</Typography>
+                    </Grid>
+                    <Grid item>
+                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/signup-user")}>Create User</Button>
+                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/signup-guru")}>Guru Sign Up</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    )
 }
 
-export default LoginUser
+export default SignUpUser;

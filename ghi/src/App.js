@@ -27,9 +27,9 @@ function GetToken() {
 function App() {
   return (
     <div>
-      <AuthProvider>
-        <GetToken />
-        <Router>
+      <Router>
+        <AuthProvider>
+          <GetToken />
           <Nav />
           <div className="container">
             <Routes>
@@ -44,8 +44,8 @@ function App() {
               <Route path="/login-guru" element={<LoginGuru />} />
             </Routes>
           </div>
-        </Router>
-      </AuthProvider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }

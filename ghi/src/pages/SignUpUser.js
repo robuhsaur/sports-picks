@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, makeStyles, Typography, Button, TextField, Box } from "@material-ui/core"
 import { useNavigate } from 'react-router-dom';
+import { useToken } from '../Auth'
 
 const useSyles = makeStyles(() => ({
     mainContainer: {
@@ -40,14 +41,16 @@ const useSyles = makeStyles(() => ({
 }))
 
 const SignUpUser = () => {
-    const [username, setUserName] = useState("");
+    const [user_name, setUserName] = useState("");
     const [password, setpassword] = useState("");
+    const [token, login, logout, signup] = useToken();
     const classes = useSyles();
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log({ username, password });
+        signup(user_name, password)
+        console.log({ user_name, password });
     }
 
     return (
@@ -79,7 +82,7 @@ const SignUpUser = () => {
                         <Typography className={classes.haveAccountText}>Already have an account?</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/login-user")}>Login</Button>
+                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/login-user")}>Login as User</Button>
                         <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/signup-guru")}>Guru Sign Up</Button>
                     </Grid>
                 </Grid>
