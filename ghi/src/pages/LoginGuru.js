@@ -79,7 +79,7 @@ const LoginGuru = () => {
                         <Typography className={classes.haveAccountText}>Don't have an account?</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/guru/signup")}>Sign Up As Guru</Button>
+                        <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/signup-guru")}>Sign Up As Guru</Button>
                         <Button variant='contained' className={classes.loginBtn} onClick={() => navigate("/signup-user")}>Sign Up User</Button>
                     </Grid>
                 </Grid>

@@ -38,13 +38,11 @@ const useSyles = makeStyles(() => ({
     }
 }))
 
-
 const SignUp = () => {
     const [username, setUserName] = useState("");
     const [password, setpassword] = useState("");
     const [description, setDescription] = useState("");
     const classes = useSyles();
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -87,7 +85,7 @@ const SignUp = () => {
                         <Typography className={classes.haveAccountText}>Already have an account?</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' className={classes.loginBtn} onClick={event => window.location.href = '/guru/login'}>Login</Button>
+                        <Button variant='contained' className={classes.loginBtn}>Login</Button>
                     </Grid>
                 </Grid>
             </Grid>
