@@ -5,7 +5,8 @@ steps = [
             id serial primary key not null,
             user_name varchar(1000) not null UNIQUE,
             password varchar(100) not null,
-            description text not null
+            description text not null,
+            price int not null
         );
         """,
         """
