@@ -1,5 +1,16 @@
-async function login(username, password) {
-    const url = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`;
+import React, { useEffect } from "react";
+import { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom'
+
+
+function LoginComponent() {
+    const [token, login] = useToken();
+
+    // Other code, here
+}
+
+async function LoginUser(username, password) {
+    const url = `${process.env.REACT_APP_API_HOST}/user/token`;
 
     const form = new FormData();
     form.append("username", username);
@@ -11,7 +22,7 @@ async function login(username, password) {
         body: form,
     });
     if (response.ok) {
-        const tokenUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/token`;
+        const tokenUrl = `${process.env.REACT_APP_API_HOST}/user/token`;
 
         try {
             const response = await fetch(tokenUrl, {
@@ -28,4 +39,12 @@ async function login(username, password) {
     }
     let error = await response.json();
     // DO SOMETHING WITH THE ERROR, IF YOU WANT
+
+
+    return (
+        <p> poo poo </p>
+    )
+
 }
+
+export default LoginUser

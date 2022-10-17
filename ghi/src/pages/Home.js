@@ -20,8 +20,8 @@ const Home = () => {
     const classes = useStyles();
     return (<Grid container justifyContent='center' alignItems='center' className={classes.container}>
         <Box textAlign={"center"}>
-            <Button variant="contained" onClick={() => navigate("/guru/signup")} className={classes.signupGuruButton}>Sign Up As Guru</Button>
-            <Button variant="contained" onClick={() => navigate("/guru/login")} className={classes.signupGuruButton}>Login As Guru</Button>
+            <Button variant="contained" onClick={() => navigate("/signup-guru")} className={classes.signupGuruButton}>Sign Up As Guru</Button>
+            <Button variant="contained" onClick={() => navigate("/signup-user")} className={classes.signupGuruButton}>Login As Guru</Button>
             <Button variant="contained" onClick={() => navigate("/signup-user")} className={classes.signupGuruButton}>Sign Up As User</Button>
         </Box>
     </Grid>)

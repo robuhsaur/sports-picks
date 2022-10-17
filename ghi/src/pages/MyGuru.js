@@ -69,7 +69,7 @@ class MyGurus extends React.Component {
                                     </tr>
                                 </tbody>
                             </table>
-                        </Scrollbars >
+                        </Scrollbars>
                     </div>
                 </div>
             </div>
