@@ -1,4 +1,5 @@
 from typing import Optional
+from urllib import response
 from fastapi import (
     Depends,
     HTTPException,
@@ -14,7 +15,10 @@ from queries.user import (
     UserSignupIn,
     UserSignupRepository,
     UserSignupOut,
-    DuplicateAccountError
+    DuplicateAccountError,
+    UserSubscriberRepository,
+    UserSubscribeIn,
+    UserSubscribeOut
 )
 
 
@@ -32,7 +36,7 @@ class AccountToken(Token):
 class HttpError(BaseModel):
     detail: str
 
-@router.get("user/token", response_model=AccountToken | None)
+@router.get("/user/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
     account: UserSignupOut = Depends(user_authenticator.try_get_current_account_data)
@@ -59,7 +63,7 @@ async def create_account(
     response: Response,
     repo: UserSignupRepository = Depends(),
 ):
-    hashed_password = user_authenticator.hash_password(user.password)git 
+    hashed_password = user_authenticator.hash_password(user.password)
     try:
         account = repo.create_user(user, hashed_password)
     except DuplicateAccountError:
@@ -70,3 +74,20 @@ async def create_account(
     form = AccountForm(username=user.user_name, password=user.password)
     token = await user_authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
+
+
+
+
+#-------------------------------------Sussyscribe--------------------------------------------------
+
+
+# @router.post("/user/subscribe/{guru_id}", response_model=UserSubscribeOut)
+# def subscribe(
+#     usersus: UserSubscribeIn,
+#     guru_id: int,
+#     account_data: dict = Depends(user_authenticator.get_current_account_data),
+#     repo: UserSubscriberRepository = Depends()
+# ):
+#     user_id = account_data.get('id')
+#     print(user_id)
+#     return repo.subscribe_to_guru(usersus, user_id, guru_id)
