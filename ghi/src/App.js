@@ -29,15 +29,14 @@ function App() {
             <Route path="onlypick/myguru" element={<MyGurus />} />
             <Route path="/sportslist" element={<SportsList />} />
             <Route path="/nflgames" element={<NFLGameslist />} />
-            <Route path="/" element={<Home/>} />
-            <Route path="/signup-guru" element={<SignUp/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup-guru" element={<SignUp />} />
             <Route path="/signup-user" element={<SignUpUser />} />
             <Route path="/login-guru" element={<LoginGuru />} />
           </Routes>
         </div>
       </Router>
     </div>
-   
   );
 }
 
