@@ -3,8 +3,6 @@ volumes:
     external: true
   postgres-data:
     external: true
-  pg-admin:
-    external: true
 services:
   pg-admin:
     image: dpage/pgadmin4
@@ -41,11 +39,11 @@ services:
       - 8000:8000
     volumes:
       - ./op_api:/app
-  ghi: 
+  ghi:
     image: node:lts-bullseye
     command: /bin/bash run.sh
     working_dir: /app
-    volumes: 
+    volumes:
       - ./ghi:/app
     ports:
       - "3000:3000"
@@ -54,15 +52,3 @@ services:
       NODE_ENV: development
       HOST: "0.0.0.0"
       REACT_APP_API_HOST: http://localhost:8000
-  
-  pg-admin:
-    image: dpage/pgadmin4
-    volumes:
-      - pg-admin:/var/lib/pgadmin
-    ports:
-      - 8082:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: s@s.com
-      PGADMIN_DEFAULT_PASSWORD: sal
-      PGADMIN_DISABLE_POSTFIX: 1  
-

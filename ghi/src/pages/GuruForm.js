@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom'
+
 
 function BootStrapInput(props) {
     const { id, placeholder, labelText, value, onChange, type } = props
@@ -18,10 +20,27 @@ function GuruForm(props) {
     const [pick, setPick] = useState('')
     const [pickDetail, setPickDetail] = useState('')
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log({ pick, pickDetail });
+    async function handleSubmit(e) {
+        e.preventDefault();
+        const url = `http://localhost:8000/gurus/form`
+        const response = await fetch(url, {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ pick, pickDetail })
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+            Navigate("/guru/signup")
+        } else {
+            console.log("didn't work uh oh")
+        }
     }
+
+
 
 
 

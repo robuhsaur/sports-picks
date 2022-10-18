@@ -11,11 +11,13 @@ class GuruSignupIn(BaseModel):
     user_name: str
     password: str
     description: str
+    price: int
 
 class GuruSignupOut(BaseModel):
     id: int
     user_name: str
     description: str
+    price: int
 
 class GuruSignupOutWithPassword(GuruSignupOut):
     hashed_password: str
@@ -46,6 +48,7 @@ class GuruSignupRepository:
                              , user_name
                              , password
                              , description
+                             , price
                         FROM guru_signup
                         WHERE user_name = %s
                         """,
@@ -59,7 +62,8 @@ class GuruSignupRepository:
                             id= record[0],
                             user_name= record[1],
                             hashed_password= record[2],
-                            description= record[3]
+                            description= record[3],
+                            price= record[4]
                         )
         except Exception as e:
             print(e)
@@ -71,15 +75,16 @@ class GuruSignupRepository:
                 result = db.execute(
                     """
                     insert into guru_signup
-                        (user_name, password, description)
+                        (user_name, password, description, price)
                     values
-                        (%s, %s, %s)
-                    returning id, user_name, password, description;
+                        (%s, %s, %s, %s)
+                    returning id, user_name, password, description, price;
                     """,
                     [
                     guru.user_name, 
                     hashed_password, 
-                    guru.description
+                    guru.description,
+                    guru.price
                     ]
                 )
                 user = result.fetchone()
@@ -87,7 +92,8 @@ class GuruSignupRepository:
                         id = user[0],
                         user_name= user[1],
                         hashed_password= user[2],
-                        description= user[3]
+                        description= user[3],
+                        price= user[4]
                     )
                 # id = result.fetchone()[0]
                 # old_data = guru.dict()
@@ -100,7 +106,7 @@ class GuruSignupRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                        select id, user_name, description
+                        select id, user_name, description, price
                         from guru_signup
                         """
                     )
@@ -108,7 +114,8 @@ class GuruSignupRepository:
                         GuruSignupOut(
                             id= guru[0],
                             user_name= guru[1],
-                            description= guru[2]
+                            description= guru[2],
+                            price= guru[3]
                         )
                         for guru in db
                     ]

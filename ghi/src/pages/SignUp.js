@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Button, TextField, Box } from "@mui/material"
 import { useNavigate } from 'react-router-dom';
-import { useToken } from '../Auth'
 
 
 
-const SignUpUser = () => {
-    const [user_name, setUserName] = useState("");
+const SignUp = () => {
+    const [username, setUserName] = useState("");
     const [password, setpassword] = useState("");
-    const [token, login, logout, signup] = useToken();
+    const [description, setDescription] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        signup(user_name, password)
-        console.log({ user_name, password });
+        console.log({ username, password, description });
     }
 
     return (
-        <Grid>
-
+        <Grid container >
             <Grid container direction='column' alignItems='center' justifyContent='center' >
-                <Typography variant='h5'>Create a User Account</Typography>
+                <Typography variant='h5'>Create a Guru Account</Typography>
                 <TextField
                     label="Username"
                     name="username"
@@ -36,22 +33,27 @@ const SignUpUser = () => {
                     inputProps={{ minLength: 6 }}
                     onChange={(event) => setpassword(event.target.value)}
                 />
+                <TextField
+                    label="Description"
+                    name="description"
+                    aria-label='description'
+                    onChange={(event) => setDescription(event.target.value)}
+                />
                 <Box textAlign={"center"}>
-                    <Button variant='contained' onClick={handleSubmit} >Create User</Button>
+                    <Button variant='contained' onClick={handleSubmit} >Create Guru</Button>
                 </Box>
                 <Grid item container alignItems="center" justifyContent="center">
                     <Grid item>
                         <Typography >Already have an account?</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' onClick={() => navigate("/login-user")}>Login as User</Button>
-                        <Button variant='contained' onClick={() => navigate("/signup-guru")}>Guru Sign Up</Button>
+                        <Button variant='contained' onClick={() => navigate("/login-guru")}>Login</Button>
+                        <Button variant='contained' onClick={() => navigate("/signup-user")}>Sign Up User</Button>
                     </Grid>
                 </Grid>
             </Grid>
-
         </Grid>
     )
 }
 
-export default SignUpUser;
+export default SignUp;
