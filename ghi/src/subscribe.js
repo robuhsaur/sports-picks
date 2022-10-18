@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 
-function MyGurus() {
+function Subscribe() {
     return(
         <div>
             Yellow
@@ -8,7 +8,7 @@ function MyGurus() {
     )
 }
 
-export default MyGurus
+export default Subscribe
 
 
 
