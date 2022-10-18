@@ -121,6 +121,62 @@ export function useToken() {
     return false;
   }
 
+  async function logout_guru() {
+    console.log("888");
+    if (token) {
+      //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
+      const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
+
+      await fetch(url, { method: "delete", credentials: "include" });
+      internalToken = null;
+      setToken(null);
+      navigate("/");
+    }
+  }
+
+  async function login_guru(username, password) {
+    const url = `${process.env.REACT_APP_API_HOST}/guru/token/`;
+    // const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
+    const form = new FormData();
+    form.append("username", username);
+    form.append("password", password);
+    const response = await fetch(url, {
+      method: "post",
+      credentials: "include",
+      body: form,
+    });
+    if (response.ok) {
+      const token = await getTokenInternal();
+      setToken(token);
+      return;
+    }
+    let error = await response.json();
+    return handleErrorMessage(error);
+  }
+
+  async function signup_guru(user_name, password, description, price) {
+    console.log("signup guru");
+    const url = `${process.env.REACT_APP_API_HOST}/gurus`; // TODO: change url to user/sign-up
+    // const url = `http://localhost:8000/gurus`; // TODO: change url to user/sign-up
+
+    const response = await fetch(url, {
+      method: "post",
+      body: JSON.stringify({
+        user_name,
+        password,
+        description,
+        price,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      await login_guru(user_name, password);
+    }
+    return false;
+  }
+
   async function update(username, password, email, firstName, lastName) {
     const url = `${process.env.REACT_APP_API_HOST}/api/accounts/`;
     const response = await fetch(url, {
@@ -142,5 +198,14 @@ export function useToken() {
     return false;
   }
 
-  return [token, login, logout, signup, update];
+  return [
+    token,
+    login,
+    logout,
+    signup,
+    update,
+    login_guru,
+    logout_guru,
+    signup_guru,
+  ];
 }
