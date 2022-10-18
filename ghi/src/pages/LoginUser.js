@@ -6,22 +6,23 @@ import { useToken } from '../Auth'
 
 
 const SignUpUser = () => {
-    const [user_name, setUserName] = useState("");
+    const [username, setUserName] = useState("");
     const [password, setpassword] = useState("");
-    const [token, login, logout, signup] = useToken();
+    const [token, login] = useToken();
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        signup(user_name, password)
-        console.log({ user_name, password });
+        login(username, password)
+        console.log({ username, password });
+
     }
 
     return (
-        <Grid>
+        <Grid container >
 
             <Grid container direction='column' alignItems='center' justifyContent='center' >
-                <Typography variant='h5'>Create a User Account</Typography>
+                <Typography variant='h5'>Login User Account</Typography>
                 <TextField
                     label="Username"
                     name="username"
@@ -37,14 +38,14 @@ const SignUpUser = () => {
                     onChange={(event) => setpassword(event.target.value)}
                 />
                 <Box textAlign={"center"}>
-                    <Button variant='contained' onClick={handleSubmit} >Create User</Button>
+                    <Button variant='contained' onClick={handleSubmit} >Log In</Button>
                 </Box>
                 <Grid item container alignItems="center" justifyContent="center">
                     <Grid item>
-                        <Typography >Already have an account?</Typography>
+                        <Typography >Don't have an Account?</Typography>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' onClick={() => navigate("/login-user")}>Login as User</Button>
+                        <Button variant='contained' onClick={() => navigate("/signup-user")}>Create User</Button>
                         <Button variant='contained' onClick={() => navigate("/signup-guru")}>Guru Sign Up</Button>
                     </Grid>
                 </Grid>

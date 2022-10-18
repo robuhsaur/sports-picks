@@ -22,8 +22,8 @@ function MyGurus(props) {
         return (
             <div class="row justify-content-center">
                 <div class="col-auto">
-                <div class="card">
-                    <Scrollbars style={{ width: 500, height: 300 }}>
+                    <div class="card">
+                        <Scrollbars style={{ width: 500, height: 300 }}>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -52,7 +52,7 @@ function MyGurus(props) {
                                     } )}
                                 </tbody>
                             </table>
-                    </Scrollbars >
+                        </Scrollbars>
                     </div>
                 </div>
             </div>
