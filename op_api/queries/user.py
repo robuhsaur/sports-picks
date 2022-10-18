@@ -25,6 +25,9 @@ class UserSubscribeIn(BaseModel):
     cvv: int
     # guru_id: int
 
+class Usersubscriptions(BaseModel):
+    guru_id: int
+
 class UserSubscribeOut(BaseModel):
     id: int
     name: str
@@ -122,18 +125,28 @@ class UserSubscriberRepository:
                     guru_id= subscription[6]
                 )
 
-    # def get_forms_from_subscription(self, user_id:int)->list[GuruFormOut]:
-    #     try:
-    #         with pool.connection() as conn:
-    #             with conn.cursor() as db:
-    #                 result = db.execute(
-    #                     """
-    #                     select 
-    #                     """
-    #                 )
-    #     except Exception as e:
-    #         print(e)
-    #         return {"message": "User has no subscriptions"}
+    def get_guruids_from_user(self, user_id:int)->list[Usersubscriptions]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        SELECT guru_id
+                        FROM subscriptions
+                        WHERE user_id = %s
+                        """,
+                        [user_id]
+                    )
+                    return [
+                        Usersubscriptions(
+                        guru_id= guru[0]
+                        )
+                        for guru in result
+                    ]
+
+        except Exception as e:
+            print(e)
+            return {"message": "User has no subscriptions"}
 
 
 
