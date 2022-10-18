@@ -19,6 +19,8 @@ from queries.guru import (
     GuruFormIn,
     DuplicateAccountError
 )
+from queries.user import (UserSignupOut)
+from userauth import user_authenticator
 
 router = APIRouter()
 
@@ -75,7 +77,8 @@ async def create_account(
 
 @router.get("/gurus", response_model=list[GuruSignupOut])
 def get_gurus(
-    repo: GuruSignupRepository = Depends()
+    repo: GuruSignupRepository = Depends(),
+    # account: UserSignupOut = Depends(user_authenticator.try_get_current_account_data)
 ):
     return repo.get_gurus()
 
@@ -99,10 +102,6 @@ def get_gurus(
 #     repo: GuruSignupRepository = Depends(),
 # ):
 #     return repo.create(guru)
-
-
-
-
 
 #--------------------------GURU-FORMS--------------------
 
