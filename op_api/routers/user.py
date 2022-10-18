@@ -18,13 +18,11 @@ from queries.user import (
     DuplicateAccountError,
     UserSubscriberRepository,
     UserSubscribeIn,
-    UserSubscribeOut
+    UserSubscribeOut,
+    Usersubscriptions
 )
 
-
-
 router = APIRouter()
-
 
 class AccountForm(BaseModel):
     username: str
@@ -75,19 +73,22 @@ async def create_account(
     token = await user_authenticator.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
-
-
-
 #-------------------------------------Sussyscribe--------------------------------------------------
 
+@router.post("/user/subscribeto/{guru_id}", response_model=UserSubscribeOut)
+def subscribe(
+    usersus: UserSubscribeIn,
+    guru_id: int,
+    account_data: dict = Depends(user_authenticator.get_current_account_data),
+    repo: UserSubscriberRepository = Depends()
+):
+    user_id = account_data.get('id')
+    print(user_id)
+    return repo.subscribe_to_guru(usersus, user_id, guru_id)
 
-# @router.post("/user/subscribe/{guru_id}", response_model=UserSubscribeOut)
-# def subscribe(
-#     usersus: UserSubscribeIn,
-#     guru_id: int,
-#     account_data: dict = Depends(user_authenticator.get_current_account_data),
-#     repo: UserSubscriberRepository = Depends()
-# ):
-#     user_id = account_data.get('id')
-#     print(user_id)
-#     return repo.subscribe_to_guru(usersus, user_id, guru_id)
+@router.get("/user/{user_id}/subscriptions", response_model=list[Usersubscriptions])
+def get_guruids_from_user(
+    user_id: int,
+    repo: UserSubscriberRepository = Depends(),
+    ):
+    return repo.get_guruids_from_user(user_id)
