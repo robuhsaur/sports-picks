@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./pages/Nav";
 import GuruForm from "./pages/GuruForm";
 import MyGurus from "./pages/MyGuru.js";
 import SportsList from "./odds/SportsList.js";
 import NFLGameslist from "./odds/NFLGamesList.js";
-import SignUp from "./pages/SignUp.js";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignUpUser from "./pages/SignUpUser.js";
 import Home from "./pages/Home.js";
