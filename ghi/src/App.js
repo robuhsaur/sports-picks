@@ -1,29 +1,25 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import Nav from './pages/Nav';
-import GuruForm from './pages/GuruForm';
-import MyGurus from './pages/MyGuru.js';
-import SportsList from './odds/SportsList.js';
-import NFLGameslist from './odds/NFLGamesList.js';
-import SignUp from './pages/SignUp.js';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
-import SignUpUser from './pages/SignUpUser.js';
-import Home from './pages/Home.js';
-import LoginGuru from './pages/LoginGuru.js';
-import LoginUser from './pages/LoginUser';
-import Subscribe from './subscribe';
-import Gurus from './pages/MyGuru.js';
-import { AuthProvider, useToken } from './Auth'
+import { useEffect, useState } from "react";
+import "./App.css";
+import Nav from "./pages/Nav";
+import GuruForm from "./pages/GuruForm";
+import MyGurus from "./pages/MyGuru.js";
+import SportsList from "./odds/SportsList.js";
+import NFLGameslist from "./odds/NFLGamesList.js";
+import SignUp from "./pages/SignUp.js";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import SignUpUser from "./pages/SignUpUser.js";
+import Home from "./pages/Home.js";
+import LoginGuru from "./pages/LoginGuru.js";
+import LoginUser from "./pages/LoginUser";
+import GuruSignUp from "./pages/GuruSignUp";
+import Subscribe from "./subscribe";
+import Gurus from "./pages/MyGuru.js";
+import { AuthProvider, useToken } from "./Auth";
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
-  return null
+  return null;
 }
 
 function App() {
@@ -42,7 +38,7 @@ function App() {
               <Route path="/nflgames" element={<NFLGameslist />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
-              <Route path="/signup-guru" element={<SignUp />} />
+              <Route path="/signup-guru" element={<GuruSignUp />} />
               <Route path="/login-guru" element={<LoginGuru />} />
               <Route path="/gurus/:guru_id" element={<Subscribe />} />
               <Route path="/gurus" element={<Gurus />} />
