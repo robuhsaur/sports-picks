@@ -40,5 +40,15 @@ started working on FastAPI and did more research on the 3rd party API to pull od
 - Continuing my work from yesterday. ran into some issues pulling the games needed. working on resolving.
 
 **10/13**
-- working on NFL/NBA games page today. 
+- working on NFL/NBA games page today. got a bug that was giving me issue on loading the games. was able to fix and get it working. finished the NFL page. 
 
+**10/14**
+- kept working on same thing. making sure I am getting correct data. Got stuck on how to link to another page.
+
+
+---
+
+## Week 3 ##
+
+**10/17**
+- got links to work on sports page. now working on displaying all the odds for the specific team. still working. 

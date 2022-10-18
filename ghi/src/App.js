@@ -20,8 +20,9 @@ function App() {
             <Route path="/guru/signup" element={<SignUp />} />
             <Route path="onlypick/myguru" element={<MyGurus />} />
             <Route path="/sportslist" element={<SportsList />} />
-            <Route path="/nflgames" element={<NFLGameslist />} />
-            <Route path="/nbagames" element={<NBAGameslist />} />
+            <Route path="/NFL" element={<NFLGameslist />} />
+            <Route path="/NBA" element={<NBAGameslist />} />
+            <Route path="/odds" element={<OddsPage.js />} />
           </Routes>
         </div>
       </BrowserRouter>

@@ -22,12 +22,12 @@ class SportsList extends React.Component {
         if (response.ok) {
             const data = await response.json();
             this.setState({ sports: data });
-            
+
         }
     }
 
     render() {
-        
+
         return (
             <div>
                 <h1>Available Sports List</h1>
@@ -36,9 +36,9 @@ class SportsList extends React.Component {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
                                 <ul key={sport.key}>
-                                    <li><Link to="/nflgames">{sport.title}</Link> - {sport.description}</li>
+                                    <li><Link to={`/${sport.title}`}>{sport.title}</Link> - {sport.description} </li>
                                 </ul>
-                            )
+                )
                         }
                     })}
                 </ul>
