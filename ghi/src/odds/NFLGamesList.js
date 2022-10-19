@@ -37,7 +37,7 @@ function NFLGamesList() {
             {games.map((game) => (
                 <ul key={game.id}>
                     <li>{game.away_team}(A) vs {game.home_team}(H)</li>
-                    <button onClick={() => navigate(`/odds/${game.id}`)} type="button"
+                    <button onClick={() => navigate(`/odds/${game.id}/${game.sport_key}`)} type="button"
                         className="btn btn-info btn-sm btn-block">Go To Odds
                     </button>
                 </ul>

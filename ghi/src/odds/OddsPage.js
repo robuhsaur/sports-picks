@@ -4,13 +4,13 @@ import { useParams } from 'react-router-dom'
 
 
 function OddsPage() {
-    const { gameId } = useParams();
-    // console.log(gameId);
+    const { gameId, sport } = useParams();
+    
 
     const [gameInfo, setGame] = useState([]);
     useEffect(() => {
         async function getData() {
-            let url = 'https://odds.p.rapidapi.com/v4/sports/americanfootball_nfl/odds?regions=us&oddsFormat=decimal&dateFormat=iso';
+            let url = `https://odds.p.rapidapi.com/v4/sports/${sport}/odds?regions=us&oddsFormat=decimal&dateFormat=iso`;
             const fetchConfig = {
                 method: "GET",
                 headers: {

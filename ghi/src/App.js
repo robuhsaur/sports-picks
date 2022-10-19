@@ -43,7 +43,7 @@ function App() {
               <Route path="/sportslist" element={<SportsList />} />
               <Route path="/NFL" element={<NFLGameslist />} />
               <Route path="/NBA" element={<NBAGameslist />} />
-              <Route path="/odds/:gameId" element={<OddsPage />} />
+              <Route path="/odds/:gameId/:sport" element={<OddsPage />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
               <Route path="/signup-guru" element={<SignUp />} />
