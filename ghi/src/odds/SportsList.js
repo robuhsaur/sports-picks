@@ -30,8 +30,9 @@ class SportsList extends React.Component {
 
         return (
             <div>
-                <h1>Available Sports List</h1>
-                <ul>
+                <h1>Available Sports</h1>
+                <Box sx={{ flexGrow: 1 }}></Box>
+                <Grid container spacing={2} columns={16}>
                     {this.state.sports.map((sport) => {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
@@ -41,7 +42,7 @@ class SportsList extends React.Component {
                 )
                         }
                     })}
-                </ul>
+                </Grid>
             </div>
         );
     }
