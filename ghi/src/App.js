@@ -44,7 +44,7 @@ function App() {
               <Route path="/login-user" element={<LoginUser />} />
               <Route path="/signup-guru" element={<SignUp />} />
               <Route path="/login-guru" element={<LoginGuru />} />
-              <Route path="/gurus/:guru_id" element={<Subscribe name={"poop"} />} />
+              <Route path="/gurus/:guru_id" element={<Subscribe />} />
               <Route path="/gurus" element={<Gurus />} />
             </Routes>
           </div>
