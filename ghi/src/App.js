@@ -6,6 +6,7 @@ import MyGurus from './pages/MyGuru.js';
 import SportsList from './odds/SportsList.js';
 import NFLGameslist from './odds/NFLGamesList.js';
 import NBAGameslist from './odds/NBAGamesList.js';
+import OddsPage from './odds/OddsPage';
 import SignUp from './pages/SignUp.js';
 import {
   BrowserRouter as Router,
@@ -18,6 +19,8 @@ import Home from './pages/Home.js';
 import LoginGuru from './pages/LoginGuru.js';
 import LoginUser from './pages/LoginUser';
 import { AuthProvider, useToken } from './Auth'
+
+
 
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
@@ -40,7 +43,7 @@ function App() {
               <Route path="/sportslist" element={<SportsList />} />
               <Route path="/NFL" element={<NFLGameslist />} />
               <Route path="/NBA" element={<NBAGameslist />} />
-              <Route path="/odds" element={<OddsPage.js />} />
+              <Route path="/odds/:gameId" element={<OddsPage />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
               <Route path="/signup-guru" element={<SignUp />} />
