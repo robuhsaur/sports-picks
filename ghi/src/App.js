@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
-import MyGurus from './pages/MyGuru.js';
 import SportsList from './odds/SportsList.js';
 import NFLGameslist from './odds/NFLGamesList.js';
 import SignUp from './pages/SignUp.js';
@@ -17,7 +16,7 @@ import Home from './pages/Home.js';
 import LoginGuru from './pages/LoginGuru.js';
 import LoginUser from './pages/LoginUser';
 import Subscribe from './subscribe';
-import Gurus from './pages/MyGuru.js';
+import Gurus from './pages/Gurus';
 import { AuthProvider, useToken } from './Auth'
 
 function GetToken() {
@@ -25,6 +24,8 @@ function GetToken() {
   useToken();
   return null
 }
+
+
 
 function App() {
   return (
@@ -37,14 +38,13 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/guru/create" element={<GuruForm />} />
-              <Route path="user/mygurus" element={<MyGurus />} />
               <Route path="/sportslist" element={<SportsList />} />
               <Route path="/nflgames" element={<NFLGameslist />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
               <Route path="/signup-guru" element={<SignUp />} />
               <Route path="/login-guru" element={<LoginGuru />} />
-              <Route path="/gurus/:guru_id" element={<Subscribe />} />
+              <Route path="/gurus/:guru_id" element={<Subscribe name={"poop"} />} />
               <Route path="/gurus" element={<Gurus />} />
             </Routes>
           </div>

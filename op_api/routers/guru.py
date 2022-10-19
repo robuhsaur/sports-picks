@@ -17,13 +17,13 @@ from queries.guru import (
     GuruFormOut, 
     GuruFormRepository,
     GuruFormIn,
-    DuplicateAccountError
+    DuplicateAccountError,
+    GuruSignupOutWithPassword
 )
 from queries.user import (UserSignupOut)
 from userauth import user_authenticator
 
 router = APIRouter()
-
 
 class AccountForm(BaseModel):
     username: str
@@ -84,16 +84,16 @@ def get_gurus(
 
 
 
-# @router.get("/guru/{guru_id}", response_model=Optional[GuruSignupOut])
-# def get_a_guru(
-#     guru_id: int,
-#     response: Response, 
-#     repo: GuruSignupRepository = Depends(),
-# )-> GuruSignupOut:
-#     guru = repo.get_a_guru(guru_id)
-#     if guru is None:
-#         response.status_code = 404
-#     return guru
+@router.get("/guru/{guru_id}", response_model=Optional[GuruSignupOut])
+def get_a_guru(
+    guru_id: int,
+    response: Response, 
+    repo: GuruSignupRepository = Depends(),
+)-> GuruSignupOut:
+    guru = repo.get_guru_byId(guru_id)
+    if guru is None:
+        response.status_code = 404
+    return guru
 
 
 # @router.post("/gurus", response_model=GuruSignupOut)

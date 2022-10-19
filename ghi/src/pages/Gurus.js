@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useNavigate } from 'react-router-dom';
-import Subscribe from "../subscribe";
 function Gurus(props) {
         const [gurus, setGurus] = useState([]);
 
@@ -40,16 +39,19 @@ function Gurus(props) {
                                 <tbody>
                                     {gurus.map(guru => {
                                         return (
-                                            <>
                                             <tr key={guru.id}>
                                             <td>{guru.user_name}</td>
                                             <td>{guru.description}</td>
                                             <td>{guru.price}</td>
-                                            <td><button onClick={()=> navigate(`/gurus/${guru.id}`)} type="button" 
-                                            className="btn btn-info btn-sm btn-block">Subscribe</button></td>
+                                            <td>
+                                            {/* <button onClick={()=> navigate(`/gurus/${guru.id}`, <Subscribe guru_id={guru.id} gurus={gurus}/>)} type="button" 
+                                            className="btn btn-info btn-sm btn-block">Subscribe
+                                            </button> */}
+                                            <button onClick={()=> navigate(`/gurus/${guru.id}`)} type="button" 
+                                            className="btn btn-info btn-sm btn-block">Subscribe
+                                            </button>
+                                            </td>
                                             </tr>
-                                            <Subscribe user_name={guru.user_name}/>
-                                            </>
                                         )
                                     } )}
                                 </tbody>
