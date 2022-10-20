@@ -115,15 +115,12 @@ function GuruForm(props) {
         }
     }
 
-
-
-
-    async function getGuruId(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-
-        const guruIdUrl = `http://localhost:8000/guruinfo`
-        const response = await fetch(guruIdUrl, {
-            method: "get",
+        const pick_detail = pickDetail
+        const url = `http://localhost:8000/gurus/form`
+        const response = await fetch(url, {
+            method: "post",
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
@@ -131,17 +128,17 @@ function GuruForm(props) {
             body: JSON.stringify({ pick, pick_detail })
         })
         const data = await response.json()
-        const guruId = data["id"] // guru id
-        setGuruId(guruId)
-        console.log(guruId)
-    }
 
         if (response.ok) {
             console.log("not stinky")
+            navigate("/guru/signup")
         } else {
             console.log("uh oh stinky")
         }
     }
+
+
+
 
     async function finalForm(e) {
         e.preventDefault();
@@ -180,12 +177,9 @@ function GuruForm(props) {
                 type="text" />
 
             <button onClick={handleSubmit}> Submit </button>
-<<<<<<< Updated upstream
-=======
             <button onClick={getGuruForms}> Forms </button>
             <button onClick={updateGuruForm}> Update </button>
             <button onClick={finalForm}> Final Form </button>
->>>>>>> Stashed changes
         </form>
     )
 }
