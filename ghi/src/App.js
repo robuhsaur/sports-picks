@@ -22,7 +22,7 @@ import { AuthProvider, useToken } from './Auth'
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
-  return null
+  return null;
 }
 
 
@@ -39,10 +39,12 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/guru/create" element={<GuruForm />} />
               <Route path="/sportslist" element={<SportsList />} />
-              <Route path="/nflgames" element={<NFLGameslist />} />
+              <Route path="/NFL" element={<NFLGameslist />} />
+              <Route path="/NBA" element={<NBAGameslist />} />
+              <Route path="/odds/:gameId/:sport" element={<OddsPage />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
-              <Route path="/signup-guru" element={<SignUp />} />
+              <Route path="/signup-guru" element={<GuruSignUp />} />
               <Route path="/login-guru" element={<LoginGuru />} />
               <Route path="/gurus/:guru_id" element={<Subscribe />} />
               <Route path="/gurus" element={<Gurus />} />
