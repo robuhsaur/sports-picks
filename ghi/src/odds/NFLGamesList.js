@@ -43,12 +43,13 @@ function NFLGamesList() {
             <Grid container spacing={2} columns={16}>
 
                 {games.map((game) => (
-                    <Grid xs={8}>
+                    <Grid key={game.id} xs={8}>
                         <Card sx={{ maxWidth: 400 }}>
                             <CardActionArea onClick={() => navigate(`/odds/${game.id}/${game.sport_key}`)}>
-                                <CardContent key={game.id} >
-                                    <Typography gutterBottom variant="h5">{game.away_team}(A) vs {game.home_team}(H)</Typography>
-
+                                <CardContent>
+                                    <Typography variant="h7" gutterBottom>{game.away_team}(A) vs {game.home_team}(H)</Typography>
+                                    <Typography gutterBottom variant="body1">{new Date(game.commence_time).toLocaleDateString(undefined, { weekday: "long", month: "short", day:"numeric" })}</Typography>
+                                    <Typography gutterBottom variant="body2">{new Date(game.commence_time).toLocaleTimeString('en-US', { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit" })}</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>
