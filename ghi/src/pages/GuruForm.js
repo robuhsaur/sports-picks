@@ -12,7 +12,7 @@ function BootStrapInput(props) {
     return (
         <div className="mb-4">
             <label htmlFor={id}>{labelText}</label>
-            <input value={value} onChange={onChange} type={type} className="form-control" id={id} placeholder={placeholder} />
+            <input required value={value} onChange={onChange} type={type} className="form-control" id={id} placeholder={placeholder} />
         </div>
     )
 }
@@ -71,8 +71,8 @@ function GuruForm(props) {
             const formId = guruForm["id"]
             console.log(formId)
             setFormId(formId)
-        } catch (Exception) {
-            return null;
+        } catch (error) {
+            return
         }
     }
 
@@ -135,10 +135,13 @@ function GuruForm(props) {
 
     async function finalForm(e) {
         e.preventDefault();
-        if (getGuruForms() == null) {
-            handleSubmit()
+        getGuruId(e);
+        if (getGuruForms(e) == null) {
+            handleSubmit(e)
+            console.log("getGuruForm")
         } else {
-            updateGuruForm()
+            updateGuruForm(e)
+            console.log("updating")
         }
 
     } // need to fix this (returns undefined in console)
