@@ -1,5 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Unstable_Grid2';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'light' ? '#10bbe2' : '#ffffff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 
 class SportsList extends React.Component {
     constructor(props) {
@@ -30,19 +43,20 @@ class SportsList extends React.Component {
 
         return (
             <div>
-                <h1>Available Sports</h1>
-                <Box sx={{ flexGrow: 1 }}></Box>
+                <h1 style={{display: 'flex',  justifyContent:'center', alignItems:'center'}}>Available Sports</h1>
+                <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2} columns={16}>
                     {this.state.sports.map((sport) => {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
-                                <ul key={sport.key}>
-                                    <li><Link to={`/${sport.title}`}>{sport.title}</Link> - {sport.description} </li>
-                                </ul>
+                                <Grid xs={8} key={sport.key}>
+                                    <Item><Link to={`/${sport.title}`}>{sport.title}</Link> - {sport.description} </Item>
+                                </Grid>
                 )
                         }
                     })}
                 </Grid>
+                </Box>
             </div>
         );
     }
