@@ -4,7 +4,9 @@ import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
 import SportsList from './odds/SportsList.js';
 import NFLGameslist from './odds/NFLGamesList.js';
-import SignUp from './pages/SignUp.js';
+import NBAGamesList from './odds/NBAGamesList.js'
+import OddsPage from './odds/OddsPage';
+import SignUp from './pages/GuruSignUp.js';
 import {
   BrowserRouter as Router,
   Routes,
@@ -40,11 +42,11 @@ function App() {
               <Route path="/guru/create" element={<GuruForm />} />
               <Route path="/sportslist" element={<SportsList />} />
               <Route path="/NFL" element={<NFLGameslist />} />
-              <Route path="/NBA" element={<NBAGameslist />} />
+              <Route path="/NBA" element={<NBAGamesList />} />
               <Route path="/odds/:gameId/:sport" element={<OddsPage />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
-              <Route path="/signup-guru" element={<GuruSignUp />} />
+              <Route path="/signup-guru" element={<SignUp />} />
               <Route path="/login-guru" element={<LoginGuru />} />
               <Route path="/gurus/:guru_id" element={<Subscribe />} />
               <Route path="/gurus" element={<Gurus />} />
