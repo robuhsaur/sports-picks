@@ -25,11 +25,11 @@ function BootStrapInput(props) {
 
 function GuruForm(props) {
     const { token } = useAuthContext()
-    console.log(token)
     const [pick, setPick] = useState('')
     const [pickDetail, setPickDetail] = useState('')
     const navigate = useNavigate()
     const [guruId, setGuruId] = useState()
+    const [formId, setFormId] = useState([])
 
     async function getGuruId(e) {
         e.preventDefault();
@@ -50,22 +50,61 @@ function GuruForm(props) {
 
     async function getGuruForms(e) {
         e.preventDefault();
-        const guru_id = guruId
-        const guruForms = `http://localhost:8000/guru/${guru_id}/form`
-        const response = await fetch(guruForms, {
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        const data = await response.json()
-        console.log(data)
-        if (response.ok) {
-            console.log("hello it work")
+        try {
+            const guru_id = guruId
+            console.log(guru_id)
+            const guruForms = `http://localhost:8000/guru/${guru_id}/form`
+            const response = await fetch(guruForms, {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            const formData = await response.json()
+            const guruForm = formData[0]
+            if (response.ok) {
+                console.log("hello it work")
+            } else {
+                return null
+            }
+            const formId = guruForm["id"]
+            console.log(formId)
+            setFormId(formId)
+        } catch (Exception) {
+            return null;
         }
-
     }
 
+
+
+
+    async function updateGuruForm(e) {
+        e.preventDefault();
+        const guru_id = guruId
+        const form_id = formId
+        const pick_detail = pickDetail
+        console.log(formId)
+        const putUrl = `http://localhost:8000/guru/${guru_id}/form/${form_id}`
+        const response = await fetch(putUrl, {
+            method: "put",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ pick, pick_detail })
+        })
+        const data = await response.json()
+
+        if (response.ok) {
+            console.log("form has been updated")
+            console.log(data)
+        } else {
+            console.log("form did not update")
+        }
+
+
+    }
 
 
 
@@ -92,6 +131,19 @@ function GuruForm(props) {
         }
     }
 
+
+
+    async function finalForm(e) {
+        e.preventDefault();
+        if (getGuruForms() == null) {
+            handleSubmit()
+        } else {
+            updateGuruForm()
+        }
+
+    } // need to fix this (returns undefined in console)
+
+
     return (
         <form>
             <BootStrapInput
@@ -112,6 +164,8 @@ function GuruForm(props) {
             <button onClick={handleSubmit}> Submit </button>
             <button onClick={getGuruId}> ID </button>
             <button onClick={getGuruForms}> Forms </button>
+            <button onClick={updateGuruForm}> Update </button>
+            <button onClick={finalForm}> finalForm </button>
         </form>
     )
 }
