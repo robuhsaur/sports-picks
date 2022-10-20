@@ -29,28 +29,46 @@ function GuruForm(props) {
     const [pickDetail, setPickDetail] = useState('')
     const navigate = useNavigate()
     const [guruId, setGuruId] = useState()
-    const [formId, setFormId] = useState([])
+    const [formId, setFormId] = useState()
 
-    async function getGuruId(e) {
-        e.preventDefault();
+    // async function getGuruId(e) {
+    //     e.preventDefault();
+    //     const guruIdUrl = `http://localhost:8000/guruinfo`
+    //     const response = await fetch(guruIdUrl, {
+    //         method: "get",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //     })
+    //     const data = await response.json()
+    //     const guruId = data["id"] // guru id
+    //     console.log(guruId)
+    //     setGuruId(guruId)
+    // }
 
-        const guruIdUrl = `http://localhost:8000/guruinfo`
-        const response = await fetch(guruIdUrl, {
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        })
-        const data = await response.json()
-        const guruId = data["id"] // guru id
-        setGuruId(guruId)
-        console.log(guruId)
-    }
+    useEffect(() => {
+       async function getGuruId() {
+            const guruIdUrl = `http://localhost:8000/guruinfo`
+            const response = await fetch(guruIdUrl, {
+                method: "get",
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            console.log(response)
+            const data = await response.json()
+            console.log(data)
+            const guruId = data["id"] // guru id
+            console.log(guruId)
+            setGuruId(guruId)
+        }
+        getGuruId()
+    }, [])
 
     async function getGuruForms(e) {
         e.preventDefault();
-        try {
             const guru_id = guruId
             console.log(guru_id)
             const guruForms = `http://localhost:8000/guru/${guru_id}/form`
@@ -62,54 +80,20 @@ function GuruForm(props) {
                 },
             })
             const formData = await response.json()
-            const guruForm = formData[0]
             if (response.ok) {
-                console.log("hello it work")
-            } else {
-                return null
+                const guruForm = formData[0]
+                const formId = guruForm["id"]
+                setFormId(formId)
+                console.log(formId)
+            }else{
+                setFormId(null)
             }
-            const formId = guruForm["id"]
-            console.log(formId)
-            setFormId(formId)
-        } catch (error) {
-            setFormId(null)
-        }
     }
 
 
 
 
-    async function updateGuruForm(e) {
-        e.preventDefault();
-        const guru_id = guruId
-        const form_id = formId
-        const pick_detail = pickDetail
-        console.log(formId)
-        const putUrl = `http://localhost:8000/guru/${guru_id}/form/${form_id}`
-        const response = await fetch(putUrl, {
-            method: "put",
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ pick, pick_detail })
-        })
-        const data = await response.json()
-
-        if (response.ok) {
-            console.log("form has been updated")
-            console.log(data)
-        } else {
-            console.log("form did not update")
-        }
-
-
-    }
-
-
-
-
-    async function handleSubmit(e) {
+    async function updateGuruForm(e){
         e.preventDefault();
         const pick_detail = pickDetail
         const url = `http://localhost:8000/gurus/form`
@@ -124,28 +108,59 @@ function GuruForm(props) {
         const data = await response.json()
 
         if (response.ok) {
-            console.log("not stinky")
-            navigate("/guru/signup")
+            console.log("form has been updated")
+            console.log(data)
         } else {
-            console.log("uh oh stinky")
+            console.log("form did not update")
         }
     }
 
 
 
+
+    async function getGuruId(e) {
+        e.preventDefault();
+
+        const guruIdUrl = `http://localhost:8000/guruinfo`
+        const response = await fetch(guruIdUrl, {
+            method: "get",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ pick, pick_detail })
+        })
+        const data = await response.json()
+        const guruId = data["id"] // guru id
+        setGuruId(guruId)
+        console.log(guruId)
+    }
+
+        if (response.ok) {
+            console.log("not stinky")
+        } else {
+            console.log("uh oh stinky")
+        }
+    }
+
     async function finalForm(e) {
         e.preventDefault();
-        getGuruForms(e) 
-        if (formId == null) {
+        getGuruForms(e)
+        if (formId === null) {
             handleSubmit(e)
             console.log("getGuruForm")
         } else {
             updateGuruForm(e)
             console.log("updating")
         }
+    }
+    
+// const Component = ({e}) => {
+//     useEffect(() => {
+//         finalForm(e)    
 
-    } // need to fix this (returns undefined in console)
-
+//     }, [guruId])
+// }
 
     return (
         <form>
@@ -165,10 +180,12 @@ function GuruForm(props) {
                 type="text" />
 
             <button onClick={handleSubmit}> Submit </button>
-            <button onClick={getGuruId}> ID </button>
+<<<<<<< Updated upstream
+=======
             <button onClick={getGuruForms}> Forms </button>
             <button onClick={updateGuruForm}> Update </button>
-            <button onClick={finalForm}> finalForm </button>
+            <button onClick={finalForm}> Final Form </button>
+>>>>>>> Stashed changes
         </form>
     )
 }
