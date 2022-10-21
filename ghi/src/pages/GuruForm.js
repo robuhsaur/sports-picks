@@ -151,10 +151,7 @@ function GuruForm(props) {
                 onChange={e => setPickDetail(e.target.value)}
                 type="text" />
 
-            <button onClick={handleSubmit}> Submit </button>
-            <button onClick={getGuruForms}> Forms </button>
-            <button onClick={updateGuruForm}> Update </button>
-            <button onClick={finalForm}> Final Form </button>
+            <button onClick={finalForm}> Submit Pick </button>
         </form>
     )
 }
