@@ -17,10 +17,7 @@ function BootStrapInput(props) {
     )
 }
 
-// if form is there for specific guru (token?)
-// make a get request from /guru/{guru_id}/form
-// if response is null, post
-// else post form to /gurus/form 
+
 
 
 function GuruForm(props) {
@@ -29,55 +26,50 @@ function GuruForm(props) {
     const [pickDetail, setPickDetail] = useState('')
     const navigate = useNavigate()
     const [guruId, setGuruId] = useState()
-    const [formId, setFormId] = useState([])
+    const [formId, setFormId] = useState(0)
+    const [isTrue, setisTrue] = useState(false)
 
-    async function getGuruId(e) {
-        e.preventDefault();
 
-        const guruIdUrl = `http://localhost:8000/guruinfo`
-        const response = await fetch(guruIdUrl, {
-            method: "get",
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
-            },
-        })
-        const data = await response.json()
-        const guruId = data["id"] // guru id
-        setGuruId(guruId)
-        console.log(guruId)
-    }
-
-    async function getGuruForms(e) {
-        e.preventDefault();
-        try {
-            const guru_id = guruId
-            console.log(guru_id)
-            const guruForms = `http://localhost:8000/guru/${guru_id}/form`
-            const response = await fetch(guruForms, {
+    useEffect(() => {
+        async function getGuruId() {
+            const guruIdUrl = `http://localhost:8000/guruinfo`
+            const response = await fetch(guruIdUrl, {
                 method: "get",
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
             })
-            const formData = await response.json()
+            console.log(response)
+            const data = await response.json()
+            console.log(data)
+            const guruId = data["id"] // guru id
+            console.log(guruId)
+            setGuruId(guruId)
+        }
+        getGuruId()
+    }, [])
+
+    async function getGuruForms(e) {
+        e.preventDefault();
+        const guru_id = guruId
+        console.log(guru_id)
+        const guruForms = `http://localhost:8000/guru/${guru_id}/form`
+        const response = await fetch(guruForms, {
+            method: "get",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const formData = await response.json()
+        if (response.ok) {
             const guruForm = formData[0]
-            if (response.ok) {
-                console.log("hello it work")
-            } else {
-                return null
-            }
             const formId = guruForm["id"]
-            console.log(formId)
             setFormId(formId)
-        } catch (error) {
-            return
+            console.log(formId)
         }
     }
-
-
-
 
     async function updateGuruForm(e) {
         e.preventDefault();
@@ -102,15 +94,12 @@ function GuruForm(props) {
         } else {
             console.log("form did not update")
         }
-
-
     }
-
-
 
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setisTrue(true)
         const pick_detail = pickDetail
         const url = `http://localhost:8000/gurus/form`
         const response = await fetch(url, {
@@ -122,12 +111,10 @@ function GuruForm(props) {
             body: JSON.stringify({ pick, pick_detail })
         })
         const data = await response.json()
-
         if (response.ok) {
-            console.log("not stinky")
-            navigate("/guru/signup")
+            console.log("post")
         } else {
-            console.log("uh oh stinky")
+            console.log("no post")
         }
     }
 
@@ -135,16 +122,16 @@ function GuruForm(props) {
 
     async function finalForm(e) {
         e.preventDefault();
-        getGuruId(e);
-        if (getGuruForms(e) == null) {
+        await getGuruForms(e)
+        console.log(formId)
+        if (!isTrue) {
             handleSubmit(e)
             console.log("getGuruForm")
         } else {
             updateGuruForm(e)
             console.log("updating")
         }
-
-    } // need to fix this (returns undefined in console)
+    }
 
 
     return (
@@ -165,14 +152,11 @@ function GuruForm(props) {
                 type="text" />
 
             <button onClick={handleSubmit}> Submit </button>
-            <button onClick={getGuruId}> ID </button>
             <button onClick={getGuruForms}> Forms </button>
             <button onClick={updateGuruForm}> Update </button>
-            <button onClick={finalForm}> finalForm </button>
+            <button onClick={finalForm}> Final Form </button>
         </form>
     )
 }
+
 export default GuruForm
-
-
-// http://localhost:8000/guru/form
