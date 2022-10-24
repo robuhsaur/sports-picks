@@ -1,49 +1,49 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate,  } from 'react-router-dom'
 
-class NFLGameslist extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            games: []
-        };
-    }
 
-    async componentDidMount() {
-        const url = 'https://odds.p.rapidapi.com/v4/sports/americanfootball_nfl/odds?regions=us&oddsFormat=decimal&dateFormat=iso'
-        const fetchConfig = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': process.env.REACT_APP_ODDS_API_KEY,
-                'X-RapidAPI-Host': 'odds.p.rapidapi.com'
+function NFLGamesList() {
+    const navigate = useNavigate();
+    const [games, setSports] = useState([]);
+    
+
+    useEffect(() => {
+        async function getData() {
+            let url = 'https://odds.p.rapidapi.com/v4/sports/americanfootball_nfl/odds?regions=us&oddsFormat=decimal&dateFormat=iso';
+            const fetchConfig = {
+                method: "GET",
+                headers: {
+                    'X-RapidAPI-Key': process.env.REACT_APP_ODDS_API_KEY,
+                    'X-RapidAPI-Host': 'odds.p.rapidapi.com'
+                }
             }
-        };
-        const response = await fetch(url, fetchConfig);
-        if (response.ok) {
-            const data = await response.json();
-            this.setState({ games: data });
-            // console.log(data)
+            let response = await fetch(url, fetchConfig);
             
+            if (response.ok) {
+                let data = await response.json();
+                setSports(data);
+                console.log("got sports data!");
+            } else {
+                console.log("ERRRROOORRRR")
+            }
         }
-    }
+        getData();
+    }, []);
 
-    render() {
-        
-        return (
-            <div>
-                <h1>Upcoming NFL Games</h1>
-                <ul>
-                    {this.state.games.map((game) => {
-                            return (
-                                <ul key={game.id}>
-                                    <li>{game.away_team}(A) vs {game.home_team}(H)</li>
-                                </ul>
-                            )
-                        
-                    })}
+    return (
+        <div>
+            <h1>Upcoming NFL Games</h1>
+            {games.map((game) => (
+                <ul key={game.id}>
+                    <li>{game.away_team}(A) vs {game.home_team}(H)</li>
+                    <button onClick={() => navigate(`/odds/${game.id}/${game.sport_key}`)} type="button"
+                        className="btn btn-info btn-sm btn-block">Go To Odds
+                    </button>
                 </ul>
-            </div>
-        );
-    }
+            ))}
+        </div>
+    );
 }
 
-export default NFLGameslist;
+export default NFLGamesList;

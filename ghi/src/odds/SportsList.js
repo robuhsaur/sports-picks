@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class SportsList extends React.Component {
     constructor(props) {
@@ -21,26 +22,27 @@ class SportsList extends React.Component {
         if (response.ok) {
             const data = await response.json();
             this.setState({ sports: data });
-            
+
         }
     }
 
     render() {
-        
+
         return (
             <div>
-                <h1>Available Sports List</h1>
-                <ul>
+                <h1>Available Sports</h1>
+                <Box sx={{ flexGrow: 1 }}></Box>
+                <Grid container spacing={2} columns={16}>
                     {this.state.sports.map((sport) => {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
                                 <ul key={sport.key}>
-                                    <li><a href="">{sport.title}</a> - {sport.description}</li>
+                                    <li><Link to={`/${sport.title}`}>{sport.title}</Link> - {sport.description} </li>
                                 </ul>
-                            )
+                )
                         }
                     })}
-                </ul>
+                </Grid>
             </div>
         );
     }

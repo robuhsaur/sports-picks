@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./pages/Nav";
 import GuruForm from "./pages/GuruForm";
 import MyGurus from "./pages/MyGuru.js";
 import SportsList from "./odds/SportsList.js";
 import NFLGameslist from "./odds/NFLGamesList.js";
-import SignUp from "./pages/SignUp.js";
+import NBAGameslist from "./odds/NBAGamesList.js";
+import OddsPage from "./odds/OddsPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignUpUser from "./pages/SignUpUser.js";
 import Home from "./pages/Home.js";
@@ -35,7 +35,9 @@ function App() {
               <Route path="/guru/create" element={<GuruForm />} />
               <Route path="user/mygurus" element={<MyGurus />} />
               <Route path="/sportslist" element={<SportsList />} />
-              <Route path="/nflgames" element={<NFLGameslist />} />
+              <Route path="/NFL" element={<NFLGameslist />} />
+              <Route path="/NBA" element={<NBAGameslist />} />
+              <Route path="/odds/:gameId/:sport" element={<OddsPage />} />
               <Route path="/signup-user" element={<SignUpUser />} />
               <Route path="/login-user" element={<LoginUser />} />
               <Route path="/signup-guru" element={<GuruSignUp />} />

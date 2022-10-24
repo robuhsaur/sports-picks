@@ -40,5 +40,18 @@ started working on FastAPI and did more research on the 3rd party API to pull od
 - Continuing my work from yesterday. ran into some issues pulling the games needed. working on resolving.
 
 **10/13**
-- working on NFL/NBA games page today. 
+- working on NFL/NBA games page today. got a bug that was giving me issue on loading the games. was able to fix and get it working. finished the NFL page. 
 
+**10/14**
+- kept working on same thing. making sure I am getting correct data. Got stuck on how to link to another page.
+
+
+---
+
+## Week 3 ##
+
+**10/17**
+- got links to work on sports page. now working on displaying all the odds for the specific team. still working. running into issue of how to grab the specific game to display. not sure how I can do it. My plan is to pull it by game id. 
+
+**10/18**
+- Still working on getting from game list to specific game. still sticking with pulling it with id. looked at react docs to try and figure out a way. spoke with Will bc we both were working on a similar feature of pulling specific info. We reached out to Matt(SEIR) for guidance on our issue. With the help from Will and Matt, we were able to figure out a way for me to pull the id I need. After pulling the id using useParams() I was able to complete the odds page.  
