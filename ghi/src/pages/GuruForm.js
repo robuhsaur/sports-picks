@@ -26,7 +26,7 @@ function GuruForm(props) {
     const [pickDetail, setPickDetail] = useState('')
     const navigate = useNavigate()
     const [guruId, setGuruId] = useState()
-    const [formId, setFormId] = useState()
+    const [formId, setFormId] = useState(0)
     const [isTrue, setisTrue] = useState(false)
 
 
@@ -50,12 +50,7 @@ function GuruForm(props) {
         getGuruId()
     }, [])
 
-    useEffect(() => {
-    getGuruForms()
-    }, [isTrue])
-
     async function getGuruForms(e) {
-        try{
         e.preventDefault();
         const guru_id = guruId
         console.log(guru_id)
@@ -74,9 +69,6 @@ function GuruForm(props) {
             setFormId(formId)
             console.log(formId)
         }
-    }catch(e){
-        return null
-    }
     }
 
     async function updateGuruForm(e) {
@@ -160,7 +152,6 @@ function GuruForm(props) {
                 type="text" />
 
             <button onClick={finalForm}> Submit Pick </button>
-            <button onClick={getGuruForms}> Submit </button>
         </form>
     )
 }
