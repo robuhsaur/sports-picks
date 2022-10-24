@@ -22,7 +22,7 @@ const LoginGuru = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     login_guru(username, password);
-    console.log({ username, password, description });
+    console.log({ username, password});
   };
 
   return (

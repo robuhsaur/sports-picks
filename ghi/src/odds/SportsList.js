@@ -72,17 +72,3 @@ class SportsList extends React.Component {
 }
 
 export default SportsList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
