@@ -35,6 +35,7 @@ function OddsPage() {
                 <thead>
                     <tr>
                         <th>Home Team</th>
+                        <th>BookMaker</th>
                         <th>Away Team</th>
                     </tr>
                 </thead>
@@ -44,8 +45,11 @@ function OddsPage() {
                             return (
                                 <tr key={teams.id}>
                                     <td>{teams.home_team}</td>
-                                    <td>{teams.away_team}</td>
+                                    <td>{teams.bookmakers[12].title}</td>
+                                    <td>{teams.away_team}</td>                                    
                                 </tr>
+
+                            
                             )
                         }
                     })}

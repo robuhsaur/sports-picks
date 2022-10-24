@@ -59,4 +59,11 @@ started working on FastAPI and did more research on the 3rd party API to pull od
 - today I planned to work on the design of the app since the functionality is complete. I got with group, asked questions on design that we had originally planned, got feedback. got to work reading docs on Material UI. was a bit challenging but playing around with it I was able to come to a design. I did run into a few errors, one being the picture was not displaying and how to get the correct picture to display. I was able to come up with a solution to check what sport it was and depending on the sport the logo is displayed.
 
 **10/20**
-- 
+- We were told to not worry about design. so switched gears to making sure everything is ready to go for deployment. all functionality is ready to go except for one part. Going to start working on unit test for app. 
+
+---
+
+## Week 4 ##
+
+**10/24**
+- working on unit test and going to start working on deployment 
