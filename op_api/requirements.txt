@@ -3,3 +3,4 @@ uvicorn[standard]==0.17.6
 psycopg[binary,pool]==3.0.14
 aiofiles>=0.8.0,<0.9.0
 jwtdown-fastapi==0.3.0
+
