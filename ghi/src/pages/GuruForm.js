@@ -17,10 +17,7 @@ function BootStrapInput(props) {
     )
 }
 
-// if form is there for specific guru (token?)
-// make a get request from /guru/{guru_id}/form
-// if response is null, post
-// else post form to /gurus/form 
+
 
 
 function GuruForm(props) {
@@ -30,25 +27,11 @@ function GuruForm(props) {
     const navigate = useNavigate()
     const [guruId, setGuruId] = useState()
     const [formId, setFormId] = useState()
+    const [isTrue, setisTrue] = useState(false)
 
-    // async function getGuruId(e) {
-    //     e.preventDefault();
-    //     const guruIdUrl = `http://localhost:8000/guruinfo`
-    //     const response = await fetch(guruIdUrl, {
-    //         method: "get",
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Authorization: `Bearer ${token}`,
-    //         },
-    //     })
-    //     const data = await response.json()
-    //     const guruId = data["id"] // guru id
-    //     console.log(guruId)
-    //     setGuruId(guruId)
-    // }
 
     useEffect(() => {
-       async function getGuruId() {
+        async function getGuruId() {
             const guruIdUrl = `http://localhost:8000/guruinfo`
             const response = await fetch(guruIdUrl, {
                 method: "get",
@@ -67,38 +50,44 @@ function GuruForm(props) {
         getGuruId()
     }, [])
 
+    useEffect(() => {
+    getGuruForms()
+    }, [isTrue])
+
     async function getGuruForms(e) {
+        try{
         e.preventDefault();
-            const guru_id = guruId
-            console.log(guru_id)
-            const guruForms = `http://localhost:8000/guru/${guru_id}/form`
-            const response = await fetch(guruForms, {
-                method: "get",
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            const formData = await response.json()
-            if (response.ok) {
-                const guruForm = formData[0]
-                const formId = guruForm["id"]
-                setFormId(formId)
-                console.log(formId)
-            }else{
-                setFormId(null)
-            }
+        const guru_id = guruId
+        console.log(guru_id)
+        const guruForms = `http://localhost:8000/guru/${guru_id}/form`
+        const response = await fetch(guruForms, {
+            method: "get",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const formData = await response.json()
+        if (response.ok) {
+            const guruForm = formData[0]
+            const formId = guruForm["id"]
+            setFormId(formId)
+            console.log(formId)
+        }
+    }catch(e){
+        return null
+    }
     }
 
-
-
-
-    async function updateGuruForm(e){
+    async function updateGuruForm(e) {
         e.preventDefault();
+        const guru_id = guruId
+        const form_id = formId
         const pick_detail = pickDetail
-        const url = `http://localhost:8000/gurus/form`
-        const response = await fetch(url, {
-            method: "post",
+        console.log(formId)
+        const putUrl = `http://localhost:8000/guru/${guru_id}/form/${form_id}`
+        const response = await fetch(putUrl, {
+            method: "put",
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
@@ -115,8 +104,10 @@ function GuruForm(props) {
         }
     }
 
+
     async function handleSubmit(e) {
         e.preventDefault();
+        setisTrue(true)
         const pick_detail = pickDetail
         const url = `http://localhost:8000/gurus/form`
         const response = await fetch(url, {
@@ -128,22 +119,20 @@ function GuruForm(props) {
             body: JSON.stringify({ pick, pick_detail })
         })
         const data = await response.json()
-
         if (response.ok) {
-            console.log("not stinky")
-            navigate("/guru/signup")
+            console.log("post")
         } else {
-            console.log("uh oh stinky")
+            console.log("no post")
         }
     }
 
 
 
-
     async function finalForm(e) {
         e.preventDefault();
-        getGuruForms(e)
-        if (formId === null) {
+        await getGuruForms(e)
+        console.log(formId)
+        if (!isTrue) {
             handleSubmit(e)
             console.log("getGuruForm")
         } else {
@@ -151,13 +140,7 @@ function GuruForm(props) {
             console.log("updating")
         }
     }
-    
-// const Component = ({e}) => {
-//     useEffect(() => {
-//         finalForm(e)    
 
-//     }, [guruId])
-// }
 
     return (
         <form>
@@ -176,11 +159,10 @@ function GuruForm(props) {
                 onChange={e => setPickDetail(e.target.value)}
                 type="text" />
 
-            <button onClick={handleSubmit}> Submit </button>
-            <button onClick={getGuruForms}> Forms </button>
-            <button onClick={updateGuruForm}> Update </button>
-            <button onClick={finalForm}> Final Form </button>
+            <button onClick={finalForm}> Submit Pick </button>
+            <button onClick={getGuruForms}> Submit </button>
         </form>
     )
 }
+
 export default GuruForm

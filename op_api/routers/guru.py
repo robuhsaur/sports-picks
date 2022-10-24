@@ -114,10 +114,13 @@ def create_guru_form(
     guru_id = account_data.get('id')
     return repo.create(guruform, guru_id)
 
+
+
 @router.get("/gurus/form", response_model=list[GuruFormOut])
 def get_all_forms(
     repo: GuruFormRepository = Depends()
 ):
+
     return repo.get_all_forms()
 
 @router.get("/guru/{guru_id}/form", response_model=Optional[list[GuruFormOut]])
@@ -127,11 +130,12 @@ def get_a_guru_forms(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: GuruFormRepository = Depends(),
 ):
-    forms = repo.get_a_guru_forms(guru_id)
-    if forms is None:
-        response.status_code = 404
-    return forms
+    try:
+        return repo.get_a_guru_forms(guru_id)
+    except:
+        return None
 
+        
 @router.put("/guru/{guru_id}/form/{form_id}", response_model=GuruFormOut)
 def update_guru_form(
         guru_id:int,
