@@ -6,7 +6,7 @@ import SportsList from "./odds/SportsList.js";
 import NFLGameslist from "./odds/NFLGamesList.js";
 import NBAGameslist from "./odds/NBAGamesList.js";
 import OddsPage from "./odds/OddsPage";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUpUser from "./pages/SignUpUser.js";
 import Home from "./pages/Home.js";
 import LoginGuru from "./pages/LoginGuru.js";
