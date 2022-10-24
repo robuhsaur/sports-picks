@@ -1,3 +1,21 @@
+## October 17, 2022
+Today:
+
+* Recap
+Merged to main for the first time today, I need to add the logic for the GuruForm post page to
+
+## October 14, 2022
+Today:
+
+* Recap
+Merged to main for the first time today, I need to add the logic for the GuruForm post page to
+
+## October 13, 2022
+Today:
+
+* Recap
+Merged to main for the first time today, I need to add the logic for the GuruForm post page to
+
 ## October 12, 2022
 Today:
 

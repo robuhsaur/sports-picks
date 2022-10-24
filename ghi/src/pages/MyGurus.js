@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useNavigate } from 'react-router-dom';
 import Subscribe from "../subscribe";
-function Gurus(props) {
+function UsersGurus(props) {
     const [gurus, setGurus] = useState([]);
 
     useEffect(() => {
