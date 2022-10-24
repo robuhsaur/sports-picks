@@ -17,13 +17,13 @@ from queries.guru import (
     GuruFormOut, 
     GuruFormRepository,
     GuruFormIn,
-    DuplicateAccountError
+    DuplicateAccountError,
+    GuruSignupOutWithPassword
 )
 from queries.user import (UserSignupOut)
 from userauth import user_authenticator
 
 router = APIRouter()
-
 
 class AccountForm(BaseModel):
     username: str
@@ -84,16 +84,16 @@ def get_gurus(
 
 
 
-# @router.get("/guru/{guru_id}", response_model=Optional[GuruSignupOut])
-# def get_a_guru(
-#     guru_id: int,
-#     response: Response, 
-#     repo: GuruSignupRepository = Depends(),
-# )-> GuruSignupOut:
-#     guru = repo.get_a_guru(guru_id)
-#     if guru is None:
-#         response.status_code = 404
-#     return guru
+@router.get("/guru/{guru_id}", response_model=Optional[GuruSignupOut])
+def get_a_guru(
+    guru_id: int,
+    response: Response, 
+    repo: GuruSignupRepository = Depends(),
+)-> GuruSignupOut:
+    guru = repo.get_guru_byId(guru_id)
+    if guru is None:
+        response.status_code = 404
+    return guru
 
 
 # @router.post("/gurus", response_model=GuruSignupOut)
@@ -114,10 +114,13 @@ def create_guru_form(
     guru_id = account_data.get('id')
     return repo.create(guruform, guru_id)
 
+
+
 @router.get("/gurus/form", response_model=list[GuruFormOut])
 def get_all_forms(
     repo: GuruFormRepository = Depends()
 ):
+
     return repo.get_all_forms()
 
 @router.get("/guru/{guru_id}/form", response_model=Optional[list[GuruFormOut]])
@@ -127,11 +130,12 @@ def get_a_guru_forms(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: GuruFormRepository = Depends(),
 ):
-    forms = repo.get_a_guru_forms(guru_id)
-    if forms is None:
-        response.status_code = 404
-    return forms
+    try:
+        return repo.get_a_guru_forms(guru_id)
+    except:
+        return None
 
+        
 @router.put("/guru/{guru_id}/form/{form_id}", response_model=GuruFormOut)
 def update_guru_form(
         guru_id:int,
