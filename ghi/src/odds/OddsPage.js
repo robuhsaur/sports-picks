@@ -27,7 +27,7 @@ function OddsPage() {
             }
         }
         getData();
-    }, []);
+    }, [sport]);
 
     return (
         <div>
