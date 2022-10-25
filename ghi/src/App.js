@@ -14,6 +14,7 @@ import LoginGuru from "./pages/LoginGuru.js";
 import LoginUser from "./pages/LoginUser";
 import Subscribe from "./subscribe";
 import Gurus from "./pages/Gurus";
+import MyGurus from "./pages/MyGurus";
 import { AuthProvider, useToken } from "./Auth";
 
 function GetToken() {
@@ -43,6 +44,7 @@ function App() {
               <Route path="/login-guru" element={<LoginGuru />} />
               <Route path="/gurus/:guru_id" element={<Subscribe />} />
               <Route path="/gurus" element={<Gurus />} />
+              <Route path="/my-gurus" element={<MyGurus />} />
             </Routes>
           </div>
         </AuthProvider>
