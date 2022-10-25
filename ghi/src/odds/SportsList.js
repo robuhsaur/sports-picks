@@ -62,6 +62,8 @@ class SportsList extends React.Component {
                                     </Card>
                                 </Grid>
                             )
+                        } else {
+                            return null;
                         }
                     })}
                 </Grid>
