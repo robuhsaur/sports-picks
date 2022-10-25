@@ -19,7 +19,7 @@ function NFLGamesList() {
             const fetchConfig = {
                 method: "GET",
                 headers: {
-                    'X-RapidAPI-Key': REACT_APP_ODDS_API_KEY,
+                    'X-RapidAPI-Key': process.env.REACT_APP_ODDS_API_KEY,
                     'X-RapidAPI-Host': 'odds.p.rapidapi.com'
                 }
             }
