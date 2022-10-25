@@ -62,5 +62,3 @@ function UsersGurus(props) {
 }
 
 export default UsersGurus;
-
-// pleas show me old source code
