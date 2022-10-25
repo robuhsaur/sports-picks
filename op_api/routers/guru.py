@@ -130,10 +130,7 @@ def get_a_guru_forms(
     account_data: dict = Depends(authenticator.get_current_account_data),
     repo: GuruFormRepository = Depends(),
 ):
-    try:
-        return repo.get_a_guru_forms(guru_id)
-    except:
-        return None
+    return repo.get_a_guru_forms(guru_id)
 
         
 @router.put("/guru/{guru_id}/form/{form_id}", response_model=GuruFormOut)
