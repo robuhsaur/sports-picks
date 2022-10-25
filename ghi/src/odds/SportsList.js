@@ -8,7 +8,6 @@ import { CardActionArea } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 
-
 class SportsList extends React.Component {
     constructor(props) {
         super(props);

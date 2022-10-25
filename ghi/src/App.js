@@ -19,6 +19,7 @@ import Subscribe from './subscribe';
 import Gurus from './pages/Gurus';
 import { AuthProvider, useToken } from './Auth'
 
+
 function GetToken() {
   // Get token from JWT cookie (if already logged in)
   useToken();
