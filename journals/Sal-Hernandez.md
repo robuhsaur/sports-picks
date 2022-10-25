@@ -43,8 +43,7 @@ started working on FastAPI and did more research on the 3rd party API to pull od
 - working on NFL/NBA games page today. got a bug that was giving me issue on loading the games. was able to fix and get it working. finished the NFL page. 
 
 **10/14**
-- kept working on same thing. making sure I am getting correct data. Got stuck on how to link to another page.
-
+- kept working on same thing. making sure I am getting correct data. Got stuck on how to link to another page. such as if user was to click on the sport they wanted how would I redirect. tried a few different methods, the one that worked for me was Link. I was able to link to the sport that is selected.
 
 ---
 
@@ -55,3 +54,16 @@ started working on FastAPI and did more research on the 3rd party API to pull od
 
 **10/18**
 - Still working on getting from game list to specific game. still sticking with pulling it with id. looked at react docs to try and figure out a way. spoke with Will bc we both were working on a similar feature of pulling specific info. We reached out to Matt(SEIR) for guidance on our issue. With the help from Will and Matt, we were able to figure out a way for me to pull the id I need. After pulling the id using useParams() I was able to complete the odds page.  
+
+**10/19**
+- today I planned to work on the design of the app since the functionality is complete. I got with group, asked questions on design that we had originally planned, got feedback. got to work reading docs on Material UI. was a bit challenging but playing around with it I was able to come to a design. I did run into a few errors, one being the picture was not displaying and how to get the correct picture to display. I was able to come up with a solution to check what sport it was and depending on the sport the logo is displayed.
+
+**10/20**
+- We were told to not worry about design. so switched gears to making sure everything is ready to go for deployment. all functionality is ready to go except for one part. Going to start working on unit test for app. 
+
+---
+
+## Week 4 ##
+
+**10/24**
+- working on unit test and going to start working on deployment 

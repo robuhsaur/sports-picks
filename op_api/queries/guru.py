@@ -36,7 +36,7 @@ class GuruFormOut(BaseModel):
     guru_id: int
     
 class GuruSignupRepository:
-    def get_a_guru(self, user_name: str) -> Optional[GuruSignupOutWithPassword]:
+    def get_a_guru(self, user_name) -> Optional[GuruSignupOutWithPassword]:
         try:
             with pool.connection() as conn:
                 # get a cursor (something to run SQL with)
@@ -54,6 +54,7 @@ class GuruSignupRepository:
                         """,
                         [user_name]
                     )
+                    print(user_name)
                     record = result.fetchone()
                     if record is None:
                         return None
@@ -68,6 +69,7 @@ class GuruSignupRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get that guru"}
+
 
     def create(self, guru: GuruSignupIn, hashed_password: str) -> GuruSignupOutWithPassword:
         with pool.connection() as conn:
@@ -121,6 +123,37 @@ class GuruSignupRepository:
                     ]
         except Exception:
             return {"message: could not get all gurus"}
+
+    def get_guru_byId(self, guru_id:int) -> Optional[GuruSignupOut]:
+        try:
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # Run our SELECT statement
+                    result = db.execute(
+                        """
+                        SELECT id
+                             , user_name
+                             , description
+                             , price
+                        FROM guru_signup
+                        WHERE id = %s
+                        """,
+                        [guru_id]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    else:
+                        return GuruSignupOut(
+                            id= record[0],
+                            user_name= record[1],
+                            description= record[2],
+                            price= record[3]
+                        )
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that guru"}
 
 
 
@@ -177,7 +210,6 @@ class GuruFormRepository:
                         guruform.pick_detail,
                         guru_id
                     ]
-                    
                 )
                 form = result.fetchone()
                 return GuruFormOut(
