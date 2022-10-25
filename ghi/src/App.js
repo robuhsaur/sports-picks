@@ -25,7 +25,7 @@ function GetToken() {
   return null;
 }
 
-
+console.log("KEEEYYYY", process.env.REACT_APP_ODDS_API_KEY)
 
 function App() {
   return (
