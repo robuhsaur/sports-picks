@@ -22,7 +22,7 @@ class SportsList extends React.Component {
         const fetchConfig = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': process.env.REACT_APP_ODDS_API_KEY,
+                'X-RapidAPI-Key': REACT_APP_ODDS_API_KEY,
                 'X-RapidAPI-Host': 'odds.p.rapidapi.com'
             }
         };
@@ -44,7 +44,7 @@ class SportsList extends React.Component {
                     {this.state.sports.map((sport) => {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
-                                <Grid xs={8}>
+                                <Grid key={sport.key} xs={8}>
                                     <Card sx={{ maxWidth: 345 }}><Link to={`/${sport.title}`}>
                                         <CardActionArea>
                                             <CardMedia
@@ -53,7 +53,7 @@ class SportsList extends React.Component {
                                                 image={sport.title === 'NBA' ? 'http://lofrev.net/wp-content/photos/2016/06/NBA-Logo-2-300x225.jpg' : 'https://1000logos.net/wp-content/uploads/2017/05/NFL-logo.png'}
                                                 alt="sport"
                                             />
-                                            <CardContent key={sport.key}>
+                                            <CardContent>
 
                                                 <Typography>{sport.title} - {sport.description} </Typography>
                                             </CardContent>
