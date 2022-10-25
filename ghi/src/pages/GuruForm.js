@@ -24,7 +24,6 @@ function GuruForm(props) {
     const { token } = useAuthContext()
     const [pick, setPick] = useState('')
     const [pickDetail, setPickDetail] = useState('')
-    const navigate = useNavigate()
     const [guruId, setGuruId] = useState()
     const [formId, setFormId] = useState(0)
     const [isTrue, setisTrue] = useState(false)
@@ -111,6 +110,7 @@ function GuruForm(props) {
             body: JSON.stringify({ pick, pick_detail })
         })
         const data = await response.json()
+        console.log(data)
         if (response.ok) {
             console.log("post")
         } else {

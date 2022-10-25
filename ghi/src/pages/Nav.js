@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Nav() {
-    const [token, login, logout] = useToken();
+    const token = useToken();
+    const tokenNav = token[0]
+    const logout = token[2]
     const navigate = useNavigate();
     return (
         <>
@@ -17,10 +19,10 @@ function Nav() {
                         <NavLink className="btn btn-dark" to="/" type="button" aria-current="page"> My Gurus </NavLink>
 
                         {
-                            token && <button type="button" className="btn btn-dark" onClick={() => navigate('/gurus')} >Gurus</button>
+                            tokenNav && <button type="button" className="btn btn-dark" onClick={() => navigate('/gurus')} >Gurus</button>
                         }
                         {
-                            token && <button type="submit" className="btn btn-danger" onClick={logout}> Logout </button>
+                            tokenNav && <button type="submit" className="btn btn-danger" onClick={logout}> Logout </button>
                         }
                     </ul>
                 </div>
