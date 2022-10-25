@@ -41,7 +41,7 @@ deploy-only-picks-api-image-job:  # RENAMED
   stage: deploy
   image: docker:20.10.16
   needs:
-    - build-fastapi-api-image-job
+    - build-only-picks-api-image-job
   services:
     - docker:20.10.16-dind
   script:
