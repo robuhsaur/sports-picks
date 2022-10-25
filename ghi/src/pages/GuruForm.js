@@ -25,7 +25,7 @@ function GuruForm(props) {
     const [pick, setPick] = useState('')
     const [pickDetail, setPickDetail] = useState('')
     const navigate = useNavigate()
-    const [guruId, setGuruId] = useState(200)
+    const [guruId, setGuruId] = useState()
     const [formId, setFormId] = useState(0)
     const [isTrue, setisTrue] = useState(false)
 
