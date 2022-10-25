@@ -8,7 +8,8 @@ import { useToken } from '../Auth'
 const SignUpUser = () => {
     const [user_name, setUserName] = useState("");
     const [password, setpassword] = useState("");
-    const [token, login, logout, signup] = useToken();
+    const token = useToken();
+    const signup = token[3]
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {

@@ -21,7 +21,7 @@ function Subscribe(props) {
             }
         }
         getGuru();
-    }, [])
+    }, [guru_id])
 
     async function handleSubmit(e) {
         e.preventDefault();
