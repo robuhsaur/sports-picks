@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './App.css';
 import Nav from './pages/Nav';
 import GuruForm from './pages/GuruForm';
@@ -10,8 +9,7 @@ import SignUp from './pages/GuruSignUp.js';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import SignUpUser from './pages/SignUpUser.js';
 import Home from './pages/Home.js';

@@ -16,5 +16,4 @@ def test_create_user():
         assert response.status_code == 200
 
 
-
         

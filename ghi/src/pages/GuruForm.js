@@ -25,7 +25,7 @@ function GuruForm(props) {
     const [pick, setPick] = useState('')
     const [pickDetail, setPickDetail] = useState('')
     const navigate = useNavigate()
-    const [guruId, setGuruId] = useState()
+    const [guruId, setGuruId] = useState(200)
     const [formId, setFormId] = useState(0)
     const [isTrue, setisTrue] = useState(false)
 
@@ -42,13 +42,13 @@ function GuruForm(props) {
             })
             console.log(response)
             const data = await response.json()
-            console.log(data)
+            console.log(data, "BRUH")
             const guruId = data["id"] // guru id
             console.log(guruId)
             setGuruId(guruId)
         }
         getGuruId()
-    }, [])
+    }, [token])
 
     async function getGuruForms(e) {
         e.preventDefault();
@@ -76,7 +76,7 @@ function GuruForm(props) {
         const guru_id = guruId
         const form_id = formId
         const pick_detail = pickDetail
-        console.log(formId)
+        // console.log(formId)
         const putUrl = `http://localhost:8000/guru/${guru_id}/form/${form_id}`
         const response = await fetch(putUrl, {
             method: "put",
@@ -84,7 +84,7 @@ function GuruForm(props) {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ pick, pick_detail })
+            body: JSON.stringify({ pick, pick_detail, guru_id })
         })
         const data = await response.json()
 
