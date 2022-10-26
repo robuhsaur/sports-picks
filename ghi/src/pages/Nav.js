@@ -3,7 +3,9 @@ import { useToken } from "../Auth";
 import { useNavigate } from "react-router-dom";
 
 function Nav() {
-  const [token, login, logout] = useToken();
+  const token = useToken();
+  const tokenNav = token[0];
+  const logout = token[2];
   const navigate = useNavigate();
   return (
     <>
@@ -33,7 +35,7 @@ function Nav() {
             </NavLink>
             <NavLink
               className="btn btn-dark"
-              to="/my-gurus"
+              to="/"
               type="button"
               aria-current="page"
             >
@@ -41,7 +43,7 @@ function Nav() {
               My Gurus{" "}
             </NavLink>
 
-            {token && (
+            {tokenNav && (
               <button
                 type="button"
                 className="btn btn-dark"
@@ -50,7 +52,7 @@ function Nav() {
                 Gurus
               </button>
             )}
-            {token && (
+            {tokenNav && (
               <button type="submit" className="btn btn-danger" onClick={logout}>
                 {" "}
                 Logout{" "}
