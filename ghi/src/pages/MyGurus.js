@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useNavigate } from "react-router-dom";
-import Subscribe from "../subscribe";
 import { useToken } from "../Auth";
 function UsersGurus(props) {
   const [gurus, setGurus] = useState([]);
@@ -24,8 +23,6 @@ function UsersGurus(props) {
     }
     getGurus();
   }, [token]);
-
-  const navigate = useNavigate();
 
   return (
     <div className="row justify-content-center">
