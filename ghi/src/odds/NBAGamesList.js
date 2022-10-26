@@ -28,9 +28,9 @@ function NBAGamesList() {
             if (response.ok) {
                 let NBAdata = await response.json();
                 setNBA(NBAdata);
-                console.log("got sports data!");
+                
             } else {
-                console.log("ERRRROOORRRR")
+                console.log("ERROR");
             }
         }
         getData();

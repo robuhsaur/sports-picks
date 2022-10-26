@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
-console.log("KEEEY", process.env)
 
 class SportsList extends React.Component {
     constructor(props) {
