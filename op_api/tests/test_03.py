@@ -4,8 +4,8 @@ from main import app
 client = TestClient(app)
 
 
-def test_get_sports():
-    
-    response = client.get("/sportslist")
+def test_get_gurus():
+    response = client.get("/")
 
-    assert response.status_code == 404
+    assert response.status_code == 200
+    

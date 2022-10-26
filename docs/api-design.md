@@ -1,7 +1,9 @@
-### Home Page ###
+# APIs
 
-* Endpoint path: /home
-* Endpoint method: GET
+## Sports List 
+* Path: `/sportslist`
+* Method: `GET`
+
 
 
 * Response: a list of upcoming games
@@ -24,13 +26,13 @@
     }
     ```
 
-### Odds page ### 
+## Teams/Odds page  
 
-* Endpoint path: /odds
-* Endpoint method: GET
+* Path: `/odds`
+* Method: `GET`
 
 
-* Response: odss to a game 
+* Response: odds to a game 
 * Response shape:
     ```json
     {
