@@ -10,7 +10,6 @@ build-front-end-job:
   image: node:lts-bullseye
   variables:
     PUBLIC_URL: https://team-7-mission.gitlab.io/only-picks/
-    REACT_APP_API_HOST: https://onlypicks.herokuapp.com
   script:
     - cd ghi
     - npm install
