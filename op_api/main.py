@@ -5,16 +5,11 @@ from routers import guru, user
 from authenticator import authenticator
 from userauth import user_authenticator
 
-
-
-
-
 app = FastAPI()
 app.include_router(guru.router)
 app.include_router(user.router)
 app.include_router(authenticator.router, prefix="/guru")
 app.include_router(user_authenticator.router, prefix="/user")
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,4 +21,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-

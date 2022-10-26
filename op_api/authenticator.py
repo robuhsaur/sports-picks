@@ -1,8 +1,11 @@
 import os
 from fastapi import Depends
 from jwtdown_fastapi.authentication import Authenticator
-from queries.guru import GuruSignupRepository, GuruSignupOut, GuruSignupOutWithPassword
-# from queries.user import UserSignupRepository, UserSignupOut, UserSignupOutWithPassword
+from queries.guru import (
+    GuruSignupRepository,
+    GuruSignupOut,
+    GuruSignupOutWithPassword
+)
 
 
 class MyAuthenticator(Authenticator):
@@ -31,7 +34,6 @@ class MyAuthenticator(Authenticator):
         # Return the username and the data for the cookie.
         # You must return TWO values from this method.
         return account.user_name, GuruSignupOut(**account.dict())
-
 
 
 authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])

@@ -1,3 +1,63 @@
+## October 26, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 25, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 24, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+  
+## October 23, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 22, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 21, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 20, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 19, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 18, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 17, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 16, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
+## October 15, 22
+
+* Everyone in teams pick page to work on
+* plan to get my guru page working by end of day.
+
 ## October 14, 22
 
 * Everyone in teams pick page to work on
