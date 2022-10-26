@@ -3,6 +3,15 @@ stages:
   - build
   - deploy
 
+## Test
+op-api-unit-test-job:
+    image: python:3-bullseye
+    stage: test
+    script:
+        - cd op_api
+        - pip install -r requirements.txt
+        - pip install requests
+        - python -m pytest
 
 ## BUILD
 build-front-end-job:
