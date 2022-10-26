@@ -1,107 +1,66 @@
 ## October 26, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* App is deployed
+* working on getting signing key for auth to function correctly in production
 
 ## October 25, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
+* Helped with deployment of app
+  
 ## October 24, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-  
-## October 23, 22
-
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
-## October 22, 22
-
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* Finished my test test_create_user
 
 ## October 21, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* helped Robbie with form and worked on understanding test
 
 ## October 20, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* Finished subscription page and began helping Robbie with his guru form
 
 ## October 19, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* completed gurus page and started working on subscription page
 
 ## October 18, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* Integrated Auth into user and started on front end gurus and subscription page
 
 ## October 17, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
-## October 16, 22
-
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
-## October 15, 22
-
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* integrating Auth into users
 
 ## October 14, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* Worked on getting end points for user accounts and subscription
 
 ## October 13, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
-## October 14, 22
-
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
-## October 13, 22
-
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* started on user account tables and subscription model in migration 
 
 ## October 12, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* had to backtrack to integrate auth in guru account
 
 ## October 11, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
-
+* worked on back end for guru form and guru account end points
+  
 ## October 10, 22
 
-* Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* Started setting up backend and table in migrations for guru account, and guru form
+* completed
 
 ## October 7, 22
 
-* Get a better understanding of fast api,
-* build tables and how they are going to look
+* Get a better understanding of fast api
+* build tables in exaldraw and how they are going to look
 
 ## October 6, 22
 
 * Everyone in teams pick page to work on
-* plan to get my guru page working by end of day.
+* worked on guru page template
 
 ## October 5, 22
 
@@ -110,8 +69,11 @@
 ## October 4, 22
 
 * Plan for today was to finish data base and admin.
-* that has been comleted and goal has beem met
-* 
+* that has been completed and goal has beem met
+
+## October, 3 22
+* Got heroku deployed with construction page
+* fine tuned wireframe 
 
 
 
