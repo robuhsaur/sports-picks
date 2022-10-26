@@ -9,7 +9,8 @@ op-api-unit-test-job:
     stage: test
     script:
         - cd op_api
-        - pip install -r requirements.txt
+        - pip install fastapi
+        - pip install pytest
         - pip install requests
         - python -m pytest
 
