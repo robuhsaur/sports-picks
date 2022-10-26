@@ -4,8 +4,15 @@ from main import app
 client = TestClient(app)
 
 
-def test_get_gurus():
-    response = client.get("/")
+def test_create_guru_error():
+    response = client.post(
+        "/gurus",
+        json={
+            "user_name": "error",
+            "password": "string",
+            "description": "string",
+            "price": "string"
+        },
+    )
 
-    assert response.status_code == 200
-    
+    assert response.status_code == 422
