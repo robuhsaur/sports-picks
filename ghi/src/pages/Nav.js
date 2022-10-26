@@ -35,7 +35,7 @@ function Nav() {
             </NavLink>
             <NavLink
               className="btn btn-dark"
-              to="/"
+              to="/my-gurus"
               type="button"
               aria-current="page"
             >

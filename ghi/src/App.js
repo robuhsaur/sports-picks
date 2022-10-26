@@ -13,6 +13,7 @@ import LoginGuru from "./pages/LoginGuru.js";
 import LoginUser from "./pages/LoginUser";
 import Subscribe from "./subscribe";
 import Gurus from "./pages/Gurus";
+import MyGurus from "./pages/MyGurus";
 import { AuthProvider, useToken } from "./Auth";
 
 function GetToken() {
