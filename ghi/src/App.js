@@ -35,7 +35,7 @@ function App() {
           <Nav />
           <div className="container">
             <Routes>
-              <Route path="/only-picks/" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/guru/create" element={<GuruForm />} />
               <Route path="/sportslist" element={<SportsList />} />
               <Route path="/NFL" element={<NFLGameslist />} />
