@@ -34,4 +34,4 @@ class MyAuthenticator(Authenticator):
 
 
 
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = MyAuthenticator(os.environ.get("SIGNING_KEY"))

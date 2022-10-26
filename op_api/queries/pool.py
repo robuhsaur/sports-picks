@@ -3,4 +3,4 @@ import os
 
 
 
-pool = ConnectionPool(conninfo=os.environ["DATABASE_URL"])
+pool = ConnectionPool(conninfo=os.environ.get("DATABASE_URL"))

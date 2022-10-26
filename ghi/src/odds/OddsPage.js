@@ -23,7 +23,7 @@ function OddsPage() {
             if (response.ok) {
                 let data = await response.json();
                 setGame(data);
-                console.log("game data");
+                
             }
         }
         getData();

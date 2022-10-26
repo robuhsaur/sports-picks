@@ -3,8 +3,17 @@ stages:
   - build
   - deploy
 
-#TEST HERE
-
+## Test
+op-api-unit-test-job:
+    image: python:3-bullseye
+    stage: test
+    script:
+        - cd op_api
+        - pip install fastapi
+        - pip install pytest
+        - pip install requests
+        - pip install jwtdown-fastapi
+        - python -m pytest
 
 ## BUILD
 build-front-end-job:
@@ -12,7 +21,6 @@ build-front-end-job:
   image: node:lts-bullseye
   variables:
     PUBLIC_URL: https://team-7-mission.gitlab.io/only-picks/
-    REACT_APP_API_HOST: https://onlypicks.herokuapp.com
   script:
     - cd ghi
     - npm install

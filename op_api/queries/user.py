@@ -138,9 +138,7 @@ class UserSubscriberRepository:
                         [user_id]
                     )
                     return [
-                        Usersubscriptions(
-                        guru_id= guru[0]
-                        )
+                         guru[0]                        
                         for guru in result
                     ]
 
