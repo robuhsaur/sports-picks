@@ -83,7 +83,7 @@ function GuruForm(props) {
                 }
             }
         } getGuruForms()
-    }, [formId])
+    }, [formId, token, guruId])
 
 
     async function updateGuruForm(e) {
