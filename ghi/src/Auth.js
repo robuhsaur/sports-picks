@@ -125,7 +125,7 @@ export function useToken() {
     console.log("888");
     if (token) {
       //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
-      const url = `http://localhost:8000/guru/token`; // TODO: change url to user/sign-up
+      const url = `${process.env.REACT_APP_API_HOST}/guru/token`; // TODO: change url to user/sign-up
 
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
