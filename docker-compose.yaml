@@ -48,7 +48,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      REACT_APP_ODDS_API_KEY: ${REACT_APP_ODDS_API_KEY}
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
