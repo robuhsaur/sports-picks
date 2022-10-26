@@ -93,6 +93,11 @@ export function useToken() {
       method: "post",
       credentials: "include",
       body: form,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+
+      },
     });
     if (response.ok) {
       const token = await getTokenInternal();
@@ -113,6 +118,8 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+
       },
     });
     if (response.ok) {
@@ -144,6 +151,10 @@ export function useToken() {
       method: "post",
       credentials: "include",
       body: form,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
     });
     if (response.ok) {
       const token = await getTokenInternal();
@@ -169,6 +180,7 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
@@ -190,6 +202,7 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
