@@ -12,6 +12,7 @@ op-api-unit-test-job:
         - pip install fastapi
         - pip install pytest
         - pip install requests
+        - pip install jwtdown-fastapi
         - python -m pytest
 
 ## BUILD
