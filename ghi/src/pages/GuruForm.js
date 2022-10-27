@@ -37,71 +37,61 @@ function GuruForm(props) {
 
   useEffect(() => {
     async function getGuruId() {
-      const url = `${process.env.REACT_APP_API_HOST}/guruinfo`;
-      const response = await fetch(url, {
+      const guruIdUrl = `http://localhost:8000/guruinfo`
+      const response = await fetch(guruIdUrl, {
         method: "get",
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        credentials: "include",
-      });
-      console.log(response, "---- this is the response");
-      const data = await response.json();
-      console.log(data, "BRUH");
-      const guruId = data["id"]; // guru id
-      console.log(guruId);
-      setGuruId(guruId);
+      })
+      console.log(response)
+      const data = await response.json()
+      console.log(data, "BRUH")
+      const guruId = data["id"] // guru id
+      console.log(guruId)
+      setGuruId(guruId)
     }
-    getGuruId();
-    // if (guruId) {
-    //     getGuruForms()
-    // }
-  }, [token]);
+    getGuruId()
+  }, [token])
 
-  useEffect(() => {
-    async function getGuruForms() {
-      const guru_id = guruId;
-      console.log(guru_id);
-      const guruForms = `${process.env.REACT_APP_API_HOST}/${guru_id}/form`;
-      const response = await fetch(guruForms, {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const formData = await response.json();
-      console.log(formData, "------Formadadasd");
-      if (response.ok) {
-        if (formData) {
-          const guruForm = formData[0];
-          const formId = guruForm["id"];
-          setFormId(formId);
-          console.log(formId, "-----getguruform: formId");
-        }
-      }
+  async function getGuruForms(e) {
+    e.preventDefault();
+    const guru_id = guruId
+    console.log(guru_id)
+    const guruForms = `http://localhost:8000/guru/${guru_id}/form`
+    const response = await fetch(guruForms, {
+      method: "get",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    const formData = await response.json()
+    if (response.ok) {
+      const guruForm = formData[0]
+      const formId = guruForm["id"]
+      setFormId(formId)
+      console.log(formId)
     }
-    getGuruForms();
-  }, [formId, token, guruId]);
+  }
 
   async function updateGuruForm(e) {
-    console.log(formId, "above url");
     e.preventDefault();
-    const guru_id = guruId;
-    const pick_detail = pickDetail;
-    const putUrl = `${process.env.REACT_APP_API_HOST}/guru/${guru_id}/form/${formId}`;
-    console.log(formId, "----inside updateGuruForm");
+    const guru_id = guruId
+    const form_id = formId
+    const pick_detail = pickDetail
+    // console.log(formId)
+    const putUrl = `http://localhost:8000/guru/${guru_id}/form/${form_id}`
     const response = await fetch(putUrl, {
       method: "put",
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ pick, pick_detail, guru_id }),
-    });
-    const data = await response.json();
-    console.log(data, "data brother");
+      body: JSON.stringify({ pick, pick_detail, guru_id })
+    })
+    const data = await response.json()
 
     if (response.ok) {
       console.log("form has been updated");
@@ -111,39 +101,41 @@ function GuruForm(props) {
     }
   }
 
+
   async function handleSubmit(e) {
     e.preventDefault();
-    setisTrue(true);
-    const pick_detail = pickDetail;
-    const url = `${process.env.REACT_APP_API_HOST}/gurus/form`;
+    setisTrue(true)
+    const pick_detail = pickDetail
+    const url = `http://localhost:8000/gurus/form`
     const response = await fetch(url, {
       method: "post",
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ pick, pick_detail }),
-    });
-    const data = await response.json();
-    console.log(data);
-    setFormId(data["id"]);
-    console.log(formId, "right below data");
+      body: JSON.stringify({ pick, pick_detail })
+    })
+    const data = await response.json()
+    console.log(data)
     if (response.ok) {
-      console.log(formId, "post and formid -----");
+      console.log("post")
     } else {
-      console.log("no post");
+      console.log("no post")
     }
   }
 
+
+
   async function finalForm(e) {
     e.preventDefault();
-    console.log(formId);
+    await getGuruForms(e)
+    console.log(formId)
     if (!isTrue) {
-      handleSubmit(e);
-      console.log("getGuruForms");
+      handleSubmit(e)
+      console.log("getGuruForm")
     } else {
-      updateGuruForm(e);
-      console.log("updating");
+      updateGuruForm(e)
+      console.log("updating")
     }
   }
 
