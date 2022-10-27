@@ -27,7 +27,7 @@ const SignUp = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="h5">Create a Guru Account</Typography>
+        <Typography variant="h5">Create an Account</Typography>
         <TextField
           label="Username"
           name="username"
