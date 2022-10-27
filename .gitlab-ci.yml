@@ -3,14 +3,22 @@ stages:
   - build
   - deploy
 
+## Test
+# op-api-unit-test-job:
+#     image: python:3-bullseye
+#     stage: test
+#     script:
+#         - cd op_api
+#         - pip install -r requirements.txt
+#         - python -m pytest
 
 ## BUILD
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
   variables:
+    REACT_APP_API_HOST: https://onlypicks.herokuapp.com 
     PUBLIC_URL: https://team-7-mission.gitlab.io/only-picks/
-    REACT_APP_API_HOST: https://onlypicks.herokuapp.com
   script:
     - cd ghi
     - npm install

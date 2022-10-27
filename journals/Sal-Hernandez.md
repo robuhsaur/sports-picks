@@ -66,4 +66,10 @@ started working on FastAPI and did more research on the 3rd party API to pull od
 ## Week 4 ##
 
 **10/24**
-- working on unit test and going to start working on deployment 
+- working on unit test and going to start working on deployment. got an error with api key. not working properly. trouble shooting issue. tried adding key to heroku, gitlab, docker. was still getting issues. 
+
+**10/25**
+- continued work on api key displaying. had some lint issues that I had to clean up for pipeline to pass build. worked on getting deployed w/ Robbie, walked thru the CI/CD cook book. was still running into issues with api key. Worked with Matt(SEIR) was able to get api key working to display data locally again. then figured out how to get api key working in production. going to finish test.
+
+**10/26**
+- finishing last things on app. finished unit test.

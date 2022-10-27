@@ -125,7 +125,7 @@ export function useToken() {
     console.log("888");
     if (token) {
       //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
-      const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
+      const url = `http://localhost:8000/guru/token/`; // TODO: change url to user/sign-up
 
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
@@ -142,6 +142,9 @@ export function useToken() {
     form.append("password", password);
     const response = await fetch(url, {
       method: "post",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
       body: form,
     });
