@@ -142,6 +142,9 @@ export function useToken() {
     form.append("password", password);
     const response = await fetch(url, {
       method: "post",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       credentials: "include",
       body: form,
     });
