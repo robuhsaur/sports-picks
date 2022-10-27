@@ -7,7 +7,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
+  const url = `${process.env.REACT_APP_API_HOST}/user/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -93,11 +93,6 @@ export function useToken() {
       method: "post",
       credentials: "include",
       body: form,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-
-      },
     });
     if (response.ok) {
       const token = await getTokenInternal();
@@ -118,8 +113,6 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-
       },
     });
     if (response.ok) {
@@ -132,7 +125,7 @@ export function useToken() {
     console.log("888");
     if (token) {
       //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
-      const url = `${process.env.REACT_APP_API_HOST}/guru/token`; // TODO: change url to user/sign-up
+      const url = `http://localhost:8000/guru/token/`; // TODO: change url to user/sign-up
 
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
@@ -142,7 +135,7 @@ export function useToken() {
   }
 
   async function login_guru(username, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/guru/token`;
+    const url = `${process.env.REACT_APP_API_HOST}/guru/token/`;
     // const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
     const form = new FormData();
     form.append("username", username);
@@ -151,10 +144,6 @@ export function useToken() {
       method: "post",
       credentials: "include",
       body: form,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
     });
     if (response.ok) {
       const token = await getTokenInternal();
@@ -180,7 +169,6 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
@@ -202,7 +190,6 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
     });
     if (response.ok) {
