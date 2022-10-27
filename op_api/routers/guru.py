@@ -20,8 +20,6 @@ from queries.guru import (
     DuplicateAccountError,
     GuruSignupOutWithPassword
 )
-from queries.user import (UserSignupOut)
-from userauth import user_authenticator
 
 router = APIRouter()
 

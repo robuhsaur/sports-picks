@@ -10,15 +10,15 @@ class DuplicateAccountError(ValueError):
 class GuruSignupIn(BaseModel):
     user_name: str
     password: str
-    description: str
-    price: int
+    description: Optional[str]
+    price: Optional[int] 
 
 
 class GuruSignupOut(BaseModel):
     id: int
     user_name: str
-    description: str
-    price: int
+    description: Optional[str]
+    price: Optional[int] 
 
 
 class GuruSignupOutWithPassword(GuruSignupOut):
@@ -36,7 +36,7 @@ class GuruFormInwithid(GuruFormIn):
 
 class GuruFormOut(BaseModel):
     id: int
-    pick: str
+    pick: str 
     pick_detail: str
     guru_id: int
 
