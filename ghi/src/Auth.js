@@ -149,12 +149,12 @@ export function useToken() {
     form.append("password", password);
     const response = await fetch(url, {
       method: "post",
-      credentials: "include",
-      body: form,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-      }
+      },
+      credentials: "include",
+      body: form,
     });
     if (response.ok) {
       const token = await getTokenInternal();
