@@ -21,8 +21,6 @@ from queries.guru import (
     DuplicateAccountError,
     GuruSignupOutWithPassword
 )
-from queries.user import (UserSignupOut, UserSubscriberRepository)
-from userauth import user_authenticator
 
 router = APIRouter()
 
@@ -83,18 +81,18 @@ def get_gurus(
 ):
     return repo.get_gurus()
 
-@router.get("/my-gurus", response_model=list[GuruSignupPickOut])
-def get_gurus(
-    repo: GuruSignupRepository = Depends(),
-    repoSub: UserSubscriberRepository = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-    # account: UserSignupOut = Depends(user_authenticator.try_get_current_account_data)
-):
-    user_id = account_data.get('id')
-    # get guru ids
-    guru_ids = repoSub.get_guruids_from_user(user_id)
-    print("guru_ids", guru_ids)
-    return repo.get_gurus_with_user_id(guru_ids)
+# @router.get("/my-gurus", response_model=list[GuruSignupPickOut])
+# def get_gurus(
+#     repo: GuruSignupRepository = Depends(),
+#     repoSub: UserSubscriberRepository = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+#     # account: UserSignupOut = Depends(user_authenticator.try_get_current_account_data)
+# ):
+#     user_id = account_data.get('id')
+#     # get guru ids
+#     guru_ids = repoSub.get_guruids_from_user(user_id)
+#     print("guru_ids", guru_ids)
+#     return repo.get_gurus_with_user_id(guru_ids)
 
 
 @router.get("/guru/{guru_id}", response_model=Optional[GuruSignupOut])

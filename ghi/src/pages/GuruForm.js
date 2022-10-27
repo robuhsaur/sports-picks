@@ -42,7 +42,7 @@ function GuruForm(props) {
       const response = await fetch(url, {
         method: "get",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         credentials: "include",
@@ -96,7 +96,7 @@ function GuruForm(props) {
     const response = await fetch(putUrl, {
       method: "put",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ pick, pick_detail, guru_id })
@@ -112,16 +112,15 @@ function GuruForm(props) {
     }
   }
 
-
   async function handleSubmit(e) {
     e.preventDefault();
-    setisTrue(true)
-    const pick_detail = pickDetail
-    const url = `http://localhost:8000/gurus/form`
+    setisTrue(true);
+    const pick_detail = pickDetail;
+    const url = `http://localhost:8000/gurus/form`;
     const response = await fetch(url, {
       method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ pick, pick_detail })
@@ -133,11 +132,9 @@ function GuruForm(props) {
     if (response.ok) {
       console.log(formId, "post and formid -----")
     } else {
-      console.log("no post")
+      console.log("no post");
     }
   }
-
-
 
   async function finalForm(e) {
     e.preventDefault();
@@ -146,8 +143,8 @@ function GuruForm(props) {
       handleSubmit(e)
       console.log("getGuruForms")
     } else {
-      updateGuruForm(e)
-      console.log("updating")
+      updateGuruForm(e);
+      console.log("updating");
     }
   }
 
