@@ -172,8 +172,6 @@ export function useToken() {
     console.log("signup guru");
     const url = `${process.env.REACT_APP_API_HOST}/gurus`; // TODO: change url to user/sign-up
     // const url = `http://localhost:8000/gurus`; // TODO: change url to user/sign-up
-    console.log(token, "----token----")
-
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -187,9 +185,10 @@ export function useToken() {
         "Authorization": `Bearer ${token}`,
       },
     });
-    console.log(token, "----token after response----")
+    console.log(response, "--response--")
     if (response.ok) {
       const token = await getTokenInternal();
+      console.log(token, "--after getTokenInternal--")
       setToken(token);
       await login_guru(user_name, password);
     }
