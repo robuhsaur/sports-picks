@@ -9,3 +9,4 @@ def test_get_gurus():
 
     assert response.status_code == 200
     
+ 
