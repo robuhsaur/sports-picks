@@ -11,9 +11,7 @@ export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
   try {
     const response = await fetch(url, {
-      headers: {
-        credentials: "include",
-      },
+      credentials: "include",
     });
     if (response.ok) {
       const data = await response.json();
