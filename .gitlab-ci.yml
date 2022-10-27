@@ -4,16 +4,13 @@ stages:
   - deploy
 
 ## Test
-op-api-unit-test-job:
-    image: python:3-bullseye
-    stage: test
-    script:
-        - cd op_api
-        - pip install fastapi
-        - pip install pytest
-        - pip install requests
-        - pip install jwtdown-fastapi
-        - python -m pytest
+# op-api-unit-test-job:
+#     image: python:3-bullseye
+#     stage: test
+#     script:
+#         - cd op_api
+#         - pip install -r requirements.txt
+#         - python -m pytest
 
 ## BUILD
 build-front-end-job:
