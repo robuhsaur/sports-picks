@@ -11,7 +11,7 @@ export async function getTokenInternal() {
   try {
     const response = await fetch(url, {
       headers: {
-        "Authorization": `Bearer ${token}`
+        credentials: "include",
       },
     });
     if (response.ok) {
@@ -204,7 +204,7 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`
       },
     });
     if (response.ok) {
