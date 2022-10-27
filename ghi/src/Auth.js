@@ -6,6 +6,7 @@ export function getToken() {
   return internalToken;
 }
 
+
 export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
   try {
