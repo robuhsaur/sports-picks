@@ -23,7 +23,7 @@ function OddsPage() {
             if (response.ok) {
                 let data = await response.json();
                 setGame(data);
-                
+
             }
         }
         getData();
@@ -44,9 +44,13 @@ function OddsPage() {
                         if (teams.id === gameId) {
                             return (
                                 <tr key={teams.id}>
-                                    <td>{teams.home_team}</td>
-                                    <td>{teams.bookmakers[12].title}</td>
-                                    <td>{teams.away_team}</td>
+                                    <td>{teams.home_team}
+                                        <p>{teams.bookmakers[0].markets[0].outcomes[1].price}</p>
+                                    </td>
+                                    <td>{teams.bookmakers[0].title}</td>
+                                    <td>{teams.away_team}
+                                        <p>{teams.bookmakers[0].markets[0].outcomes[0].price}</p>
+                                    </td>
                                 </tr>
 
 
