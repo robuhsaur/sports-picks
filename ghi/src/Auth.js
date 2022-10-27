@@ -6,9 +6,8 @@ export function getToken() {
   return internalToken;
 }
 
-
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
+  const url = `${process.env.REACT_APP_API_HOST}/user/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -78,7 +77,7 @@ export function useToken() {
     console.log("777");
     if (token) {
       const url = `${process.env.REACT_APP_API_HOST}/user/token`;
-      await fetch(url, { method: "delete", "Authorization": `Bearer ${token}` });
+      await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
       navigate("/");
@@ -92,9 +91,7 @@ export function useToken() {
     form.append("password", password);
     const response = await fetch(url, {
       method: "post",
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
+      credentials: "include",
       body: form,
     });
     if (response.ok) {
@@ -116,7 +113,6 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
       },
     });
     if (response.ok) {
@@ -131,19 +127,14 @@ export function useToken() {
       //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
       const url = `http://localhost:8000/guru/token/`; // TODO: change url to user/sign-up
 
-      await fetch(url, {
-        method: "delete",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
-      });
+      await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
       navigate("/");
     }
   }
 
-  async function login_guru(username, password, guru_token) {
+  async function login_guru(username, password) {
     const url = `${process.env.REACT_APP_API_HOST}/guru/token/`;
     // const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
     const form = new FormData();
@@ -151,12 +142,9 @@ export function useToken() {
     form.append("password", password);
     const response = await fetch(url, {
       method: "post",
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
+      credentials: "include",
       body: form,
     });
-    console.log(response, "---response---")
     if (response.ok) {
       const token = await getTokenInternal();
       setToken(token);
@@ -170,6 +158,7 @@ export function useToken() {
     console.log("signup guru");
     const url = `${process.env.REACT_APP_API_HOST}/gurus`; // TODO: change url to user/sign-up
     // const url = `http://localhost:8000/gurus`; // TODO: change url to user/sign-up
+
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -180,15 +169,10 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
       },
     });
-    console.log(response, "--response--")
     if (response.ok) {
-      const guru_token = await getTokenInternal();
-      console.log(guru_token, "--after getTokenInternal--")
-      setToken(guru_token);
-      await login_guru(user_name, password, guru_token);
+      await login_guru(user_name, password);
     }
     return false;
   }
@@ -206,7 +190,6 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
       },
     });
     if (response.ok) {
