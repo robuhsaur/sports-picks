@@ -156,7 +156,6 @@ export function useToken() {
       headers: {
         "Authorization": `Bearer ${token}`
       },
-      credentials: "include",
       body: form,
     });
     if (response.ok) {
