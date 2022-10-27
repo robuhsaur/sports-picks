@@ -10,7 +10,9 @@ export async function getTokenInternal() {
   const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
   try {
     const response = await fetch(url, {
-      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
     });
     if (response.ok) {
       const data = await response.json();
@@ -77,7 +79,7 @@ export function useToken() {
     console.log("777");
     if (token) {
       const url = `${process.env.REACT_APP_API_HOST}/user/token`;
-      await fetch(url, { method: "delete", credentials: "include" });
+      await fetch(url, { method: "delete", "Authorization": `Bearer ${token}` });
       internalToken = null;
       setToken(null);
       navigate("/");
@@ -91,7 +93,9 @@ export function useToken() {
     form.append("password", password);
     const response = await fetch(url, {
       method: "post",
-      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      },
       body: form,
     });
     if (response.ok) {
@@ -113,6 +117,7 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
     });
     if (response.ok) {
@@ -127,7 +132,12 @@ export function useToken() {
       //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
       const url = `http://localhost:8000/guru/token/`; // TODO: change url to user/sign-up
 
-      await fetch(url, { method: "delete", credentials: "include" });
+      await fetch(url, {
+        method: "delete",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        },
+      });
       internalToken = null;
       setToken(null);
       navigate("/");
@@ -172,6 +182,7 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
     });
     if (response.ok) {
@@ -193,6 +204,7 @@ export function useToken() {
       }),
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
     });
     if (response.ok) {
