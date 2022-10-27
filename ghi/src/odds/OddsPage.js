@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 
 function OddsPage() {
     const { gameId, sport } = useParams();
-    
+
 
     const [gameInfo, setGame] = useState([]);
     useEffect(() => {
@@ -23,11 +23,11 @@ function OddsPage() {
             if (response.ok) {
                 let data = await response.json();
                 setGame(data);
-                console.log("game data");
+
             }
         }
         getData();
-    }, []);
+    }, [sport]);
 
     return (
         <div>
@@ -35,6 +35,7 @@ function OddsPage() {
                 <thead>
                     <tr>
                         <th>Home Team</th>
+                        <th>BookMaker</th>
                         <th>Away Team</th>
                     </tr>
                 </thead>
@@ -43,10 +44,19 @@ function OddsPage() {
                         if (teams.id === gameId) {
                             return (
                                 <tr key={teams.id}>
-                                    <td>{teams.home_team}</td>
-                                    <td>{teams.away_team}</td>
+                                    <td>{teams.home_team}
+                                        <p>{teams.bookmakers[0].markets[0].outcomes[1].price}</p>
+                                    </td>
+                                    <td>{teams.bookmakers[0].title}</td>
+                                    <td>{teams.away_team}
+                                        <p>{teams.bookmakers[0].markets[0].outcomes[0].price}</p>
+                                    </td>
                                 </tr>
+
+
                             )
+                        } else {
+                            return null;
                         }
                     })}
                 </tbody>

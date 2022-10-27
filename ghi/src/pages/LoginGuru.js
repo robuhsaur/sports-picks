@@ -1,28 +1,18 @@
 import React, { useState } from "react";
 import { Grid, Typography, Button, TextField, Box } from "@mui/material";
-import { navigate } from "react-router-dom";
 import { useToken } from "../Auth";
 
 const LoginGuru = () => {
   const [username, setUserName] = useState("");
   const [password, setpassword] = useState("");
-  const [description, setDescription] = useState("");
+  const token = useToken();
+  const login_guru = token[5]
 
-  const [
-    token,
-    login,
-    logout,
-    signup,
-    update,
-    login_guru,
-    logout_guru,
-    signup_guru,
-  ] = useToken();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     login_guru(username, password);
-    console.log({ username, password});
+    console.log({ username, password });
   };
 
   return (

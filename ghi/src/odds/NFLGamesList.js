@@ -1,12 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate,  } from 'react-router-dom'
+import { useNavigate, } from 'react-router-dom'
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 
 
 function NFLGamesList() {
     const navigate = useNavigate();
     const [games, setSports] = useState([]);
-    
+
 
     useEffect(() => {
         async function getData() {
@@ -19,13 +24,12 @@ function NFLGamesList() {
                 }
             }
             let response = await fetch(url, fetchConfig);
-            
+
             if (response.ok) {
                 let data = await response.json();
                 setSports(data);
-                console.log("got sports data!");
             } else {
-                console.log("ERRRROOORRRR")
+                console.log("error");
             }
         }
         getData();
@@ -33,15 +37,24 @@ function NFLGamesList() {
 
     return (
         <div>
-            <h1>Upcoming NFL Games</h1>
-            {games.map((game) => (
-                <ul key={game.id}>
-                    <li>{game.away_team}(A) vs {game.home_team}(H)</li>
-                    <button onClick={() => navigate(`/odds/${game.id}/${game.sport_key}`)} type="button"
-                        className="btn btn-info btn-sm btn-block">Go To Odds
-                    </button>
-                </ul>
-            ))}
+            <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Upcoming NFL Games</h1>
+            <Grid container spacing={2} columns={16}>
+
+                {games.map((game) => (
+                    <Grid key={game.id} xs={8}>
+                        <Card sx={{ maxWidth: 400 }}>
+                            <CardActionArea onClick={() => navigate(`/odds/${game.id}/${game.sport_key}`)}>
+                                <CardContent>
+                                    <Typography variant="h7" gutterBottom>{game.away_team}(A) vs {game.home_team}(H)</Typography>
+                                    <Typography gutterBottom variant="body1">{new Date(game.commence_time).toLocaleDateString(undefined, { weekday: "long", month: "short", day:"numeric" })}</Typography>
+                                    <Typography gutterBottom variant="body2">{new Date(game.commence_time).toLocaleTimeString('en-US', { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit" })}</Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                ))}
+
+            </Grid>
         </div>
     );
 }

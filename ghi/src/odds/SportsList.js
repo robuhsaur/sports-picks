@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Grid, Box } from "@mui/material";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+
 
 class SportsList extends React.Component {
     constructor(props) {
@@ -31,19 +37,36 @@ class SportsList extends React.Component {
 
         return (
             <div>
-                <h1>Available Sports</h1>
-                <Box sx={{ flexGrow: 1 }}></Box>
+                <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Available Sports</h1>
                 <Grid container spacing={2} columns={16}>
+
                     {this.state.sports.map((sport) => {
                         if (sport.title === 'NFL' || sport.title === 'NBA') {
                             return (
-                                <ul key={sport.key}>
-                                    <li><Link to={`/${sport.title}`}>{sport.title}</Link> - {sport.description} </li>
-                                </ul>
-                )
+                                <Grid key={sport.key} xs={8}>
+                                    <Card sx={{ maxWidth: 345 }}><Link to={`/${sport.title}`}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                component="img"
+                                                height="225"
+                                                image={sport.title === 'NBA' ? 'http://lofrev.net/wp-content/photos/2016/06/NBA-Logo-2-300x225.jpg' : 'https://1000logos.net/wp-content/uploads/2017/05/NFL-logo.png'}
+                                                alt="sport"
+                                            />
+                                            <CardContent>
+
+                                                <Typography>{sport.title} - {sport.description} </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Link>
+                                    </Card>
+                                </Grid>
+                            )
+                        } else {
+                            return null;
                         }
                     })}
                 </Grid>
+
             </div>
         );
     }

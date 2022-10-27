@@ -9,16 +9,8 @@ const SignUp = () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const navigate = useNavigate();
-  const [
-    token,
-    login,
-    logout,
-    signup,
-    update,
-    login_guru,
-    logout_guru,
-    signup_guru,
-  ] = useToken();
+  const token = useToken();
+  const signup_guru = token[7]
 
   const handleSubmit = async (event) => {
     console.log("guru signup submit");

@@ -3,14 +3,22 @@ stages:
   - build
   - deploy
 
+## Test
+# op-api-unit-test-job:
+#     image: python:3-bullseye
+#     stage: test
+#     script:
+#         - cd op_api
+#         - pip install -r requirements.txt
+#         - python -m pytest
 
 ## BUILD
 build-front-end-job:
   stage: build
   image: node:lts-bullseye
   variables:
+    REACT_APP_API_HOST: https://onlypicks.herokuapp.com 
     PUBLIC_URL: https://team-7-mission.gitlab.io/only-picks/
-    REACT_APP_API_HOST: https://onlypicks.herokuapp.com
   script:
     - cd ghi
     - npm install
@@ -20,7 +28,7 @@ build-front-end-job:
     paths:
       - ghi/build/
 
-build-fastapi-api-image-job:  # RENAME THIS
+build-only-picks-api-image-job:  # RENAMED
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: build
@@ -28,34 +36,34 @@ build-fastapi-api-image-job:  # RENAME THIS
   services:
     - docker:20.10.16-dind
   script:
-    - cd sample_service
-    - docker build -t ${CI_REGISTRY_IMAGE}/fastapi_api:latest .
-    - docker tag ${CI_REGISTRY_IMAGE}/fastapi_api:latest ${CI_REGISTRY_IMAGE}/fastapi_api:$CI_JOB_ID
+    - cd op_api
+    - docker build -t ${CI_REGISTRY_IMAGE}/op_api:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/op_api:latest ${CI_REGISTRY_IMAGE}/op_api:$CI_JOB_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker push ${CI_REGISTRY_IMAGE}/fastapi_api:$CI_JOB_ID
-    - docker push ${CI_REGISTRY_IMAGE}/fastapi_api:latest
+    - docker push ${CI_REGISTRY_IMAGE}/op_api:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/op_api:latest
 
-deploy-fastapi-api-image-job:  # RENAME THIS
+deploy-only-picks-api-image-job:  # RENAMED
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   stage: deploy
   image: docker:20.10.16
   needs:
-    - build-fastapi-api-image-job
+    - build-only-picks-api-image-job
   services:
     - docker:20.10.16-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-    - docker pull ${CI_REGISTRY_IMAGE}/fastapi_api:latest
-    - docker tag ${CI_REGISTRY_IMAGE}/fastapi_api:latest registry.heroku.com/$HEROKU_FASTAPI_APP/web:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/op_api:latest
+    - docker tag ${CI_REGISTRY_IMAGE}/op_api:latest registry.heroku.com/$HEROKU_FASTAPI_APP/web:latest
     - docker push registry.heroku.com/$HEROKU_FASTAPI_APP/web:latest
 
-release-fastapi-api-image-job:  # RENAME THIS
+release-only-picks-api-image-job:  # RENAMED 
   stage: deploy
   image: node:10.17-alpine
   needs:
-    - deploy-fastapi-api-image-job
+    - deploy-only-picks-api-image-job
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   before_script:

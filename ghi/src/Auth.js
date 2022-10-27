@@ -17,7 +17,7 @@ export async function getTokenInternal() {
       internalToken = data.access_token;
       return internalToken;
     }
-  } catch (e) {}
+  } catch (e) { }
   return false;
 }
 
@@ -29,7 +29,7 @@ function handleErrorMessage(error) {
       if ("__all__" in error) {
         error = error.__all__;
       }
-    } catch {}
+    } catch { }
   }
   if (Array.isArray(error)) {
     error = error.join("<br>");
@@ -209,4 +209,3 @@ export function useToken() {
     signup_guru,
   ];
 }
-

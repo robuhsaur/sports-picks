@@ -8,8 +8,9 @@ import { useToken } from '../Auth'
 const SignUpUser = () => {
     const [username, setUserName] = useState("");
     const [password, setpassword] = useState("");
-    const [token, login] = useToken();
     const navigate = useNavigate();
+    const token = useToken();
+    const login = token[1]
 
     const handleSubmit = (event) => {
         event.preventDefault();

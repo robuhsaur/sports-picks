@@ -21,6 +21,14 @@ class GuruSignupOut(BaseModel):
     price: Optional[int] 
 
 
+class GuruSignupPickOut(BaseModel):
+    id: int
+    user_name: str
+    description: str
+    price: int
+    pick: str
+    pick_detail: str
+
 class GuruSignupOutWithPassword(GuruSignupOut):
     hashed_password: str
 
@@ -156,6 +164,50 @@ class GuruSignupRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get that guru"}
+
+    def get_gurus_with_user_id(self, guru_ids) -> list[GuruSignupPickOut]:        
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    ids = ""
+                    i = 0
+                    for id in guru_ids:
+                        if i > 0:
+                            ids += ","
+                        ids += str(id)
+                        i += 1
+                     
+                    query = f"""
+                        select guru_signup.id, user_name, description, price, guru_form.pick, guru_form.pick_detail
+                        from guru_signup 
+                        left join guru_form on guru_form.guru_id = guru_signup.id
+                        where
+                        """
+                    if len(guru_ids) < 1:
+                        query += " guru_signup.id = 0"
+                    else:
+                        query += f" guru_signup.id in ({ids})"
+
+                    # query += " group by guru_signup.id"
+
+                    print("query", query)
+                    result = db.execute(
+                       query
+                    )
+                    return [
+                        GuruSignupPickOut(
+                            id= guru[0],
+                            user_name= guru[1],
+                            description= guru[2],
+                            price= guru[3],
+                            pick="" if guru[4] is None else guru[4],
+                            pick_detail="" if guru[5] is None else guru[5],
+                        )
+                        
+                        for guru in db
+                    ]
+        except Exception:
+            return {"message: could not get all gurus"}
 
 
 class GuruFormRepository:
