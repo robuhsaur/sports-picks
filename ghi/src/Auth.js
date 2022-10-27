@@ -143,7 +143,7 @@ export function useToken() {
     }
   }
 
-  async function login_guru(username, password) {
+  async function login_guru(username, password, guru_token) {
     const url = `${process.env.REACT_APP_API_HOST}/guru/token/`;
     // const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
     const form = new FormData();
@@ -185,10 +185,10 @@ export function useToken() {
     });
     console.log(response, "--response--")
     if (response.ok) {
-      const token = await getTokenInternal();
-      console.log(token, "--after getTokenInternal--")
-      setToken(token);
-      await login_guru(user_name, password);
+      const guru_token = await getTokenInternal();
+      console.log(guru_token, "--after getTokenInternal--")
+      setToken(guru_token);
+      await login_guru(user_name, password, guru_token);
     }
     return false;
   }
