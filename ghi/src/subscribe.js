@@ -51,7 +51,7 @@ function Subscribe(props) {
     useEffect(() => {
         async function getGuruForms() {
             console.log(guru_id);
-            const guruForms = `http://localhost:8000/guru/${guru_id}/form`;
+            const guruForms = `${process.env.REACT_APP_API_HOST}/guru/${guru_id}/form`;
             const response = await fetch(guruForms, {
                 method: "get",
                 headers: {
