@@ -21,6 +21,7 @@ from queries.guru import (
     DuplicateAccountError,
     GuruSignupOutWithPassword
 )
+from authenticator import MyAuthenticator
 
 router = APIRouter()
 
@@ -60,6 +61,7 @@ async def create_account(
     request: Request,
     response: Response,
     repo: GuruSignupRepository = Depends(),
+    auth: MyAuthenticator = Depends()
 ):
     hashed_password = authenticator.hash_password(guru.password)
     try:
@@ -70,7 +72,7 @@ async def create_account(
             detail="Cannot create an account with those credentials",
         )
     form = AccountForm(username=guru.user_name, password=guru.password)
-    token = await authenticator.login(response, request, form, repo)
+    token = await auth.login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
 
