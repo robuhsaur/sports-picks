@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 import os
 from routers import guru
 from authenticator import authenticator
+
 # from userauth import user_authenticator
 
 app = FastAPI()
+app.add_middleware(HTTPSRedirectMiddleware)
 app.include_router(guru.router)
 # app.include_router(user.router)
 app.include_router(authenticator.router, prefix="/guru")
