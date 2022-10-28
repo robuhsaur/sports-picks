@@ -7,7 +7,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `${process.env.REACT_APP_API_HOST}/user/token`;
+  const url = `${process.env.REACT_APP_API_HOST}/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -76,7 +76,7 @@ export function useToken() {
   async function logout() {
     console.log("777");
     if (token) {
-      const url = `${process.env.REACT_APP_API_HOST}/user/token`;
+      const url = `${process.env.REACT_APP_API_HOST}/guru/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -84,62 +84,65 @@ export function useToken() {
     }
   }
 
-  async function login(username, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
-    const form = new FormData();
-    form.append("username", username);
-    form.append("password", password);
-    const response = await fetch(url, {
-      method: "post",
-      credentials: "include",
-      body: form,
-    });
-    if (response.ok) {
-      const token = await getTokenInternal();
-      setToken(token);
-      return;
-    }
-    let error = await response.json();
-    return handleErrorMessage(error);
+  async function login() {
+    console.log("under construction")
+    // const url = `${process.env.REACT_APP_API_HOST}/user/token/`;
+    // const form = new FormData();
+    // form.append("username", username);
+    // form.append("password", password);
+    // const response = await fetch(url, {
+    //   method: "post",
+    //   credentials: "include",
+    //   body: form,
+    // });
+    // if (response.ok) {
+    //   const token = await getTokenInternal();
+    //   setToken(token);
+    //   return;
+    // }
+    // let error = await response.json();
+    // return handleErrorMessage(error);
   }
 
-  async function signup(user_name, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/user`; // TODO: change url to user/sign-up
-    const response = await fetch(url, {
-      method: "post",
-      body: JSON.stringify({
-        user_name,
-        password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      await login(user_name, password);
-    }
-    return false;
+  async function signup() {
+    console.log("under construction")
+    // const url = `${process.env.REACT_APP_API_HOST}/user`; // TODO: change url to user/sign-up
+    // const response = await fetch(url, {
+    //   method: "post",
+    //   body: JSON.stringify({
+    //     user_name,
+    //     password,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // if (response.ok) {
+    //   await login(user_name, password);
+    // }
+    // return false;
   }
 
   async function logout_guru() {
     console.log("888");
-    if (token) {
-      //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
-      const url = `http://localhost:8000/guru/token/`; // TODO: change url to user/sign-up
+    // if (token) {
+    //   //   const url = `${process.env.REACT_APP_API_HOST}/gurus/token`;
+    //   const url = `http://localhost:8000/guru/token/`; // TODO: change url to user/sign-up
 
-      await fetch(url, { method: "delete", credentials: "include" });
-      internalToken = null;
-      setToken(null);
-      navigate("/");
-    }
+    //   await fetch(url, { method: "delete", credentials: "include" });
+    //   internalToken = null;
+    //   setToken(null);
+    //   navigate("/");
+    // }
   }
 
   async function login_guru(username, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/guru/token/`;
+    const url = `https://onlypicks.herokuapp.com/guru/token`;
     // const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
+    console.log(form, "--form--")
     const response = await fetch(url, {
       method: "post",
       credentials: "include",
@@ -209,3 +212,5 @@ export function useToken() {
     signup_guru,
   ];
 }
+
+

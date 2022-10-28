@@ -1,4 +1,3 @@
-from tkinter.messagebox import NO
 from pydantic import BaseModel
 from queries.pool import pool
 from typing import Optional
@@ -14,13 +13,11 @@ class GuruSignupIn(BaseModel):
     description: str
     price: int
 
-
 class GuruSignupOut(BaseModel):
     id: int
     user_name: str
-    description: str
-    price: int
-
+    description: Optional[str]
+    price: Optional[int]
 
 class GuruSignupPickOut(BaseModel):
     id: int
@@ -46,7 +43,7 @@ class GuruFormInwithid(GuruFormIn):
 
 class GuruFormOut(BaseModel):
     id: int
-    pick: str
+    pick: str 
     pick_detail: str
     guru_id: int
 
@@ -70,7 +67,6 @@ class GuruSignupRepository:
                         """,
                         [user_name],
                     )
-                    print(user_name)
                     record = result.fetchone()
                     if record is None:
                         return None
@@ -99,7 +95,8 @@ class GuruSignupRepository:
                         (%s, %s, %s, %s)
                     returning id, user_name, password, description, price;
                     """,
-                    [guru.user_name, hashed_password, guru.description, guru.price],
+                    [guru.user_name, hashed_password, guru.description,
+                        guru.price],
                 )
                 user = result.fetchone()
                 return GuruSignupOutWithPassword(
@@ -118,7 +115,7 @@ class GuruSignupRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         select id, user_name, description, price
                         from guru_signup
@@ -209,7 +206,6 @@ class GuruSignupRepository:
             return {"message: could not get all gurus"}
 
 
-# ---------------------------------------
 class GuruFormRepository:
     def get_a_guru_forms(self, guru_id: int) -> Optional[list[GuruFormOut]]:
         try:
@@ -240,8 +236,7 @@ class GuruFormRepository:
                     if forms == []:
                         return None
                     return forms
-        except Exception as e:
-            print(e)
+        except Exception:
             return {"message": "Could not get that guru"}
 
     def create(self, guruform: GuruFormIn, guru_id) -> GuruFormOut:
@@ -269,7 +264,7 @@ class GuruFormRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         select id, pick, pick_detail, guru_id
                         from guru_form
@@ -284,7 +279,8 @@ class GuruFormRepository:
                         )
                         for form in db
                     ]
-        except Exception:
+        except Exception as e:
+            print(e)
             return {"message: could not get all gurus"}
 
     def update_guru_form(
@@ -293,7 +289,7 @@ class GuruFormRepository:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
-                    result = db.execute(
+                    db.execute(
                         """
                         update guru_form
                         set pick = %s
@@ -301,7 +297,8 @@ class GuruFormRepository:
                          ,  guru_id = %s
                          where id = %s
                         """,
-                        [guruform.pick, guruform.pick_detail, guru_id, form_id],
+                        [guruform.pick, guruform.pick_detail, guru_id,
+                            form_id],
                     )
                     old_data = guruform.dict()
                     return GuruFormOut(id=form_id, guru_id=guru_id, **old_data)
