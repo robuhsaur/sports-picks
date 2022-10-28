@@ -91,7 +91,7 @@ function GuruForm(props) {
     e.preventDefault();
     const guru_id = guruId
     const pick_detail = pickDetail
-    const putUrl = `${process.env.REACT_APP_API_HOST}/${guru_id}/form/${formId}`
+    const putUrl = `${process.env.REACT_APP_API_HOST}/guru/${guru_id}/form/${formId}`
     console.log(putUrl, "---putUrl---")
     console.log(formId, "----inside updateGuruForm")
     const response = await fetch(putUrl, {
