@@ -55,15 +55,26 @@ async def get_guru_info(
         return account_data
     return None
 
+
+async def get_hash():
+    return authenticator.hash_password
+
+async def get_login():
+    return authenticator.login
+
+
+
 @router.post("/gurus", response_model=AccountToken | HttpError)
 async def create_account(
     guru: GuruSignupIn,
     request: Request,
     response: Response,
     repo: GuruSignupRepository = Depends(),
-    auth: MyAuthenticator = Depends()
+    hash_password = Depends(get_hash),
+    login = Depends(get_login)
 ):
-    hashed_password = auth.hash_password(guru.password)
+    print("\n\n\n create_account begins here \n\n\n ")
+    hashed_password = hash_password(guru.password)
     try:
         print("----before account----")
         account = repo.create(guru, hashed_password)
@@ -74,7 +85,7 @@ async def create_account(
             detail="Cannot create an account with those credentials",
         )
     form = AccountForm(username=guru.user_name, password=guru.password)
-    token = await auth.login(response, request, form, repo)
+    token = await login(response, request, form, repo)
     return AccountToken(account=account, **token.dict())
 
 

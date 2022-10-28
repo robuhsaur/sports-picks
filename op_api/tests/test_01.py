@@ -1,9 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
-from routers.guru import GuruSignupRepository
-from routers.guru import MyAuthenticator
+from routers.guru import GuruSignupRepository, get_login, get_hash
 from jwtdown_fastapi.authentication import Token
-
 
 client = TestClient(app)
 
@@ -34,16 +32,20 @@ class FakeGuruSignupRepository:
     def get_gurus(self):
         return []
 
-
-class FakeMyAuthenticator:
-    async def login(self, response, request, form, repo ):
+def get_fake_login():
+    async def login(response, request, form, repo ):
         return Token(**account_token)
-    def hash_password(self,pw):
+    return login
+
+def get_fake_hash_pass():
+    def hash_password(pw):
         return "abc123"
+    return hash_password
 
 def test_create_guru():
     app.dependency_overrides[GuruSignupRepository]=FakeGuruSignupRepository
-    app.dependency_overrides[MyAuthenticator]=FakeMyAuthenticator
+    app.dependency_overrides[get_hash]=get_fake_hash_pass
+    app.dependency_overrides[get_login]=get_fake_login
     response = client.post(
         "/gurus",
         json=account_in
