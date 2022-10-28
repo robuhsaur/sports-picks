@@ -10,16 +10,14 @@ class DuplicateAccountError(ValueError):
 class GuruSignupIn(BaseModel):
     user_name: str
     password: str
-    description: Optional[str]
-    price: Optional[int] 
-
+    description: str
+    price: int
 
 class GuruSignupOut(BaseModel):
     id: int
     user_name: str
     description: Optional[str]
-    price: Optional[int] 
-
+    price: Optional[int]
 
 class GuruSignupPickOut(BaseModel):
     id: int
@@ -28,6 +26,7 @@ class GuruSignupPickOut(BaseModel):
     price: int
     pick: str
     pick_detail: str
+
 
 class GuruSignupOutWithPassword(GuruSignupOut):
     hashed_password: str
@@ -165,7 +164,7 @@ class GuruSignupRepository:
             print(e)
             return {"message": "Could not get that guru"}
 
-    def get_gurus_with_user_id(self, guru_ids) -> list[GuruSignupPickOut]:        
+    def get_gurus_with_user_id(self, guru_ids) -> list[GuruSignupPickOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -176,7 +175,7 @@ class GuruSignupRepository:
                             ids += ","
                         ids += str(id)
                         i += 1
-                     
+
                     query = f"""
                         select guru_signup.id, user_name, description, price, guru_form.pick, guru_form.pick_detail
                         from guru_signup 
@@ -191,19 +190,16 @@ class GuruSignupRepository:
                     # query += " group by guru_signup.id"
 
                     print("query", query)
-                    result = db.execute(
-                       query
-                    )
+                    result = db.execute(query)
                     return [
                         GuruSignupPickOut(
-                            id= guru[0],
-                            user_name= guru[1],
-                            description= guru[2],
-                            price= guru[3],
+                            id=guru[0],
+                            user_name=guru[1],
+                            description=guru[2],
+                            price=guru[3],
                             pick="" if guru[4] is None else guru[4],
                             pick_detail="" if guru[5] is None else guru[5],
                         )
-                        
                         for guru in db
                     ]
         except Exception:
