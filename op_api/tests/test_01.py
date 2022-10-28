@@ -9,8 +9,8 @@ def test_create_guru():
     response = client.post(
         "/gurus",
         json={
-            "user_name": "strin",
-            "password": "string",
+            "user_name": "string_test1",
+            "password": "string1",
             "description": "string",
             "price": 0
         },

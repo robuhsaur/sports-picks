@@ -69,7 +69,7 @@ function Subscribe(props) {
             }
         }
         getGuruForms();
-    },);
+    }, [guru_id, token]);
 
     // async function handleSubmit(e) {
     //     e.preventDefault();

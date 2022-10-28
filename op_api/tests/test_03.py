@@ -8,8 +8,8 @@ def test_create_guru_error():
     response = client.post(
         "/gurus",
         json={
-            "user_name": "error",
-            "password": "string",
+            "user_name": "error_test",
+            "password": "string1",
             "description": "string",
             "price": "string"
         },

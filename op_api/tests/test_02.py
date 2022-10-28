@@ -8,7 +8,7 @@ def test_guru():
     response = client.post(
         "/gurus",
         json={
-            "user_name": "test-login",
+            "user_name": "test-login1",
             "password": "string",
             "description": "stri",
             "price": 0
@@ -19,7 +19,7 @@ def test_guru():
 def test_guru_login():
         response = client.post("/guru/token/",
         json = {
-    "user_name": "test-login",
+    "user_name": "test-login1",
     "password": "string",    
 }, )
         assert response.status_code == 307 # redirect to guru page 
