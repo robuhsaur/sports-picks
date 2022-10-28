@@ -38,7 +38,8 @@ class FakeGuruSignupRepository:
 class FakeMyAuthenticator:
     async def login(self, response, request, form, repo ):
         return Token(**account_token)
-
+    def hash_password(self,pw):
+        return "abc123"
 
 def test_create_guru():
     app.dependency_overrides[GuruSignupRepository]=FakeGuruSignupRepository
