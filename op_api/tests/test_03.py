@@ -8,7 +8,7 @@ def test_create_guru_error():
     response = client.post(
         "/gurus",
         json={
-            "user_name": "error_test",
+            "user_name": "error_test2",
             "password": "string1",
             "description": "string",
             "price": "string"
@@ -17,6 +17,6 @@ def test_create_guru_error():
 
     assert response.status_code == 422
 
-def test_get_gurus():
-    response = client.get("/gurus")
-    assert response.status_code == 200
+# def test_get_gurus():
+#     response = client.get("/gurus")
+#     assert response.status_code == 200
