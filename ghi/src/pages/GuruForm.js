@@ -38,7 +38,7 @@ function GuruForm(props) {
 
   useEffect(() => {
     async function getGuruId() {
-      const url = `http://localhost:8000/guruinfo`
+      const url = `${process.env.REACT_APP_API_HOST}/guruinfo`
       const response = await fetch(url, {
         method: "get",
         headers: {
@@ -64,7 +64,7 @@ function GuruForm(props) {
     async function getGuruForms() {
       const guru_id = guruId
       console.log(guru_id)
-      const guruForms = `http://localhost:8000/guru/${guru_id}/form`
+      const guruForms = `${process.env.REACT_APP_API_HOST}/guru/${guru_id}/form`
       const response = await fetch(guruForms, {
         method: "get",
         headers: {
@@ -91,7 +91,7 @@ function GuruForm(props) {
     e.preventDefault();
     const guru_id = guruId
     const pick_detail = pickDetail
-    const putUrl = `http://localhost:8000/guru/${guru_id}/form/${formId}`
+    const putUrl = `${process.env.REACT_APP_API_HOST}/${guru_id}/form/${formId}`
     console.log(formId, "----inside updateGuruForm")
     const response = await fetch(putUrl, {
       method: "put",
@@ -117,7 +117,7 @@ function GuruForm(props) {
     e.preventDefault();
     setisTrue(true)
     const pick_detail = pickDetail
-    const url = `http://localhost:8000/gurus/form`
+    const url = `${process.env.REACT_APP_API_HOST}/gurus/form`
     const response = await fetch(url, {
       method: "post",
       headers: {
