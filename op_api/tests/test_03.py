@@ -9,7 +9,7 @@ def test_create_guru_error():
         "/gurus",
         json={
             "user_name": "error_test2",
-            "password": "string1",
+            "password": "pass",
             "description": "string",
             "price": "string"
         },

@@ -3,13 +3,11 @@ from main import app
 
 client = TestClient(app)
 
-def test_missing_token():
-        response = client.get("/guru/undefined/form")
-        assert response.status_code == 401
-
-
-def test_form():
-        response = client.get("/gurus/form")
+def test_get_gurus():
+        response = client.get("/gurus")
         assert response.status_code == 200
+
+
+
 
         
