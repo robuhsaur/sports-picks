@@ -14,9 +14,7 @@ app.include_router(authenticator.router, prefix="/guru")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get("CORS_HOST", "http://localhost:3000"),
-        os.environ.get("CORS_HOST", "http://localhost:8082"),
-        os.environ.get("CORS_HOST", None),
+        os.environ.get("CORS_HOST", "http://localhost:3000")
     ],
     allow_credentials=True,
     allow_methods=["*"],
