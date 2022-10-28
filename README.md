@@ -6,7 +6,7 @@
 - Will Cordova
 
 
-OnlyPicks - a place where sports cappers(Gurus) can post their daily/weekly sports picks! subscribe to your favorite capper(Guru)!
+OnlyPicks - a place where sports cappers(Gurus) can post their daily/weekly sports picks! 
 
 ## Design
 

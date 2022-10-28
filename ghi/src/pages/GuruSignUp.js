@@ -21,6 +21,7 @@ const SignUp = () => {
 
   return (
     <Grid container>
+    <Box component="form">
       <Grid
         container
         direction="column"
@@ -55,11 +56,11 @@ const SignUp = () => {
           aria-label="price"
           onChange={(event) => setPrice(event.target.value)}
         />
-        <Box textAlign={"center"}>
+        
           <Button variant="contained" onClick={handleSubmit}>
             Create
           </Button>
-        </Box>
+      
         <Grid item container alignItems="center" justifyContent="center">
           <Grid item>
             <Typography>Already have an account?</Typography>
@@ -71,6 +72,7 @@ const SignUp = () => {
           </Grid>
         </Grid>
       </Grid>
+      </Box>
     </Grid>
   );
 };

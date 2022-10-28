@@ -16,3 +16,7 @@ def test_create_guru_error():
     )
 
     assert response.status_code == 422
+
+def test_get_gurus():
+    response = client.get("/gurus")
+    assert response.status_code == 200
