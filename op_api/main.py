@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from routers import guru
 from authenticator import authenticator
-
 # from userauth import user_authenticator
 
 app = FastAPI()
@@ -14,11 +13,12 @@ app.include_router(authenticator.router, prefix="/guru")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        os.environ.get("CORS_HOST", "http://localhost:3000"),
+        os.environ.get("CORS_HOST", "http://localhost:8082"),
+        os.environ.get("CORS_HOST", None),
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-        # os.environ.get("CORS_HOST", "REACT_APP_API_HOST"),
-        # "http://localhost:3000"

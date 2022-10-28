@@ -76,7 +76,7 @@ export function useToken() {
   async function logout() {
     console.log("777");
     if (token) {
-      const url = `${process.env.REACT_APP_API_HOST}/guru/token`;
+      const url = `${process.env.REACT_APP_API_HOST}/user/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -174,8 +174,7 @@ export function useToken() {
       },
     });
     if (response.ok) {
-      console.log("go log in!")
-      // await login_guru(user_name, password);
+      await login_guru(user_name, password);
     }
     return false;
   }
@@ -196,8 +195,7 @@ export function useToken() {
       },
     });
     if (response.ok) {
-      console.log("---it was this the whole time---")
-      // await login(username, password);
+      await login(username, password);
     }
     return false;
   }
@@ -213,3 +211,5 @@ export function useToken() {
     signup_guru,
   ];
 }
+
+
