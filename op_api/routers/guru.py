@@ -63,9 +63,11 @@ async def create_account(
     repo: GuruSignupRepository = Depends(),
     auth: MyAuthenticator = Depends()
 ):
-    hashed_password = authenticator.hash_password(guru.password)
+    hashed_password = auth.hash_password(guru.password)
     try:
+        print("----before account----")
         account = repo.create(guru, hashed_password)
+        print(account, "--printing account from create_account--")
     except DuplicateAccountError:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
