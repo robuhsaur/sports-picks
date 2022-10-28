@@ -76,7 +76,7 @@ export function useToken() {
   async function logout() {
     console.log("777");
     if (token) {
-      const url = `${process.env.REACT_APP_API_HOST}/user/token`;
+      const url = `${process.env.REACT_APP_API_HOST}/guru/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
