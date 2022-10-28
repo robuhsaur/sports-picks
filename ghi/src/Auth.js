@@ -195,7 +195,8 @@ export function useToken() {
       },
     });
     if (response.ok) {
-      await login(username, password);
+      console.log("---it was this the whole time---")
+      // await login(username, password);
     }
     return false;
   }
