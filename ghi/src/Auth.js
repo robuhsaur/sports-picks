@@ -174,7 +174,8 @@ export function useToken() {
       },
     });
     if (response.ok) {
-      await login_guru(user_name, password);
+      console.log("go log in!")
+      // await login_guru(user_name, password);
     }
     return false;
   }
