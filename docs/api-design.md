@@ -1,5 +1,25 @@
 # APIs
 
+## Guru Accounts
+
+- Method: `GET`, `POST`,
+- Path: `/signup-guru`, `/login-guru`
+
+Input:
+
+```json
+{
+  "username": string,
+  "password": string,
+  "description": string,
+  "price": int,
+ 
+  
+}
+```
+
+
+# 3rd party API 
 ## Sports List 
 * Path: `/sportslist`
 * Method: `GET`

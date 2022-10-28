@@ -7,17 +7,20 @@ from typing import Optional
 class DuplicateAccountError(ValueError):
     pass
 
+
 class GuruSignupIn(BaseModel):
     user_name: str
     password: str
     description: str
     price: int
 
+
 class GuruSignupOut(BaseModel):
     id: int
     user_name: str
     description: str
     price: int
+
 
 class GuruSignupPickOut(BaseModel):
     id: int
@@ -27,22 +30,27 @@ class GuruSignupPickOut(BaseModel):
     pick: str
     pick_detail: str
 
+
 class GuruSignupOutWithPassword(GuruSignupOut):
     hashed_password: str
+
 
 class GuruFormIn(BaseModel):
     pick: str
     pick_detail: str
 
+
 class GuruFormInwithid(GuruFormIn):
     guru_id: int
+
 
 class GuruFormOut(BaseModel):
     id: int
     pick: str
     pick_detail: str
     guru_id: int
-    
+
+
 class GuruSignupRepository:
     def get_a_guru(self, user_name) -> Optional[GuruSignupOutWithPassword]:
         try:
@@ -60,7 +68,7 @@ class GuruSignupRepository:
                         FROM guru_signup
                         WHERE user_name = %s
                         """,
-                        [user_name]
+                        [user_name],
                     )
                     print(user_name)
                     record = result.fetchone()
@@ -68,18 +76,19 @@ class GuruSignupRepository:
                         return None
                     else:
                         return GuruSignupOutWithPassword(
-                            id= record[0],
-                            user_name= record[1],
-                            hashed_password= record[2],
-                            description= record[3],
-                            price= record[4]
+                            id=record[0],
+                            user_name=record[1],
+                            hashed_password=record[2],
+                            description=record[3],
+                            price=record[4],
                         )
         except Exception as e:
             print(e)
             return {"message": "Could not get that guru"}
 
-
-    def create(self, guru: GuruSignupIn, hashed_password: str) -> GuruSignupOutWithPassword:
+    def create(
+        self, guru: GuruSignupIn, hashed_password: str
+    ) -> GuruSignupOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
                 result = db.execute(
@@ -90,21 +99,16 @@ class GuruSignupRepository:
                         (%s, %s, %s, %s)
                     returning id, user_name, password, description, price;
                     """,
-                    [
-                    guru.user_name, 
-                    hashed_password, 
-                    guru.description,
-                    guru.price
-                    ]
+                    [guru.user_name, hashed_password, guru.description, guru.price],
                 )
                 user = result.fetchone()
                 return GuruSignupOutWithPassword(
-                        id = user[0],
-                        user_name= user[1],
-                        hashed_password= user[2],
-                        description= user[3],
-                        price= user[4]
-                    )
+                    id=user[0],
+                    user_name=user[1],
+                    hashed_password=user[2],
+                    description=user[3],
+                    price=user[4],
+                )
                 # id = result.fetchone()[0]
                 # old_data = guru.dict()
                 # print(old_data)
@@ -122,17 +126,17 @@ class GuruSignupRepository:
                     )
                     return [
                         GuruSignupOut(
-                            id= guru[0],
-                            user_name= guru[1],
-                            description= guru[2],
-                            price= guru[3]
+                            id=guru[0],
+                            user_name=guru[1],
+                            description=guru[2],
+                            price=guru[3],
                         )
                         for guru in db
                     ]
         except Exception:
             return {"message: could not get all gurus"}
 
-    def get_guru_byId(self, guru_id:int) -> Optional[GuruSignupOut]:
+    def get_guru_byId(self, guru_id: int) -> Optional[GuruSignupOut]:
         try:
             with pool.connection() as conn:
                 # get a cursor (something to run SQL with)
@@ -147,23 +151,23 @@ class GuruSignupRepository:
                         FROM guru_signup
                         WHERE id = %s
                         """,
-                        [guru_id]
+                        [guru_id],
                     )
                     record = result.fetchone()
                     if record is None:
                         return None
                     else:
                         return GuruSignupOut(
-                            id= record[0],
-                            user_name= record[1],
-                            description= record[2],
-                            price= record[3]
+                            id=record[0],
+                            user_name=record[1],
+                            description=record[2],
+                            price=record[3],
                         )
         except Exception as e:
             print(e)
             return {"message": "Could not get that guru"}
 
-    def get_gurus_with_user_id(self, guru_ids) -> list[GuruSignupPickOut]:        
+    def get_gurus_with_user_id(self, guru_ids) -> list[GuruSignupPickOut]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -174,7 +178,7 @@ class GuruSignupRepository:
                             ids += ","
                         ids += str(id)
                         i += 1
-                     
+
                     query = f"""
                         select guru_signup.id, user_name, description, price, guru_form.pick, guru_form.pick_detail
                         from guru_signup 
@@ -189,36 +193,30 @@ class GuruSignupRepository:
                     # query += " group by guru_signup.id"
 
                     print("query", query)
-                    result = db.execute(
-                       query
-                    )
+                    result = db.execute(query)
                     return [
                         GuruSignupPickOut(
-                            id= guru[0],
-                            user_name= guru[1],
-                            description= guru[2],
-                            price= guru[3],
+                            id=guru[0],
+                            user_name=guru[1],
+                            description=guru[2],
+                            price=guru[3],
                             pick="" if guru[4] is None else guru[4],
                             pick_detail="" if guru[5] is None else guru[5],
                         )
-                        
                         for guru in db
                     ]
         except Exception:
             return {"message: could not get all gurus"}
 
 
-
-
-#---------------------------------------
+# ---------------------------------------
 class GuruFormRepository:
-
-    def get_a_guru_forms(self, guru_id:int)-> Optional[list[GuruFormOut]]:
+    def get_a_guru_forms(self, guru_id: int) -> Optional[list[GuruFormOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
-                            """
+                        """
                             SELECT guru_form.id
                                 , guru_form.pick
                                 , guru_form.pick_detail
@@ -228,23 +226,23 @@ class GuruFormRepository:
                             on (guru_signup.id = guru_form.guru_id)
                             WHERE guru_signup.id = %s
                             """,
-                            [guru_id]
+                        [guru_id],
                     )
                     forms = [
-                            GuruFormOut(
-                                id= form[0],
-                                pick= form[1],
-                                pick_detail= form[2],
-                                guru_id= form[3]
-                            )
-                            for form in result
+                        GuruFormOut(
+                            id=form[0],
+                            pick=form[1],
+                            pick_detail=form[2],
+                            guru_id=form[3],
+                        )
+                        for form in result
                     ]
                     if forms == []:
                         return None
                     return forms
         except Exception as e:
-                print(e)
-                return {"message": "Could not get that guru"}
+            print(e)
+            return {"message": "Could not get that guru"}
 
     def create(self, guruform: GuruFormIn, guru_id) -> GuruFormOut:
         with pool.connection() as conn:
@@ -257,19 +255,15 @@ class GuruFormRepository:
                             (%s, %s, %s)
                         returning id, pick, pick_detail, guru_id
                     """,
-                    [
-                        guruform.pick,
-                        guruform.pick_detail,
-                        guru_id
-                    ]
+                    [guruform.pick, guruform.pick_detail, guru_id],
                 )
                 form = result.fetchone()
                 return GuruFormOut(
-                        id= form[0],
-                        pick= form[1],
-                        pick_detail= form[2],
-                        guru_id= form[3],
-                    )
+                    id=form[0],
+                    pick=form[1],
+                    pick_detail=form[2],
+                    guru_id=form[3],
+                )
 
     def get_all_forms(self) -> list[GuruFormOut]:
         try:
@@ -283,17 +277,19 @@ class GuruFormRepository:
                     )
                     return [
                         GuruFormOut(
-                            id= form[0],
-                            pick= form[1],
-                            pick_detail= form[2],
-                            guru_id= form[3]
+                            id=form[0],
+                            pick=form[1],
+                            pick_detail=form[2],
+                            guru_id=form[3],
                         )
                         for form in db
                     ]
         except Exception:
             return {"message: could not get all gurus"}
 
-    def update_guru_form(self, guruform:GuruFormIn, guru_id:int, form_id:int)-> GuruFormOut:
+    def update_guru_form(
+        self, guruform: GuruFormIn, guru_id: int, form_id: int
+    ) -> GuruFormOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
@@ -305,15 +301,10 @@ class GuruFormRepository:
                          ,  guru_id = %s
                          where id = %s
                         """,
-                        [
-                            guruform.pick,
-                            guruform.pick_detail,
-                            guru_id,
-                            form_id
-                        ]
+                        [guruform.pick, guruform.pick_detail, guru_id, form_id],
                     )
                     old_data = guruform.dict()
                     return GuruFormOut(id=form_id, guru_id=guru_id, **old_data)
         except Exception as e:
-                print(e)
-                return {"message": "Could not get that guru"}
+            print(e)
+            return {"message": "Could not get that guru"}

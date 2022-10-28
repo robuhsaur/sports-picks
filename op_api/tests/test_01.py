@@ -5,15 +5,14 @@ from main import app
 client = TestClient(app)
 
 
-def test_create_user():
-        response = client.post(
-        "/user",
+def test_create_guru():
+    response = client.post(
+        "/gurus",
         json={
-  "user_name": "test_case_01",
-  "password": "test_case_password"
-},
+            "user_name": "strin",
+            "password": "string",
+            "description": "string",
+            "price": 0
+        },
     )
-        assert response.status_code == 200
-
-
-        
+    assert response.status_code == 200

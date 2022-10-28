@@ -1,18 +1,17 @@
 # OnlyPicks
 
-- Sal Hernandez 
-- Robert Nacario
-- Will Cordova
 - Armen Ohanian
+- Robert Nacario
+- Sal Hernandez 
+- Will Cordova
+
 
 OnlyPicks - a place where sports cappers(Gurus) can post their daily/weekly sports picks! subscribe to your favorite capper(Guru)!
 
 ## Design
 
-- [ ]
 - [APIs](docs/api-design.md)
 - [GHI](docs/ghi.md)
-- [ ] 
 
 ## Who is OnlyPicks for?
 
@@ -21,9 +20,11 @@ We are going after the sports gambling community. As more states legalize online
 
 ## What does OnlyPicks do? 
 
-- Sports bettors can subscribe to their favorite sports capper(Guru)
-  - Giving them access to their cappers daily/weekly sports picks!
-- 
+- Sports bettors can visit OnlyPicks to see their favorite sports capper(Guru) share their picks for the upcoming games!
+- Users can also see odds from popular bookmakers! 
+- Can sign up as a Guru to post their picks to the public
+  - a resource for users who sports bet.  
+  
 
 ## Start application
 Steps to start app locally using **Docker**
