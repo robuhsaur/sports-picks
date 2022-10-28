@@ -137,7 +137,7 @@ export function useToken() {
   }
 
   async function login_guru(username, password) {
-    const url = `${process.env.REACT_APP_API_HOST}/guru/token/`;
+    const url = `https://onlypicks.herokuapp.com/guru/token/`;
     // const url = `http://localhost:8000/gurus/token/`; // TODO: change url to user/sign-up
     const form = new FormData();
     form.append("username", username);
