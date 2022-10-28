@@ -30,8 +30,6 @@ function Gurus(props) {
                                     </th>
                                     <th className="th-sm">Description
                                     </th>
-                                    <th className="th-sm">Monthly Price
-                                    </th>
                                     <th className="th-sm">subscribe
                                     </th>
                                 </tr>
@@ -42,13 +40,12 @@ function Gurus(props) {
                                         <tr key={guru.id}>
                                             <td>{guru.user_name}</td>
                                             <td>{guru.description}</td>
-                                            <td>{guru.price}</td>
                                             <td>
                                                 {/* <button onClick={()=> navigate(`/gurus/${guru.id}`, <Subscribe guru_id={guru.id} gurus={gurus}/>)} type="button" 
                                             className="btn btn-info btn-sm btn-block">Subscribe
                                             </button> */}
                                                 <button onClick={() => navigate(`/gurus/${guru.id}`)} type="button"
-                                                    className="btn btn-info btn-sm btn-block">Subscribe
+                                                    className="btn btn-info btn-sm btn-block">See Picks
                                                 </button>
                                             </td>
                                         </tr>
