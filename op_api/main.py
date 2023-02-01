@@ -8,8 +8,14 @@ from authenticator import authenticator
 app = FastAPI(servers=[{"url": "https://onlypicks.herokuapp.com", "description": "heroku"}])
 app.include_router(guru.router)
 # app.include_router(user.router)
-app.include_router(authenticator.router, prefix="/guru")
+app.include_router(authenticator.router)
+# prefix="/guru"
 # app.include_router(user_authenticator.router, prefix="/user")
+origins=[
+        "http://localhost:3000",
+        "http://localhost:8000"
+
+        ],
 
 app.add_middleware(
     CORSMiddleware,

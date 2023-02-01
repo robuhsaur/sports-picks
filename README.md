@@ -1,4 +1,4 @@
-# OnlyPicks
+# SportsPicks
 
 - Armen Ohanian
 - Robert Nacario
@@ -6,21 +6,21 @@
 - Will Cordova
 
 
-OnlyPicks - a place where sports cappers(Gurus) can post their daily/weekly sports picks! 
+SportsPicks - a place where sports cappers(Gurus) can post their daily/weekly sports picks! 
 
 ## Design
 
 - [APIs](docs/api-design.md)
 - [GHI](docs/ghi.md)
 
-## Who is OnlyPicks for?
+## Who is SportsPicks for?
 
 We are going after the sports gambling community. As more states legalize online sports gambling more people are looking for resources for making bets! 
 
 
-## What does OnlyPicks do? 
+## What does SportsPicks do? 
 
-- Sports bettors can visit OnlyPicks to see their favorite sports capper(Guru) share their picks for the upcoming games!
+- Sports bettors can visit SportsPicks to see their favorite sports capper(Guru) share their picks for the upcoming games!
 - Users can also see odds from popular bookmakers! 
 - Can sign up as a Guru to post their picks to the public
   - a resource for users who sports bet.  
@@ -36,5 +36,5 @@ Steps to start app locally using **Docker**
 5.  Run `docker compose build`
 6.  Run `docker compose up`
 7.  Open http://localhost:3000/ in browser
-8.  You can now use OnlyPicks to view upcoming odds for NFL/NBA
+8.  You can now use SportsPicks to view upcoming odds for NFL/NBA
 9.  You can create Gurus and Users
