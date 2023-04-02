@@ -1,6 +1,5 @@
 # SportsPicks
 
-- Armen Ohanian
 - Robert Nacario
 - Sal Hernandez 
 - Will Cordova
